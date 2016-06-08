@@ -1,0 +1,140 @@
+<include file="./Public/widget/head.html" title="Account - Adonads" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/account.css">
+<style type="text/css">
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html" curr="index"/>
+        </ul>
+        <div class="content account">
+            <h1 class="title">Account Profile(<a href="javascript:void(0);" id="edit">Edit</a>)<span class="f-fr">Account: {$username}</span></h1>
+            <div id="normalform" class="form form-normal">
+                <div class="form-item">
+                    <label class="f-tr">Password:</label>
+                    <label class="item-val f-tl">******(<a href="javascript:void(0);" id="changepwd">Change</a>)</label>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Paypal:</label>
+                    <label class="item-val f-tl">{$paypal}</label>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">First Name:</label>
+                    <label class="item-val f-tl">{$firstname}</label>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Last Name:</label>
+                    <label class="item-val f-tl">{$lastname}</label>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Country:</label>
+                    <label class="item-val f-tl">{$country}</label>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Skype/Phone:</label>
+                    <label class="item-val f-tl">{$skype}</label>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Website/Adons:</label>
+                    <label class="item-val f-tl">{$ext}</label>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Company:</label>
+                    <label class="item-val f-tl">{$company}</label>
+                </div>
+            </div>
+            <form id="modiform" class="form" method="post" action="__URL__/modifyuser" style="display:none;">
+                <div class="form-item">
+                    <label class="f-tr">Paypal:</label>
+                    <input type="text" name="paypal" value="{$paypal}" placeholder="withdrawals require"/>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">First Name:</label>
+                    <input type="text" name="firstname" value="{$firstname}" pattern=".{1,20}" placeholder="1 to 20 characters(optional)"/>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Last Name:</label>
+                    <input type="text" name="lastname" value="{$lastname}" pattern=".{1,20}" placeholder="1 to 20 characters(optional)"/>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Country:</label>
+                    <select name="country">
+                        <volist name="countries" id="item">
+                        <option value="{$item}">{$item}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Skype/Phone:</label>
+                    <input type="text" name="skype" value="{$skype}" placeholder="optional"/>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Website/Adons:</label>
+                    <input type="text" name="ext" value="{$ext}" placeholder="optional"/>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Company:</label>
+                    <input type="text" name="company" value="{$company}" placeholder="optional"/>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr"></label>
+                    <input type="submit" value="Modify"/>
+                </div>
+            </form>
+            <form id="changeform" onsubmit="return changecheck();" class="form" method="post" action="__URL__/changepwd" style="display:none;">
+                <div class="form-item">
+                    <label class="f-tr">Old Password:</label>
+                    <input type="password" required name="oldpwd" value="" placeholder="old password"/>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">New Password:</label>
+                    <input type="password" id="newpwd" required name="newpwd" value="" pattern=".{6,20}" placeholder="6 to 20 characters"/>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr">Confirm New Password:</label>
+                    <input type="password" id="confirm" required name="confirm" value="" pattern=".{6,20}" placeholder="6 to 20 characters"/>
+                </div>
+                <div class="form-item">
+                    <label class="f-tr"></label>
+                    <input type="submit" value="Change"/>
+                </div>
+            </form>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function() {
+    setCurrNav('account');
+    $('#edit').click(function(e) {
+        var $this = $(this);
+        var txt = $this.text();
+        if (txt == 'Edit') {
+            $this.text('Cancel');
+        } else {
+            $this.text('Edit');
+        }
+        $('#normalform,#modiform').toggle();
+    });
+
+    $('#changepwd').click(function(e) {
+        $('#changeform').toggle();
+    });
+});
+
+function changecheck() {
+    var newpwd = $('#newpwd').val();
+    var confirm = $('#confirm').val();
+    if (newpwd.length < 6) {
+        alert('new password to short');
+        return false;
+    } else if (newpwd.length > 20) {
+        alert('new password to long');
+        return false;
+    } else if (newpwd !== confirm) {
+        alert('the new password and confirming password disagree');
+        return false;
+    }
+    return true;
+}
+</script>
+<include file="./Public/widget/foot.html"/>

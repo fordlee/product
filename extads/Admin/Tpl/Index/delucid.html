@@ -1,0 +1,49 @@
+<include file="./Public/widget/head.html" title="用户管理" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <div class="form">
+                <h1>删除渠道号</h1>
+                <form id="adduserform" method="post" action="__URL__/delchannel">
+                    <input type="hidden" name="uid" value="{$item.uid}" />
+                    <div class="form-item">
+                        用户邮箱：<input readonly value="{$item.username}" />
+                    </div>
+                    <div class="form-item">
+                        扩展名称：
+                                <select name='cid'>
+                                    <option value="0">--请选择--</option>
+                                    <{:arr2option($citem,"cid","cid","cid")}>
+                                </select>
+                    </div>
+                    <div class="form-item">
+                        <input type="submit" onclick="return delcfm()" value="删除"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function() {
+    setCurrNav('user');
+});
+
+function delcfm() {
+        $val = $("Select").val();
+        if($val != 0){
+            if (!confirm("确认要删除吗？")) {
+                window.event.returnValue = false;
+            }
+        }else{
+            window.alert('请选择扩展名称！');
+        }
+    }
+</script>
+<include file="./Public/widget/foot.html"/>

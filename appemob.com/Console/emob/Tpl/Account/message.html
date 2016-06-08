@@ -1,0 +1,31 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+
+<!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+		<section class="content-header">
+
+			 
+
+		</section>
+		<section class="content">
+			<div class="content message">
+            <table class="table table-noborder">
+            <empty name="ret">
+                <tr>
+                    <td>No Message</td>
+                </tr>
+            <else />
+                <volist name="ret" id="item">{$item.isread}
+                <tr>
+                    <td><a class="msg-title" href="__URL__/msgshow/id/{$item.id}">{$item.title}</a><span class="msg-time f-fr">{$item.addtime|strtotime|date='Y-m-d',###}</span><a href="__URL__/delmsg/id/{$item.id}" class="btn btn-box-tool pull-right" title="删除" onclick="return confirm('确认要删除吗？');"><i class="fa fa-remove"></i></a></td>
+                </tr>
+                </volist>
+            </empty>
+            </table>
+        </div>
+		</section>
+	</div>
+
+<include file="Public:footer" />

@@ -1,0 +1,333 @@
+<include file="./Public/widget/head.html" title="Payment - Adonads" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<style type="text/css">
+.form input[type=text]{
+    width: 300px;
+}
+.form input.long{
+    width: 500px;
+}
+.upinvoice{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -300px;
+    margin-top: -50px;
+    height: 100px;
+    width: 600px;
+    z-index: 2;
+    background-color: #fff;
+    border:1px solid #ccc;
+    line-height: 30px;
+    padding: 10px;
+}
+.upinvoice-2{
+    margin-top: -100px;
+    height: 200px;
+}
+.upinvoice-2-1{
+    width: 230px;
+    margin-left: -115px;
+    line-height: 45px;
+}
+.upinvoice-mask{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    border: 0;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 1;
+}
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html" curr="index"/>
+        </ul>
+        <div class="content payment">
+            <div class="tip mb20">
+                
+                Payment request: 
+                <if condition="($userinfo.checkcycle eq 1)">
+                <span class="f-fb f-hl">${$canPaymentIncome|number_format=###,2}</span>
+                (<a id="withdrawals" href="javascript:void(0);">Payment request</a>)
+                <span class="f-sp">&nbsp;</span>
+                <elseif condition="($userinfo.checkcycle eq 2)"/>
+                <a id="withdrawals_manual" href="javascript:void(0);">Payment request</a>
+                <span class="f-sp">&nbsp;</span>
+                </if>
+
+                Payment Pending: <span class="f-fb">${$income|number_format=###,2}</span>
+                <span class="f-sp">&nbsp;</span>
+                Total: <span class="f-fb">${$totalIncome|number_format=###,2}</span>
+                </div>
+
+            <if condition="($canPaymentIncome lt 100) and ($userinfo.checkcycle eq 1)">
+            <form id="payform" style="display:none;">
+                <h3 class="title">Payment request at least $100.00</h3>
+            </form>
+            <else />
+            <div id="payform" class="form" style="display:none;">
+                <if condition="($userinfo.checkcycle eq 1)">
+                <h3 class="form-title">Submit payment request:${$canPaymentIncome|number_format=###,2,'.', ''}</h3>
+                <elseif condition="($userinfo.checkcycle eq 2)"/>
+                <h3 class="form-title">Submit payment request no more than:${$income|number_format=###,2}</h3>
+                </if>
+                <div class="form-item">
+                    <if condition="($userinfo.usertype eq 1)">
+                    <div id="paytype_paypal" class="paytype paytype-paypal"></div>
+                    <elseif condition="($userinfo.usertype eq 2)"/>
+                    <div id="paytype_wiretransfer" class="paytype paytype-wiretransfer"></div>
+                    </if>
+                    <!-- <div id="paytype_westernunion" class="paytype paytype-westernunion-gray"></div> -->
+                    <!-- <div id="paytype_alipay" class="paytype paytype-alipay-gray"></div> -->
+
+                    <div class="payment-info" id="info_paypal" <?php if($userinfo['usertype'] == 1){echo 'style="display:block;"';}else{echo 'style="display:none;"';} ?>>
+                        <if condition="($userinfo.checkcycle eq 1)">
+                        <form action="__URL__/addpayment_paypal" method="post">
+                        <elseif condition="($userinfo.checkcycle eq 2)"/>
+                        <form action="__URL__/savepayment_info" method="post">
+                        </if>
+                            <input type="hidden" value="{$canPaymentIncome|floatval|number_format=###,2, '.', ''}" name="paycount" />
+                            <div class="form-item">
+                                <label class="item-title">Name:</label>
+                                <input type="text" required name="name" value="{$account.name}" placeholder="xxxx xxxx"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Account:</label>
+                                <input type="email" required name="account" value="{$account.account}" class="long" placeholder="xxxx@xxxx.xxx"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Country:</label>
+                                <input type="text" required name="cp_address" class="long" value="{$account.cp_address}" placeholder=""/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title"></label>
+                                <input type="submit" value="Submit"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="payment-info" id="info_wiretransfer" <?php if($userinfo['usertype'] == 2){echo 'style="display:block;"';}else{echo 'style="display:none;"';} ?>>
+                        <if condition="($userinfo.checkcycle eq 1)">
+                        <form action="__URL__/addpayment_wiretransfer" method="post">
+                        <elseif condition="($userinfo.checkcycle eq 2)"/>
+                        <form action="__URL__/savepayment_info" method="post">
+                        </if>
+                            <input type="hidden" value="{$canPaymentIncome|floatval|number_format=###,2, '.', ''}" name="paycount" />
+                            <div class="form-item">
+                                <label class="item-title">SWIFT:</label>
+                                <input type="text" required name="swift" value="{$account.swift}" placeholder="HSBCHKHHHKH"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Account Owner:</label>
+                                <input type="text" required name="owner" class="long" value="{$account.owner}" placeholder="WUHAN HELLO WORLD NETWORK TECHNOLOGY CO, LTD."/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Company/Personal Address:</label>
+                                <input type="text" required name="cp_address" class="long" value="{$account.cp_address}" placeholder="SUITE 1302, BLOCK C,CHUANGYI BUILDING GUANSHAN STREET, HONGSHAN DISTRICT WUHAN, HUBEI, CHINA"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Bank Account Number:</label>
+                                <input type="text" required name="number" value="{$account.number}" placeholder="817830136838"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Bank Name:</label>
+                                <input type="text" required name="bank" class="long" value="{$account.bank}" placeholder="HONGKONG AND SHANGHAI BANKING CORPORATION LIMITED"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Bank Address:</label>
+                                <input type="text" required name="address" class="long" value="{$account.address}" placeholder="Bank Address"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title"></label>
+                                <input type="submit" value="Submit"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="payment-info" id="info_westernunion" style="display:none;">
+                        <form action="__URL__/addpayment_westernunion" method="post">
+                            <input type="hidden" value="{$canPaymentIncome|floatval|number_format=###,2, '.', ''}" name="paycount" />
+                            <div class="form-item">
+                                <label class="item-title">Name:</label>
+                                <input type="text" required name="name" placeholder="english name"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Address:</label>
+                                <input type="text" required name="address" class="long" placeholder="1 Queen's Road Central, Hong Kong SAR, China"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Tel:</label>
+                                <input type="text" required name="tel" placeholder="+1 123456789"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title"></label>
+                                <input type="submit" value="Submit"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="payment-info" id="info_alipay" style="display:none;">
+                        <form action="__URL__/addpayment_alipay" method="post">
+                            <input type="hidden" value="{$canPaymentIncome|floatval|number_format=###,2, '.', ''}" name="paycount" />
+                            <div class="form-item">
+                                <label class="item-title">Name:</label>
+                                <input type="text" required name="name" placeholder="name"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title">Account:</label>
+                                <input type="text" required name="account" placeholder="phone number or mail"/>
+                            </div>
+                            <div class="form-item">
+                                <label class="item-title"></label>
+                                <input type="submit" value="Submit"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </if>
+            <if condition="($ret neq null)">
+            <table class="table">
+                <tr>
+                    <th>Request Time</th>
+                    <th>Payment</th>
+                    <th>Current Status</th>
+                    <th>Pending Time</th>
+                    <th>Payment Time</th>
+                    <th>Invoice</th>
+                </tr>
+                <volist name="ret" id="item">
+                <if condition="($item.paycount neq 0)">
+                <tr>
+                    <td>{$item.addtime|strtotime|date='Y-m-d',###}</td>
+                    <td>${$item.paycount|number_format=###,2}</td>
+                    <td>
+                <if condition="($item.status eq 0)">
+                Under review, please wait
+                <elseif condition="($item.status eq 1)"/>
+                <notempty name="item.upinvoice">
+                    <span style="color:#2F4F4F;font-weight:700">In the payment,please wait</span>
+                <else/>
+                    <notempty name="item.invoice">
+                    <span style="color:#00BFFF;font-weight:700">Please upload your signed invoice</span>
+                    <else/>
+                    <span style="color:#2F4F5F;font-weight:700">Invoice review, please wait</span>
+                    </notempty>
+                </notempty>
+                <elseif condition="($item.status eq 2)"/>
+                <span style="color:#4CBB17;font-weight:700">Payment success</span>
+                <elseif condition="($item.status eq 3)"/>
+                Review fail, please contact us
+                </if>
+                    </td>
+                    <td>
+                    <if condition="($item.status neq 2)">
+                        <if condition="($userinfo.checkcycle eq 1)">
+                        in 30days
+                        <elseif condition="($userinfo.checkcycle eq 2)"/>
+                        in 7days
+                        </if>
+                    <else />
+                    /
+                    </if>
+                    </td>
+                    <td>
+                    <if condition="($item.status neq 2)">
+                    /
+                    <else />
+                    {$item.paytime|strtotime|date='Y-m-d',###}
+                    </if>
+                    </td>
+                    <notempty name="item.invoice">
+                        <td>
+                            <eq name="item.status" value="1">
+                            <a href="http://www.adonads.com/admin/{$item.invoice|getInvoicePath}" target="_blank">Download</a>&nbsp;&nbsp;
+                            <!-- <a href="__ROOT__/{$item.invoice|getInvoicePath}" target="_blank">Download</a>&nbsp;&nbsp; -->
+                            <a href="javascript:void(0);" onclick="$('#invoice_{$item.id}').toggle()">Upload</a>&nbsp;&nbsp;
+                            <notempty name="item.upinvoice">
+                            <a href="__ROOT__/{$item.upinvoice|getSignInvoicePath}" target="_blank">Singed</a>
+                            </notempty>
+                            </eq>
+                            <eq name="item.status" value="2">
+                            <notempty name="item.upinvoice">
+                            <a href="__ROOT__/{$item.upinvoice|getSignInvoicePath}" target="_blank">Singed</a>
+                            </notempty>
+                            </eq>
+                            <div id="invoice_{$item.id}" style="display:none;">
+                                <div class="upinvoice-mask" onclick="$('#invoice_{$item.id}').toggle()"></div>
+                                <div class="upinvoice upinvoice-2 upinvoice-2-1">
+                                <form action="__URL__/uploadSignedInvoice" method="post" enctype="multipart/form-data">
+                                    <label for="file">Signed Invoice:</label>
+                                    <input type="hidden" name="pid" value="{$item.id}"/>
+                                    <input type="file" name="file" id="file" /><br/>
+                                    <input type="submit" name="submit" value="Submit" />
+                                </form>
+                                </div>
+                            </div>
+                        </td>
+                    <else/>
+                        <td>/</td>
+                    </notempty>
+                </tr>
+                </if>
+                </volist>
+            </table>
+            </if>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function() {
+    $("#payform form").submit(function(e){
+        $("#payform input[type=submit]").attr("disabled", "disabled");
+    });
+
+    setCurrNav('payments');
+    $('#withdrawals').click(function(e) {
+        $('#payform').toggle();
+    });
+
+    $('#withdrawals_manual').click(function(e){
+        $('#payform').toggle();
+    });
+
+    $("#paytype_paypal").click(function(e) {
+        $('.payment-info').hide();
+        $('#info_paypal').show();
+        $('#paytype_wiretransfer').addClass('paytype-wiretransfer-gray');
+        $('#paytype_alipay').addClass('paytype-alipay-gray');
+        $('#paytype_westernunion').addClass('paytype-westernunion-gray');
+        $(this).addClass('paytype-paypal').removeClass('paytype-paypal-gray');
+    });
+
+    $("#paytype_wiretransfer").click(function(e) {
+        $('.payment-info').hide();
+        $('#info_wiretransfer').show();
+        $('#paytype_paypal').addClass('paytype-paypal-gray');
+        $('#paytype_alipay').addClass('paytype-alipay-gray');
+        $('#paytype_westernunion').addClass('paytype-westernunion-gray');
+        $(this).addClass('paytype-wiretransfer').removeClass('paytype-wiretransfer-gray');
+    });
+
+    $("#paytype_alipay").click(function(e) {
+        $('.payment-info').hide();
+        $('#info_alipay').show();
+        $('#paytype_wiretransfer').addClass('paytype-wiretransfer-gray');
+        $('#paytype_paypal').addClass('paytype-paypal-gray');
+        $('#paytype_westernunion').addClass('paytype-westernunion-gray');
+        $(this).addClass('paytype-alipay').removeClass('paytype-alipay-gray');
+    });
+
+    $("#paytype_westernunion").click(function(e) {
+        $('.payment-info').hide();
+        $('#info_westernunion').show();
+        $('#paytype_wiretransfer').addClass('paytype-wiretransfer-gray');
+        $('#paytype_paypal').addClass('paytype-paypal-gray');
+        $('#paytype_alipay').addClass('paytype-alipay-gray');
+        $(this).addClass('paytype-westernunion').removeClass('paytype-westernunion-gray');
+    });
+});
+
+</script>
+<include file="./Public/widget/foot.html"/>

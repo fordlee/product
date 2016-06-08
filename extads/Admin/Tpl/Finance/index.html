@@ -1,0 +1,140 @@
+<include file="./Public/widget/head.html" title="财务统计信息" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <form id="filterform" method="post">
+                <div class="form-item">
+                    Date Range:
+                    <select id="dateRange" name="dateRange">
+                        <option value="today">Today</option>
+                        <option value="last_7_days">Last 7 Days</option>
+                        <option value="last_30_days">Last 30 Days</option>
+                        <option value="this_month">This Month</option>
+                        <option value="last_month">Last Month</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                    <span id="timewrap" class="timerange" style="display:none;">
+                        <input type="text" id="datepicker"/>
+                        <input id="timebegin" type="hidden" name="timebegin"/>
+                        <input id="timeend" type="hidden" name="timeend"/>
+                    </span>
+                    &nbsp;
+                    <input type="submit" value="Apply" />
+                    <span class="warning">注：本表中不包含未转换的用户收入</span>
+                </div>
+            </form>
+            <div class="list">
+                <table class="table">
+                    <tr style="display:none;">
+                        <td class="export" colspan="9">
+                            <form id="formtocsv" method="post" action="__URL__/saveAsCsv">
+                                <input type="hidden" name="uid" value="{$uid}" />
+                                <input id="ex_dateRange" type="hidden" name="ex_dateRange"/>
+                                <input id="ex_timebegin" type="hidden" name="ex_timebegin"/>
+                                <input id="ex_timeend" type="hidden" name="ex_timeend"/>
+                                <a href="javascript:void(0);" id="tocsv" class="export-item f-fr">导出CSV文件保存</a>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Date</th>
+                        <th>Impressions</th>
+                        <th>Clicks</th>
+                        <th>CPM</th>
+                        <th>平均系数</th>
+                        <th>用户Profit</th>
+                        <th class="f-bhl">总Profit</th>
+                        <th class="f-warning">Income</th>
+                    </tr>
+                    <tr class="f-fb">
+                        <td>total</td>
+                        <td class="f-tr">{$total.pop|number_format}</td>
+                        <td class="f-tr">{$total.click|number_format}</td>
+                        <td class="f-tr">{$total.cpm|number_format=###,4}</td>
+                        <td class="f-tr">{$total.avgdiscount|number_format=###,2}</td>
+                        <td class="f-tr">${$total.userprofit|number_format=###,2}</td>
+                        <td class="f-tr f-bhl">${$total.totalprofit|number_format=###,2}</td>
+                        <td class="fulltime f-warning">${$total['totalprofit'] - $total['userprofit']|number_format=###,2}</td>
+                    </tr>
+                    <volist name="rets" id="item">
+                    <tr>
+                        <td>{$item.date}</td>
+                        <td class="f-tr">{$item.pop|number_format}</td>
+                        <td class="f-tr">{$item.click|number_format}</td>
+                        <td class="f-tr">{$item.cpm|number_format=###,4}</td>
+                        <td class="f-tr">{$item.avgdiscount|number_format=###,2}</td>
+                        <td class="f-tr">${$item.userprofit|number_format=###,2}</td>
+                        <td class="f-tr f-bhl">${$item.totalprofit|number_format=###,2}</td>
+                        <td class="fulltime f-warning">${$item['totalprofit'] - $item['userprofit']|number_format=###,2}</td>
+                    </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript" src="__JS__/moment.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.daterangepicker.js"></script>
+<script type="text/javascript">
+$(function(){
+    setCurrNav('finance');
+
+    dateinit();
+
+    csvinit();
+});
+
+function csvinit() {
+    $('#tocsv').click(function(e) {
+        $('#ex_dateRange').val($('#dateRange').val());
+        $('#ex_timebegin').val($('#timebegin').val());
+        $('#ex_timeend').val($('#timeend').val());
+        $('#formtocsv').attr('action', '__URL__/saveAsCsv').submit();
+    });
+}
+
+function dateinit() {
+    var currrange = '{$currrange}';
+    $('#dateRange').val(currrange);
+
+    var dateconf = {
+        language:'en',
+        showShortcuts: false,
+        maxDays: 62
+    };
+    $('#datepicker').dateRangePicker(dateconf).bind('datepicker-change', function(event,obj) {
+        var val = obj.value;
+        if (val.indexOf('to') != -1) {
+            var datearr = val.split('to');
+            var datebegin = $.trim(datearr[0]);
+            var dateend = $.trim(datearr[1]);
+            $('#timebegin').val(datebegin);
+            $('#timeend').val(dateend);
+        }
+    });
+    var now = new Date();
+    now.setMonth(now.getMonth() - 2);
+    var towMonthBefore = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+
+    $('#datepicker').data('dateRangePicker')
+        .setDateRange(towMonthBefore,"{$Think.now|strtotime|date='Y-m-d',###}");
+
+    $('#timebegin').val(towMonthBefore);
+    $('#timeend').val("{$Think.now|strtotime|date='Y-m-d',###}");
+
+    $('#dateRange').change(function(e) {
+        if (this.value == 'custom') {
+            $('#timewrap').show();
+        } else {
+            $('#timewrap').hide();
+        }
+    });
+}
+</script>
+<include file="./Public/widget/foot.html"/>

@@ -1,0 +1,337 @@
+<include file="./Public/widget/head.html" title="用户管理" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+#dialog_userinfo .body{
+    width: 800px;
+    height: 600px;
+    margin-left: -400px;
+    margin-top: -300px;
+}
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <div class="accountstate">
+                <a href="javascript:void(0);" data-id="user_list_1" class="curr">正常账户</a><a href="javascript:void(0);" data-id="user_list_0">待审核账户</a><a href="javascript:void(0);" data-id="user_list_2">不活动账户</a>
+            </div>
+            <div class="list">
+                <table id="user_list_1" class="table">
+                    <tr>
+                        <th>用户名</th>
+                        <th>来源</th>
+                        <th>渠道号</th>
+                        <th>总收入</th>
+                        <th>日均展示量</th>
+                        <th>折扣</th>
+                        <th>提现</th>
+                        <th>用户类型</th>
+                        <th>管理</th>
+                        <th>代码</th>
+                    </tr>
+                    <volist name="users" id="item">
+                    <tr>
+                        <td><a href="javascript:void(0);" onclick="showuserinfo(this)" data-href="__URL__/userinfo/uid/{$item.uid}">{$item.username}</a></td>
+                        <td>{$item.f}</td>
+                        <td>
+                        <volist name="item.cids" id="ciditem">
+                        <if condition="($ciditem.last30DaysIncome lt 1)">
+                        <span style="color: gray;">
+                        <a href="__URL__/userchannel/cid/{$ciditem.cid}" style="text-decoration:line-through;color: gray;">{$ciditem.cid}</a>({$ciditem.name|platformNameConver}:{$ciditem.ocid},&nbsp;last30day:[${$ciditem.last30DaysIncome|number_format=###,2}],&nbsp;
+                        <a href="javascript:del('{$item.uid}','{$ciditem.cid}');" title="释放后将删除此渠道:)" style="color: gray;">释放</a>)</span>
+                        <else />
+                        <a href="__URL__/userchannel/cid/{$ciditem.cid}">{$ciditem.cid}</a>({$ciditem.name|platformNameConver}:{$ciditem.ocid})
+                        </if><br/>
+                        </volist>
+                        <a href="__URL__/adducid/uid/{$item.uid}">添加渠道</a>
+                        </td>
+                        <td class="f-tr"><a href="__URL__/profitinfo/uid/{$item.uid}">${$item.income|number_format=###,2}</a></td>
+                        <td class="f-tr">{$item.daypops|number_format=###}</td>
+                        <td>
+                            <span id="disnow_{$item.uid}">
+                                {$item.discount}<br/>
+                                <a href="javascript:void(0)" onclick="showmodi('{$item.uid}')">修改</a>
+                            </span>
+                            <span id="dismodi_{$item.uid}" style="display:none;">
+                                <select id="dis_{$item.uid}">
+                                    <option value="1">1</option>
+                                    <option value="0.95">0.95</option>
+                                    <option value="0.9">0.9</option>
+                                    <option value="0.85">0.85</option>
+                                    <option value="0.8">0.8</option>
+                                    <option value="0.75">0.75</option>
+                                    <option selected="true" value="0.7">0.7</option>
+                                    <option value="0.65">0.65</option>
+                                    <option value="0.6">0.6</option>
+                                    <option value="0.55">0.55</option>
+                                    <option value="0.5">0.5</option>
+                                    <option value="0.45">0.45</option>
+                                    <option value="0.4">0.4</option>
+                                    <option value="0.35">0.35</option>
+                                    <option value="0.3">0.3</option>
+                                    <option value="0.25">0.25</option>
+                                    <option value="0.2">0.2</option>
+                                    <option value="0.15">0.15</option>
+                                    <option value="0.1">0.1</option>
+                                </select>
+                                <button onclick="modidiscount('{$item.uid}')">确认</button>
+                                <button onclick="cancel('{$item.uid}')">取消</button>
+                            </span>
+                        </td>
+                        <td>
+                            <span id="checktimenow_{$item.uid}">
+                                <if condition="$item.checkcycle eq 1">Month
+                                <elseif condition="$item.checkcycle eq 2"/><span style="color:red;"><strong>Week</strong></span>
+                                </if>
+                                <br/>
+                                <a href="javascript:void(0)" onclick="showChecktime('{$item.uid}')">修改</a>
+                            </span>
+                            <span id="checktimemodi_{$item.uid}" style="display:none;">
+                                <select id="checktime_{$item.uid}">
+                                    <option value="1">a month</option>
+                                    <option value="2">a week</option>
+                                </select>
+                                <button onclick="moditime('{$item.uid}')">确认</button>
+                                <button onclick="canceltime('{$item.uid}')">取消</button>
+                        </td>
+                        <td>
+                            <span id="usertypenow_{$item.uid}">
+                                <if condition="$item.usertype eq 1">
+                                    <span style="color:green;"><strong>Personal</strong></span>
+                                <elseif condition="$item.usertype eq 2"/>
+                                    Company
+                                </if>
+                                <br/>
+                                <a href="javascript:void(0)" onclick="showUsertype('{$item.uid}')">修改</a>
+                            </span>
+                            <span id="usertypemodi_{$item.uid}" style="display:none;">
+                                <select id="usertype_{$item.uid}">
+                                    <option value="1">Personal</option>
+                                    <option value="2">Company</option>
+                                </select>
+                                <button onclick="modiusertype('{$item.uid}')">确认</button>
+                                <button onclick="cancelusertype('{$item.uid}')">取消</button>
+                        </td>
+                        <td><a href="__URL__/disableuser/uid/{$item.uid}">停用</a></td>
+                        <td><a href="javascript:void(0);" onclick="getcode('{$item.uid}')">Code</a></td>
+                    </tr>
+                    </volist>
+                </table>
+                <table id="user_list_0" class="table" style="display:none;">
+                    <tr>
+                        <th>用户名</th>
+                        <th>来源</th>
+                        <th>注册时间</th>
+                        <th>备注</th>
+                        <th>账户状态</th>
+                        <th>管理</th>
+                    </tr>
+                    <volist name="users_0" id="item">
+                    <tr>
+                        <td><a href="javascript:void(0);" onclick="showuserinfo(this)" data-href="__URL__/userinfo/uid/{$item.uid}">{$item.username}</a></td>
+                        <td>{$item.f}</td>
+                        <td>{$item.addtime|strtotime|date='Y-m-d',###}</td>
+                        <td class="f-tr">{$item.mark}</td>
+                        <td class="used">待审核</td>
+                        <td>
+                            <a href="__URL__/enableuser/uid/{$item.uid}">审核通过</a><br/>
+                            <a href="__URL__/disactiveuser/uid/{$item.uid}">不活动账户</a>
+                        </td>
+                    </tr>
+                    </volist>
+                </table>
+                <table id="user_list_2" class="table" style="display:none;">
+                    <tr>
+                        <th>用户名</th>
+                        <th>来源</th>
+                        <th>注册时间</th>
+                        <th>备注</th>
+                        <th>账户状态</th>
+                        <th>管理</th>
+                    </tr>
+                    <volist name="users_2" id="item">
+                    <tr>
+                        <td><a href="javascript:void(0);" onclick="showuserinfo(this)" data-href="__URL__/userinfo/uid/{$item.uid}">{$item.username}</a></td>
+                        <td>{$item.f}</td>
+                        <td>{$item.addtime|strtotime|date='Y-m-d',###}</td>
+                        <td class="f-tr">{$item.mark}</td>
+                        <td class="used">不活动账户</td>
+                        <td>
+                            <a href="__URL__/activeuser/uid/{$item.uid}">待审核账户</a>
+                        </td>
+                    </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+        <div class="dialog" id="dialog">
+            <div class="mask"></div>
+            <div class="body">
+                <textarea readonly="readonly" id="coderet" class="code"></textarea>
+            </div>
+        </div>
+        <div class="dialog" id="dialog_userinfo">
+            <div class="mask"></div>
+            <div class="body">
+                <iframe id="ifuserinfo" src="" frameBorder="0" style="width:100%;height:100%;"></iframe>
+            </div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function() {
+    setCurrNav('user');
+    $('.mask').click(function(e) {
+        $('#dialog, #dialog_userinfo').hide();
+    });
+
+    $('.accountstate').delegate("a", "click", function(e) {
+        $('.accountstate a').removeClass('curr');
+        $(this).addClass('curr');
+        var dataid = $(this).attr('data-id');
+        $('.table').hide();
+        $('#' + dataid).show();
+    });
+});
+
+function showuserinfo(obj) {
+    $('#ifuserinfo').attr("src", $(obj).attr('data-href'));
+    $('#dialog_userinfo').show();
+}
+
+function getcode(uid) {
+    var code = "(function() {var head = document.getElementsByTagName('head')[0];var script = document.createElement('script');script.type = 'text/javascript';script.src = 'https://www.onclickcool.com/"+uid+"/bindo.js';head.appendChild(script);})();";
+    $('#coderet').text(code);
+    $('#dialog').show();
+}
+
+function showmodi(uid) {
+    $('#disnow_' + uid).hide();
+    $('#dismodi_' + uid).show();
+}
+
+function modidiscount(uid) {
+    var discount = $('#dis_' + uid).val();
+    $.ajax({
+        url: '__URL__/setdiscount',
+        data: {
+            uid: uid,
+            discount: discount
+        },
+        type: 'post'
+    }).done(function(data) {
+        if (data == 1) {
+            window.location.reload();
+        } else if (data == 0) {
+            alert('请先登录!');
+        } else {
+            alert('设置失败，请稍后再试!');
+        }
+    })
+    .fail(function(msg) {
+        alert(msg);
+    });
+}
+
+function cancel(uid) {
+    $('#disnow_' + uid).show();
+    $('#dismodi_' + uid).hide();
+}
+
+function showChecktime(uid){
+    $('#checktimenow_'+uid).hide();
+    $('#checktimemodi_'+uid).show();
+}
+
+function moditime(uid){
+    var checktime = $('#checktime_'+uid).val();
+    $.ajax({
+        url: '__URL__/setchecktime',
+        data: {
+            uid: uid,
+            checktime: checktime
+        },
+        type: 'post'
+    }).done(function(data) {
+        if (data == 1) {
+            window.location.reload();
+        } else if (data == 0) {
+            alert('请先登录!');
+        } else {
+            alert('设置失败，请稍后再试!');
+        }
+    })
+    .fail(function(msg) {
+        alert(msg);
+    });
+}
+
+function canceltime(uid){
+    $('#checktimenow_'+uid).show();
+    $('#checktimemodi_'+uid).hide();
+}
+
+function showUsertype(uid){
+    $('#usertypenow_'+uid).hide();
+    $('#usertypemodi_'+uid).show();
+}
+
+function modiusertype(uid){
+    var usertype = $('#usertype_'+uid).val();
+    $.ajax({
+        url: '__URL__/setusertype',
+        data: {
+            uid: uid,
+            usertype: usertype
+        },
+        type: 'post'
+    }).done(function(data) {
+        if (data == 1) {
+            window.location.reload();
+        } else if (data == 0) {
+            alert('请先登录!');
+        } else {
+            alert('设置失败，请稍后再试!');
+        }
+    })
+    .fail(function(msg) {
+        alert(msg);
+    });
+}
+
+function cancelusertype(uid){
+    $('#usertypenow_'+uid).show();
+    $('#usertypemodi_'+uid).hide();
+}
+
+function del(uid,cid){
+    if (prompt("请输入要释放的渠道号：","") == cid){
+        $.ajax({
+            url: '__URL__/delchannel',
+            data: {
+                uid: uid,
+                cid: cid
+            },
+            type: 'get'
+        }).done(function(data){
+            if(data == 1){
+                alert("释放成功!");
+                window.location.reload();
+            }else if(data == 0){
+                alert('请先登录!');
+            }else{
+                alert('释放失败!');
+            }
+        })
+        .fail(function(msg) {
+            alert(msg);
+        });
+    } else {
+        alert('请仔细核对渠道号！');
+    }
+}
+
+</script>
+<include file="./Public/widget/foot.html"/>

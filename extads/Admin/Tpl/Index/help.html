@@ -1,0 +1,42 @@
+<include file="./Public/widget/head.html" title="帮助中心——Adonads管理员管理系统" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+.help .help-item{
+    margin-bottom: 20px;
+}
+.help-item h4{
+    margin-bottom: 0;
+}
+.help-item ul{
+    margin-left: 25px;
+    line-height: 25px;
+}
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html"/>
+        </ul>
+        <div class="content help">
+            <div class="help-item">
+                <h4>1、<a href="__URL__/st">世界时间</a></h4>
+            </div>
+            <div class="help-item">
+                <h4>2、invoice状态码</h4>
+                <ul>
+                    <li>1：成功</li>
+                    <li>0：未登录</li>
+                    <li>-1：pdf生成失败</li>
+                    <li>-2：数据库操作失败</li>
+                    <li>-3：提现单不存在</li>
+                    <li>-4：付款时间有误</li>
+                    <li>-5：提现信息缺失</li>
+                </ul>
+            </div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+    setCurrNav('help');
+</script>
+<include file="./Public/widget/foot.html"/>

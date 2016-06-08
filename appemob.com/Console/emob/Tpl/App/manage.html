@@ -1,0 +1,232 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+<style type="text/css" > 
+    .texthidden{
+       width:100px;
+       overflow:hidden;
+       white-space:nowrap;
+       text-overflow:ellipsis;
+       cursor: pointer;
+     }
+</style>
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+          <h1>
+            <small style="color:red">User: {$_SESSION['name']} </small>
+            <small>app list</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{:U('Index/index')}"><i class="fa fa-dashboard"></i>Home</a></li>
+            <li><a href="">App Manage</a></li>
+            <li class="active">app list</li>
+          </ol>
+      </section>
+
+        <!-- Main content -->
+      <section class="content">
+          <div class="row">
+              <!-- Custom Tabs -->
+          <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" data-toggle="tab"
+                  aria-expanded="true"><font><font>App list</font></font></a></li>
+                <li class=""><a href="#tab_2" data-toggle="tab"
+                  aria-expanded="false"><font><font>App verifylist</font></font></a></li>
+                <!-- <li class=""><a href="#tab_3" data-toggle="tab"
+                  aria-expanded="false"><font><font>Record</font></font></a></li> -->
+              </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+
+              <!-- <form id="formid" action="{:U('Proxy/appbrain')}" method="post"> -->
+                <div class="input-group input-group-sm col-sm-6">
+                  <input type="text" id="appname" name="appname" class="form-control" placeholder="Please enter you want to search for access appid!">
+                  <span class="input-group-btn">
+                    <button class="btn btn-info btn-flat" type="button" onclick="appbrain();">Search</button>
+                  </span>
+                </div>
+              <!-- </form> -->
+              
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Data Table With Full Features</h3>
+                </div><!-- /.box-header -->
+                
+                <div class="box-body">
+                	<div class="dataTables_wrapper form-inline dt-bootstrap">
+                	
+                  <div class="row">
+                  <table id="example1" class="table table-bordered table-hover">                  	
+                    <thead>
+                      <tr>
+                        <th>Img</th>
+                        <th>DevId</th>
+                        <th>AppId</th>
+                        <th>Appname</th>
+                        <th>Description</th>
+                        <th>Sort</th>
+                        <th>Installs</th>
+                        <th>Size</th>
+                        <th>OS</th>
+                        <th>OsVersion</th>
+                        <th>AppStatus</th>
+                        <th>Bid</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <volist name="applist" id="vo">                       
+                        <tr>
+                          <td><img src="{:C('IMG_DOMAIN')}/{$vo.img}w30-rw"></td>
+                          <td>{$vo.devid}</td>
+	                        <td><a href="{:U('App/showAppInfo')}?id={$vo.appid}">{$vo.appid}<a></td>
+	                        <td><div class="texthidden" title="{$vo.name}">{$vo.name}</div></td>
+	                      	<td><div class="texthidden" title="{$vo.description}">{$vo.description}</div></td>
+	                      	<td>{$vo.sort}</td>
+	                      	<td><div class="texthidden" title="{$vo.install}">{$vo.install}</div></td>
+	                      	<td>{$vo.size}</td>
+	                      	<td>{$vo.os}</td>
+	                      	<td>{$vo.os_version}</td>
+                          <eq name="vo.status" value="1">
+                          <td><span class="label label-success">Active</span></td>
+                          <else/>
+                          <td><span class="label label-danger">Stopped</span></td>
+                          </eq>
+	                      	<td><a href="{:U('App/showbidinfo')}?id={$vo.applistid}" class="btn btn-default">Adjust</a></td>
+                        </tr>
+                      </volist>
+                    </tbody>
+                  </table>
+                 </div>
+                  
+                </div>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+              </div>
+
+
+
+             <div class="tab-pane" id="tab_2">
+
+                <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Data Table With Full Features</h3>
+                </div><!-- /.box-header -->
+                
+                <div class="box-body">
+                  <div clas="dataTables_wrapper form-inline dt-bootstrap">
+                  
+                  <div class="row">
+                  <table id="verifyapp" class="table table-bordered table-hover">       
+                    <thead>
+                      <tr>
+                        <th>Img</th>
+                        <th>DevId</th>
+                        <th>AppId</th>
+                        <th>Appname</th>
+                        <th>Description</th>
+                        <th>Sort</th>
+                        <th>Installs</th>
+                        <th>Size</th>
+                        <th>Os</th>
+                        <th>OsVersion</th>
+                        <th>Developer Email</th>
+                        <th>Check Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <volist name="applisttemp" id="vo">
+                        <tr>
+                          <td><img src="{:C('IMG_DOMAIN')}/{$vo.img}w30-rw"></td>
+                          <td>{$vo.devid}</td>
+                          <td>{$vo.appid}</td>
+                          <td><div class="texthidden" title="{$vo.name}">{$vo.name}</div></td>
+                          <td><div class="texthidden" title="{$vo.description}">{$vo.description}</div></td>
+                          <td>{$vo.sort}</td>
+                          <td><div class="texthidden" title="{$vo.install}">{$vo.install}</div></td>
+                          <td>{$vo.size}</td>
+                          <td>{$vo.os}</td>
+                          <td>{$vo.os_version}</td>
+                          <td>{$vo.devemail}</td>
+                          <td><button class="btn btn-default" onclick="sendemail('{$vo.devid}','{$vo.name}','{$vo.devemail}')">Send</button></td>
+                        </tr>
+                      </volist>
+                    </tbody>
+                    
+                  </table>
+                 </div>
+   
+                </div>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+             </div>
+             
+            </div><!-- /.ta-content -->
+          </div>
+        </div><!-- /.row -->
+      </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+
+<include file="Public:footer" />
+
+<script type="text/javascript">
+
+  function appbrain(){
+    //$('#formid').submit();
+    var appname = $('#appname').val();
+    var timestamp=new Date().getTime()+10000;
+
+    $.ajax({
+      url:"{:U('Proxy/appbrain')}",
+      data:{
+        'appname':appname,
+        'timestamp':timestamp
+      },
+      type:'post'
+    })
+    .done(function(data) {
+      if (data == 1) {
+          alert('Success!');
+          location.href=location.href+'#tab2';
+          window.location.reload();
+      }else if(data == 0){
+          alert('You have added this app!Please do not repeat!');
+      }else if(data == 2){
+          alert('Please wait 10 seconds!');
+      }else{
+          alert('Operation failed, please try again later!');
+      }
+    })
+    .fail(function(msg) {
+        alert(msg);
+    });
+  }
+
+  function sendemail(devid,app_name,devemail){
+     $.ajax({
+        url: '__URL__/sendAppbrainEmail',
+        data: {
+            'devid': devid,
+            'app_name':app_name,
+            'devemail':devemail
+        },
+        type: 'post'
+      })
+     .done(function(data) {
+        if (data == 1) {
+            alert('Please activate the application development mailbox!');
+        }else{
+            alert('Operation failed, please try again later!');
+        }
+      })
+      .fail(function(msg) {
+          alert(msg);
+      });
+  }
+
+
+</script>

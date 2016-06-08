@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/common.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/login.css">
+</head>
+<body>
+    <div class="auth">
+        <div class="auth__logo"></div>
+        <div class="auth__action">
+            <form class="auth-form" method="post" autocomplate="off">
+                <div class="auth-form__header">
+                    LOGIN
+                </div>
+                <div class="auth-form__body">
+                    <div class="form-item">
+                        <label class="auth-form__field">username:</label>
+                        <input class="auth-form__field__input" required name="username" type="text" placeholder="username" autocomplete="off">
+                    </div>
+                    <div class="form-item">
+                        <label class="auth-form__field">password:</label>
+                        <input class="auth-form__field__input auth-form__field__input--pass" required type="password" name="password" placeholder="password" autocomplete="off">
+                    </div>
+                    <div class="form-item">
+                        <label class="auth-form__field">token:</label>
+                        <input class="auth-form__field__input" required name="token" type="text" placeholder="token" autocomplete="off">
+                    </div>
+                </div>
+                <div class="auth-form__footer">
+                    <input type="submit" class="auth-form__footer__action" value="Login">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

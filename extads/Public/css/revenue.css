@@ -1,0 +1,51 @@
+.infowrap{
+    border:1px solid #ccc;
+}
+.infoheader{
+    height: 40px;
+    width: 100%;
+    background-color: #eee;
+    border-bottom: 1px solid #ccc;
+    padding-left: 10px;
+    padding-top: 7px;
+}
+.infoheader .nav-item{
+    display: inline-block;
+    float: left;
+    padding: 5px 10px;
+    cursor: pointer;
+    padding-left: 38px;
+}
+.infoheader .nav-item:hover{
+    background-color: #e6e6e6;
+}
+.infoheader .nav-item-chart{
+    background: url(../imgs/icon_revenue.png) no-repeat 10px center;
+}
+.infoheader .nav-item-table{
+    background: url(../imgs/icon_table.png) no-repeat 10px center;
+}
+.infoheader .nav-item-curr,
+.infoheader .nav-item-curr:hover{
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+}
+.infobody{
+    padding: 10px;
+}
+.table td.export{
+    border: none;
+    background-color: #fff;
+    padding-right: 0;
+}
+.export-item{
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    background-color: #f6f6f6;
+}
+.export-item:hover{
+    background-color: #f3f3f3;
+}

@@ -1,0 +1,67 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+<style type="text/css">
+    .select{list-style: none;}
+    .select li{border-radius:5px;float: left;display: block;width:120px;height:30px;background: #3D9CCC;margin: 4px}
+  li.selections span{cursor:default;display: block;float: left;line-height: 30px;color:white;width: 100px;overflow: hidden;
+    text-overflow: ellipsis!important;text-align: center}
+  li.selections a{cursor:default;float: right;color:white;display: block;width: 20px;height:30px;text-align: center;line-height:30px}
+
+</style>
+
+
+<!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
+              <small style="color:red">等级{$_SESSION['level']}</small>管理员操作
+              <small>Version 2.0</small>
+            </h1>
+              <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">CPI设定</li>
+              </ol>
+
+      </section>
+        
+    <section class="content">
+      <div class="box box-solid">
+        <div class="box-header with-border">
+            <a href="{:U('addCPIGroup')}"  class="btn btn-default" >添加CPI分组</a>
+        </div>
+      </div>
+    <volist name="item" id="vo1">
+      <div class="box box-solid">
+        <div class="box-header with-border">
+          <form action="{:U('setCPI')}" method="post">
+            <h3 class="box-title">CPI:</h3>
+            <input type="hidden" name="ocpi" value='{$vo1.0.cpi}'>
+            <input type="text" name="ncpi" value='{$vo1.0.cpi}'>
+            <i class="fa fa-dollar"></i>
+            <button type="submit" class="btn btn-default" >修改</button>
+            <a href="{:U('addCountry')}?ocpi={$vo1.0.cpi}"  class="btn btn-default" >添加</a>
+          </form>
+        </div>
+        <div class="box-body">
+            <ul class="select">
+            <volist name="vo1" id="vo2"> 
+                  <li class="selections">
+                   <span>{$vo2.id}|{$vo2.name}</span><a href="{:U('delCountry')}?id={$vo2.id}">×</a>
+                  </li>
+            </volist>
+          </ul>
+        </div>
+      </div>
+    </volist>
+
+    </section>
+  </div>
+
+<include file="Public:footer" />
+
+<script type="text/javascript"> 
+$('ul.select li.selections a').click(
+  function(){
+    $(this).parent('li.selections').hide(200);
+  });
+</script>

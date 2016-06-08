@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head id="Head1">
+    <meta charset="UTF-8" />
+    <title>Register</title>
+    <link href="/Public/app/css/frame.css" rel="stylesheet" type="text/css" />
+    <script src="/Public/app/js/vendor/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="/Public/app/js/frame.js" type="text/javascript"></script>
+    <style>
+        html {
+            overflow : hidden;
+            width    : 450px;
+            height   : 572px;
+        }
+         
+        .pop-body .pop-title { margin: 0 0 0 0; }
+        .pop-body .pop-content .sended .pop-title { margin-bottom: 10px; }
+        .pop-body .pop-content .sended .pop-title-big {
+            font-size: 28px;
+            color: #fff;
+            margin-top: 0px;
+            font-weight: 300;
+            margin-bottom: 12px;
+            font-family: Lato, Arial;
+        }
+        
+        .hint {
+            width: 210px;
+            -webkit-margin-before: 0px;
+            -webkit-margin-after: 0px;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+        }
+        
+        .pop-body .pop-content .thisForm .hint p{
+            padding-left: 25px;
+            text-align: left;
+            margin: 0;
+            color: #ff0000;
+        }
+        
+        .pop-body .pop-content .thisForm .hint p.registered{
+            color: #fff;
+        }
+        .hint2 {
+            color: #ffffff;
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 0px;
+            margin-bottom: 0;
+            float: right;
+            font-family: 'Roboto Slab';
+        }       
+        
+    </style>
+
+    <script type="text/javascript" >
+
+           function validation() {
+               setCookie("name", $("#company_name").val(), 100);
+               setCookie("email", $("#email").val(), 100);
+
+           }
+           
+           function setCookie(cname, cvalue, exdays) {
+               var d = new Date();
+               d.setTime(d.getTime() + (exdays * 60 * 60 * 1000));
+               var expires = "expires=" + d.toGMTString();
+               document.cookie = cname + "=" + cvalue + "; " + expires + ";  path=/";
+           }
+
+           function getQueryByName(name) {
+               name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+               var regexS = "[\\?&]" + name + "=([^&#]*)";
+               var regex = new RegExp(regexS);
+               var results = regex.exec(window.location.search);
+               if (results == null)
+                   return "";
+               else
+                   return results[1];
+           }
+
+           setCookie("ref", getQueryByName("ref"), 30);
+
+    </script>
+
+    <script type="text/javascript" >
+       
+            var err_required_company_name = false;
+            var err_invalid_company_name = false;
+            var err_invalid_email = false;
+            var err_invalid_username = false;
+            var err_invalid_password = false;
+         
+            $(function(){
+            
+
+                var _theform = document.forms[0];
+
+                window.theForm = _theform;
+
+                if ($('#__EVENTTARGET').length <= 0 && $('#__EVENTARGUMENT').length <= 0) {
+                    $(theForm).prepend('<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" /><input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />');
+                }
+
+                if (typeof __doPostBack == 'undefined') {
+                    __doPostBack = function (eventTarget, eventArgument) {
+                        if (!theForm) {
+                            theForm = _theform;
+                        }
+                        if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                            theForm.__EVENTTARGET.value = eventTarget;
+                            theForm.__EVENTARGUMENT.value = eventArgument;
+                            theForm.submit();
+                        }
+                    };
+                }
+            
+
+                $('.joinUp input').on('keyup', function (e) {
+                    var thisForm = $('.thisForm');
+
+                    if (e.target.name == "company_name") {
+
+                        if ($(this).val().length < 3) {
+                            $(this).parent('.input').addClass('error');
+                            if ($(this).val().length > 0)
+                                $('.invalid_company_name').show();
+                            else
+                                $('.required_company_name').show();
+                        } else {
+                            $(this).parent('.input').removeClass('error');
+                            $('.required_company_name, .invalid_company_name').hide();
+                        }
+
+                    }
+
+                    if (e.target.name == "email") {
+
+                        var reg = /[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$/,
+                        patt = new RegExp(reg);
+
+                        if (!patt.test($(this).val())) {
+                            $(this).parent('.input').addClass('error');
+                            $('.invalid_email').show();
+                        } else if (err_invalid_username) {
+                            $(this).parent('.input').addClass('error');
+                            $('.invalid_username').show();
+                            err_invalid_username = false;
+                        } else {
+                            $(this).parent('.input').removeClass('error');
+                            $('.invalid_email, .invalid_username').hide();
+                        }
+
+                    }
+
+                    if (e.target.name == "password") {
+
+                        if (e.target.value.length >= 5) {
+                            $(this).parent('.input').removeClass('error');
+                            $('.invalid_password').hide();
+                            if (thisForm.find('input[type=password]').eq(0).val() != thisForm.find('input[type=password]').eq(1).val()) thisForm.find('input[type=password]').eq(1).trigger('change');
+                        } else {
+                            $(this).parent('.input').addClass('error');
+                            $('.invalid_password').show();
+                        }
+
+                    }
+
+                    if (e.target.name == "Password1") {
+
+                        if (thisForm.find('input[type=password]').eq(0).val() === thisForm.find('input[type=password]').eq(1).val()) {
+                            $(this).parent('.input').removeClass('error');
+                            $('.match_password').hide();
+                        } else {
+                            $(this).parent('.input').addClass('error');
+                            $('.match_password').show();
+                        }
+
+                    }
+
+                    if (thisForm.find('.input.error').length === 0) {
+                        thisForm.find('input[type=submit]').removeClass('disabled').addClass('enabled');
+                    } else {
+                        //if ($('.thisForm').find('.input.error').length >= 3 ) {
+                        //    thisForm.find('.hint p').hide();
+                        //    thisForm.find('.hint p.obligatory').show();
+                        //}
+                        thisForm.find('input[type=submit]').addClass('disabled')
+
+                    }
+
+
+
+                    return false;
+                });
+               
+                $('.thisForm input[name=email], .thisForm input[name=company_name]').on('change', function (e) {
+                    $(e.target).trigger('keyup');
+                });
+                       
+                if (err_invalid_username)
+                    $('form input').trigger('keyup');
+
+            
+            });
+
+       
+       
+    </script>
+</head>
+<body>
+    <form method="post" action="" id="form1">
+        <div class="aspNetHidden">
+            <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+            <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
+        </div>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            var theForm = document.forms['form1'];
+            if (!theForm) {
+                theForm = document.form1;
+            }
+            function __doPostBack(eventTarget, eventArgument) {
+                if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                    theForm.__EVENTTARGET.value = eventTarget;
+                    theForm.__EVENTARGUMENT.value = eventArgument;
+                    theForm.submit();
+                }
+            }
+            //]]>
+        </script>
+
+        <div class="aspNetHidden">
+
+            <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="" />
+        </div>
+
+        <div class="pop-body joinUp">
+
+            <div class="pop-content clearfix">
+
+                <p class="pop-title">Join Appemob</p>
+                <form action="{:U('register')}" method="post">
+                <div id="box_form" class="thisForm">
+
+                    <div class="input">
+                        <input name="company_name" type="text" id="company_name" placeholder="Company Name" />
+                    </div>
+                    <div class="input">
+                        <input name="email" type="text" id="email" placeholder="Email" />
+                    </div>
+                    <div class="input">
+                        <input name="password" type="password" id="password" placeholder="Password" />
+                    </div>
+                    <div class="input">
+                        <input name="password1" type="password" id="password1" placeholder="Repeat password" />
+                    </div>
+
+                    <p>
+                        By creating an account you agree with our
+                        <br>
+                        <a href="terms.html" target="_blank">Terms of Services</a>
+                    </p>
+
+                    <input name="Button1" type="submit" id="Button1" class="box_but" value="Start Now" onclick="return validation();" />
+
+                    <div class="hint">
+
+                        <p class="registered">
+                            Already Registered?
+                            <a class="do-frame" data-target="login.html" href="login.html">Sign In</a>
+                        </p>
+
+                        <p class="obligatory">
+                            * Obligatory Fields
+                            <p class="sending">Sending...</p>
+
+                            <p id="required_company_name" class="required_company_name">* Company name is required.</p>
+
+                            <p id="invalid_company_name" class="invalid_company_name">* Company name should be more then 3 characters long.</p>
+
+                            <p id="invalid_email" class="invalid_email">* Invalid mail.</p>
+
+                            <p id="invalid_username" class="invalid_username" style="display:none;">* Email address is already in use.</p>
+
+                            <p id="invalid_password" class="invalid_password">* Password must be at least 5 character.</p>
+
+                            <p id="match_password" class="match_password">* Passwords must match.</p>
+
+                            <p class="disconnect">Disconnected, please retry!</p>
+
+                        </div>
+
+                    </div>
+                </form>
+                    <div id="thanks" class="sended">
+
+                        <p class="pop-title">Thank you for Joining Up!</p>
+
+                        <img src="/Public/app/i/mail.png" alt="" />
+
+                        <p class="pop-title-big">
+                            Please Confirm Your
+                        Email Address
+                        </p>
+
+                        <div class="divider"></div>
+
+                        <p>
+                            We sent a verification message to
+                            <br/>
+
+                            <span id="sent_to_email">user@domain.co</span>
+
+                            <br/>
+                            <br/>
+                            No message received?
+                        Check your spam folders or
+                            <a id="A1" href="javascript:__doPostBack(&#39;A1&#39;,&#39;&#39;)">Resend the Email</a>
+                            <div id="hint2" class="hint2"></div>
+                            <iframe id="thanksId" style="border:none;" width="1" height="1" src=""></iframe>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+</body>
+</html>

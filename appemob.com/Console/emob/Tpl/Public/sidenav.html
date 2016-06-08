@@ -1,0 +1,89 @@
+
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="/Public/console/dist/img/user-default.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>{$_SESSION['name']}</p>
+              <i class="fa fa-circle text-success"></i> {$_SESSION['email']}
+            </div>
+          </div>
+          <!-- search form -->
+          <form action="#" method="get" class="sidebar-form" style="display:none;">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Home</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{:U('Index/index')}"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-th"></i>
+                <span>Application</span>
+                <!-- <span class="label label-primary pull-right">4</span> -->
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="/console.php/Report/report"><i class="fa fa-circle-o"></i>Data Reporting</a></li>
+                <li><a href="/console.php/App/manage"><i class="fa fa-circle-o"></i> App Manage</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>SDK Manage</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{:U('SDK/setsdk')}"><i class="fa fa-circle-o"></i>SDK access/set</a></li>
+                <li><a href="http://console.appemob.com/sdk/sdk.pdf" target="_blank"><i class="fa fa-circle-o"></i> SDK Document</a></li>
+                <li><a href="http://console.appemob.com/sdk/sdk.zip"  target="_blank"><i class="fa fa-circle-o"></i> SDK Download</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-user"></i>
+                <span>Account</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{:U('Account/accountInfo')}"><i class="fa fa-circle-o"></i>Account settings</a></li>
+                <li><a href="{:U('Message/message')}"><i class="fa fa-circle-o"></i>Message</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>FAQ</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <!-- <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i>Help</a></li> -->
+                <li><a href="mailto:support@appemob.com"><i class="fa fa-circle-o"></i>Contact Us</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>

@@ -1,0 +1,106 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+<style type="text/css">
+
+#container{
+    line-height: 1.428571429;
+    width: 600px;
+    height: 300px;
+    position: relative;
+    left: 180px;
+    top: 10px;
+}
+#subbtn{
+    margin-top: 50px;
+}
+</style>
+
+<!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            <small style="color:red">等级{$_SESSION['level']}</small>管理员操作
+            <small>Version 2.0</small>
+          </h1>
+            <ol class="breadcrumb">
+              <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+              <li class="active">消息管理</li>
+           </ol>
+        </section>
+        <section class="content">
+        
+        <div class="col-md-10">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">消息管理</h3>
+                </div>
+            <form class="form-horizontal" action="{:U('Message/add')}" method="post">
+                <div class="box-body">
+                <input type="hidden" name="id" value=""/>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">消息标题：</label>
+                    <input type="text" name="title" required value="" />
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">消息类型：</label>
+                    <label><input type="radio" id="sys" name="type" checked="" value="1"/>系统</label>
+                    <label><input type="radio" id="usr" name="type" value="0"/>用户</label>           
+                </div>
+                <div id="msg_0" class="form-group" style="display:none;">
+                    <label class="col-sm-2 control-label">用户邮箱：</label>
+                    <input type="email" name="email" value="" placeholder="useremail"/>
+                </div>
+                <div id="msg_1" class="form-group">
+                    <label class="col-sm-2 control-label">消息内容：</label>
+                    <script id="container" name="message" type="text/plain">{$item.message}</script>
+                </div>
+                </div>
+                <div class="box-footer">
+                    <label class="col-sm-2 control-label"></label>
+                    <input type="submit" id="subbtn" class="btn btn-default" value="添加" />
+                </div>
+            </form>
+            </div>
+        </div>
+        </section>
+    </div>
+
+<include file="Public:footer" />
+
+<script type="text/javascript" src="/Public/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/Public/ueditor/ueditor.all.js"></script>
+<script type="text/javascript">
+var ue = UE.getEditor('container', {
+    autoHeight: false
+});
+
+$('input[type=radio]').click(function(e) {
+    $('#msg_0').hide();
+    $('#msg_' + this.value).show();
+});
+
+function del(id) {
+    if (confirm("确认删除？")) {
+        $.ajax({
+            url: '__URL__/msgdel',
+            data: {
+                id: id
+            },
+            type: 'post'
+        }).done(function(data) {
+            if (data == 1) {
+                window.location.reload();
+            } else if (data == 0) {
+                alert('请先登录!');
+            } else {
+                alert('操作失败，请稍后再试!');
+            }
+        })
+        .fail(function(msg) {
+            alert(msg);
+        });
+    }
+}
+</script>
+

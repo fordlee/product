@@ -1,0 +1,93 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+<style type="text/css">
+#options {margin-bottom: 15px; text-shadow: 0px 0px 1px #cccccc; color: #333333; font-size: 14px;}
+.option {height:15px; padding:16px 0px 17px;}
+.optionMsg {float: left; margin: 0px 11px 0px 24px; line-height: 32px;width: 200px;}
+.option > .opt-icons {float: left; height: 31px; width: 97px; margin-top: 1px;}
+.opt-icons {background: url('/Public/static/image/switch.png');}
+.option-on {background-position: 0px 96px; cursor: hand; cursor: pointer;}
+.option-off {background-position: 97px 190px;}
+</style>
+<div class="content-wrapper">
+	  <section class="content-header">
+	    	<h1>
+	          <small style="color:red">用户{$_SESSION['email']}</small>
+	          <small>Version 2.0</small>
+	        </h1>
+	      <ol class="breadcrumb">
+	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+	        <li class="active">SDK Ad</li>
+	      </ol>
+	  </section>
+        
+    <section class="content">
+		<div id="inner">
+		<div id="options" >
+			<input type="hidden" id="applistid" value="{$applistid}">
+			<volist name="item" id="vo">
+				<div class="option">
+					<div class="optionMsg">{$vo.adtype}</div>
+					<eq name="vo.adset" value="true">
+						<div data-mid="{$key}" class="opt-icons option-on"></div>
+					<else/>
+						<div data-mid="{$key}" class="opt-icons option-off"></div>
+					</eq>
+				</div>
+			</volist>
+		</div>
+			<input type="button" id="savebtn" onclick="setAll()" class="btn btn-default" value="save">
+		</div>
+	</section>
+</div>
+
+<include file="Public:footer" />
+<script type="text/javascript">
+
+$('.opt-icons').click(function(){
+	if ($(this).hasClass('option-off')){
+		$(this).removeClass('option-off');
+		$(this).addClass('option-on');
+
+		setOptOutParams($(this).attr('data-mid'),'on');
+	}else if ($(this).hasClass('option-on')){
+		$(this).removeClass('option-on');
+		$(this).addClass('option-off');
+
+		setOptOutParams($(this).attr('data-mid'),'off');
+	}
+});
+
+var optoutParams = {};
+function setOptOutParams(mid, state){
+	optoutParams[mid] = (state == 'on');
+};
+
+function setAll(){
+	var applistid = $("#applistid").val();
+	var json = JSON.stringify(optoutParams);
+	if(jQuery.isEmptyObject(optoutParams)){
+		window.location.href="{:U('SDK/setsdk')}";
+	}else{
+		$.ajax({
+			url: "{:U('SDK/setad')}",
+			data: {
+				'applistid':applistid,
+				'ad_control':json
+			},
+			dataType: 'json',
+			type:'post'
+		}).done(function(data){
+	        if(data == 1){
+	            alert('成功！');
+	            window.location.href="{:U('SDK/setsdk')}";
+	        }else{
+	            alert('失败');
+	        }
+	    }).fail(function(msg) {
+	        alert(msg);
+	    });
+	}
+	
+}
+</script>

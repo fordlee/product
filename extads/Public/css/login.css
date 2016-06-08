@@ -1,0 +1,115 @@
+html,body{
+    background-color: #fff;
+}
+body{
+  min-height: 350px;
+}
+.auth {
+  min-height: 400px;
+  width: 700px;
+  padding-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.auth_signup{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.auth__logo{
+    height: 0;
+    margin-bottom: 13px;
+}
+.auth__action {
+  background-color: #f6f6f6;
+  border-radius: 5px;
+  border:1px solid #eee;
+  padding: 10px;
+}
+.auth__action_singup{
+  margin-top: 0;
+}
+.auth-form {
+  /*border: 1px solid #ddd;
+  box-shadow: 0 1px 1px #ececec;*/
+  border-radius: 0;
+  overflow: hidden;
+}
+.auth-form__header {
+  padding: 8px 13px;
+  font-weight: 300;
+  font-size: 20px;
+  /*background: #fefefe;
+  border-bottom: 1px solid #ddd;*/
+  color: #232323;
+  text-transform: capitalize;
+}
+.auth-form__body {
+  padding: 25px 0 10px 40px;
+  /*background: #f7f7f7;*/
+  width: 100%;
+}
+.auth-form__footer {
+  /*border-top: 1px solid #ddd;
+  background: #f7f7f7;*/
+  padding: 15px 136px 15px 40px;
+}
+.auth-form__field {
+  display: inline-block;
+  width: 200px;
+  text-align: right;
+  margin-bottom: 15px;
+  padding-right: 5px;
+  font-weight: 400;
+}
+.auth-form__field__input {
+  font-family: 'Open Sans',sans-serif;
+  margin: 0;
+  outline: 0;
+  width: 300px;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(255,255,255,0);
+  line-height: 1.2142em;
+  padding: .89861em 1em .88861em;
+  font-size: 1em;
+  background: #fff;
+  border: 1px solid rgba(39,41,43,.15);
+  color: rgba(0,0,0,.8);
+  border-radius: .2857rem;
+  box-shadow: 0 0 0 0 transparent inset;
+  -webkit-transition: background-color .2s ease,color .2s ease,box-shadow .2s ease,border-color .2s ease;
+  transition: background-color .2s ease,color .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.auth-form__footer__action {
+  background-color: #dc1f26;
+  border: 0;
+  text-align: center;
+  color: #fff;
+  padding: 5px 15px;
+  margin-bottom: 15px;
+  font-family: "futura-pt-condensed", sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+}
+.auth-form__footer__link {
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 13px;
+  line-height: 32px;
+}
+.auth__info__item{
+    margin: 10px 13px;
+}
+.fr{
+  float: right;
+  height: 32px;
+  line-height: 32px;
+}
+.form-item{
+  display: block;
+  position: relative;
+}
+.require{
+  display: inline-block;
+  color: #f00;
+}

@@ -1,0 +1,34 @@
+<include file="./Public/widget/head.html" title="添加消息" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+.title{
+    text-align: center;
+    margin: 20px 0;
+}
+.addtime {
+    color: #aaa;
+    text-align: center;
+}
+.msgbody{
+    color: #666;
+    margin: 20px;
+}
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html" curr="index"/>
+        </ul>
+        <div class="content">
+            <h1 class="title">{$item.title}</h1>
+            <div class="addtime">发布时间:{$item.addtime|strtotime|date='Y-m-d', ###}</div>
+            <div class="msgbody">{$item.content}</div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function() {
+    setCurrNav('msg');
+});
+</script>
+<include file="./Public/widget/foot.html"/>

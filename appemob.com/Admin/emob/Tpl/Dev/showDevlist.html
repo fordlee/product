@@ -1,0 +1,108 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+
+<!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
+              <small style="color:red">等级{$_SESSION['level']}</small>管理员操作
+              <small>Version 2.0</small>
+            </h1>
+              <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">开发者信息</li>
+              </ol>
+
+      </section>
+        
+		<section class="content">
+			<div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">开发者列表</h3>                  
+                </div><!-- /.box-header -->
+                
+                <div class="box-body">
+                  <form class="form-horizontal" id="formlevel" method="post" action="__URL__/showDevLevel">
+                  <div class="form-group">
+                    <label for="level" class="col-sm-1 control-label">开发者级别:</label>
+                    <div class="col-sm-1">
+                    <select class="form-control select2 select2-hidden-accessible" onchange="selectlevel()" id="level" name="level" style="" tabindex="-1" aria-hidden="true">
+                            <option value="0">所有</option>
+                            <option value="1" <php>if($level==1) echo 'selected="selected"'</php>>顶尖</option>
+                            <option value="2" <php>if($level==2) echo 'selected="selected"'</php>>普通</option>
+                    </select>
+                    </div>
+                  <!-- <input type="submit" class="btn btn-default" value="选择"> -->
+                  </div>
+                </form>
+                	<div class="dataTables_wrapper form-inline dt-bootstrap">
+                  <div class="row">
+                  <table id="tab" class="table table-bordered table-striped">             	
+                    <thead>
+                      <tr>
+                        <th>用户邮箱</th>
+                        <th>开发者ID</th>
+                        <th>开发者名称</th>
+                        <th><eq name="d_appNo" value="DESC"><i class="glyphicon glyphicon-menu-down"></i></eq>
+                            <eq name="d_appNo" value="ASC"><i class="glyphicon glyphicon-menu-up"></i></eq>
+                        <a href="javascript:void(0)" title="排序" onclick="loadNewSort('appNo','{$d_appNo}')">APP数量</a></th>
+                        <th>开发者邮箱</th>
+                        <th>开发者网址</th>
+                        <th>开发者级别</th>
+                        <th><eq name="d_time" value="DESC"><i class="glyphicon glyphicon-menu-down"></i></eq>
+                            <eq name="d_time" value="ASC"><i class="glyphicon glyphicon-menu-up"></i></eq>
+                        <a href="javascript:void(0)" title="排序" onclick="loadNewSort('time','{$d_time}')">添加时间</a></th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <volist name="devlist" id="vo">
+                      	<tr>
+                          <td>{$vo.useremail}</td>
+                          <td>{$vo.devid}</td>
+	                        <td>{$vo.appname}</td>
+                          <td>{$vo.appNo}</td>
+	                        <td>{$vo.devemail}</td>
+                          <td>{$vo.website}</td>
+                          <if condition="$vo.level eq 1" >
+	                        <td>Top Developer</td>
+                          <else/>
+                          <td>Developer</td>
+                          </if>
+                          <td>{$vo.time|strtotime|date='Y-m-d',###}</td>
+	                        <td>
+                            <if condition="$vo.devstatus eq 1">
+                            <a href="__URL__/operateDev/id/{$vo.devlistid}/s/{$vo.devstatus}" class="btn btn-default">停用</a>
+                            <else />
+                            <a href="__URL__/operateDev/id/{$vo.devlistid}/s/{$vo.devstatus}" class="btn btn-default">启用</a>
+                            </if>
+                          </td>
+                      	</tr>
+                      </volist>
+                    </tbody>
+                    
+                  </table>
+                 </div>
+                 
+                </div>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+		</section>
+	</div>
+
+<include file="Public:footer" />
+<script type="text/javascript">
+  function selectlevel(){
+    $('#formlevel').submit();
+  }
+
+  function loadNewSort(key, direction) {
+    if(direction == 'DESC'){
+      var direction = 'ASC';
+    }else{
+      var direction = 'DESC';
+    }
+    window.location.href="{:U('resort')}?k="+key+"&d="+direction;
+  }
+</script>

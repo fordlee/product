@@ -1,0 +1,26 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+
+<!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+		<section class="content-header">
+	      <h1>
+            <small style="color:red">等级{$_SESSION['level']}</small>管理员操作
+            <small>Version 2.0</small>
+          </h1>
+            <ol class="breadcrumb">
+              <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+              <li class="active">管理员信息</li>
+           </ol>
+	    </section>
+		<section class="content">
+		<div class="content">
+            <h1 class="title">{$item.title}</h1>
+            <div class="addtime">发布时间:{$item.addtime|strtotime|date='Y-m-d', ###}</div>
+            <div class="msgbody">{$item.content}</div>
+        </div>
+		</section>
+	</div>
+
+<include file="Public:footer" />

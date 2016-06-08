@@ -1,0 +1,163 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+<!-- Daterange picker -->
+<link rel="stylesheet" href="/Public/console/plugins/daterangepicker/daterangepicker-bs3.css">
+<style type="text/css">
+
+</style>
+ <div class="content-wrapper">
+     <section class="content-header">
+        <h1>
+          <small style="color:red">User: {$_SESSION['name']}</small>
+          <small>Version 2.0</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="{:U('Index/index')}"><i class="fa fa-dashboard"></i>Home</a></li>
+          <li><a href="{:U('App/showAppInfo')}?id={$appid}">Application Detail</a></li>
+          <li class="active">Install Detail</li>
+        </ol>
+
+     </section>
+        
+    <section class="content">
+      <div class="box">
+      	<form action="{:U('Report/installCountry')}" id="form_date" method="post">
+            <input type="hidden" id="appid" name="appid" value="{$appid}">
+            <!-- Date range -->
+            <div class="form-group">
+              <label>Date range:</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="btn btn-default pull-left" name="dateRange" value="" id="daterange-btn">
+                <a href="{:U('App/showAppInfo')}?id={$appid}" class="btn btn-default btn-sm" title="Back">back</a>
+              </div><!-- /.input group -->
+            </div>
+          </form>
+      </div>
+
+      <!-- Map box -->
+      <div class="box box-solid bg-light-blue-gradient">
+        <div class="box-header">
+          <!-- tools box -->
+          <div class="pull-right box-tools">
+            <button class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
+          </div><!-- /. tools -->
+
+          <i class="fa fa-map-marker"></i>
+          <h3 class="box-title">
+            Installs
+          </h3>
+        </div>
+        <div class="box-body">
+          <div id="world-map" style="height: 400px; width: 100%;"></div>
+        </div><!-- /.box-body-->
+      </div><!-- /.box -->
+
+      <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Hover Data Table</h3>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Unique ID</th>
+                    <th>Country</th>
+                    <th>Language</th>
+                    <th>Android Version</th>
+                    <th>Phone Model</th>
+                    <th>Carrier</th>
+                    <th>Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <volist name="installDetail" id="vo">
+                    <tr>
+                      <td>{$vo.time|date="Y-m-d H:i",###}</td>
+                      <td>{$vo.unique_id}</td>
+                      <td>{$vo.country}</td>
+                      <td>{$vo.language}</td>
+                      <td>{$vo.os_version}</td>
+                      <td>{$vo.phone_model}</td>
+                      <td>{$vo.carrier}</td>
+                      <td>${$vo.cost}</td>
+                    </tr>
+                  </volist>
+                </tbody>
+              </table>
+          </div>
+      </div>
+
+    </section>
+ </div>
+<include file="Public:footer" />
+<!-- date-range-picker -->
+<script src="/Public/static/js/moment.min.js"></script>
+<script src="/Public/console/plugins/daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript">
+ var currrange = '{$dateRange}';
+ $('#daterange-btn').val(currrange);
+ dateinit();
+
+function dateinit() {
+      $('#daterange-btn').daterangepicker({
+        ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment()
+      },
+  function (start, end) {
+    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+  });
+
+  $('#daterange-btn').change(function(){
+      $('#form_date').submit();
+  });
+ }
+
+  //jvectormap data
+  var installsData = {$installCountry};
+  //World map by jvectormap
+  $('#world-map').vectorMap({
+    map: 'world_mill_en',
+    backgroundColor: "transparent",
+    regionStyle: {
+      initial: {
+        fill: '#e4e4e4',
+        "fill-opacity": 1,
+        stroke: 'none',
+        "stroke-width": 0,
+        "stroke-opacity": 1
+      }
+    },
+    series: {
+      regions: [{
+          values: installsData,
+          scale: ["#92c1dc", "#ebf4f9"],
+          normalizeFunction: 'polynomial'
+        }]
+    },
+    onRegionLabelShow: function (e, el, code) {
+      if (typeof installsData[code] != "undefined")
+        el.html(el.html() + ': ' + installsData[code] + ' new installs');
+    },
+    onRegionClick:function (e, code) {
+      if (typeof installsData[code] != "undefined"){
+        var id = $('#appid').val();
+        var dateRange = $('#daterange-btn').val();
+        window.location.href = "{:U('Report/installDetailCountry')}?id="+id+"&c="+code+"&d="+dateRange;
+      }
+    }
+  });
+
+
+</script>

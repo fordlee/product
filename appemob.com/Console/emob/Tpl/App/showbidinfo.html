@@ -1,0 +1,92 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+
+<!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Bid Set
+            <small>Bid set tables</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Tables</a></li>
+            <li class="active">Data tables</li>
+          </ol>
+        </section>
+
+        <section class="content">
+          <form action="{:U('setbidAll')}?id={$applistid}" method="post">
+            <button type="submit" class="btn btn-default">SetAll</button>
+            <input type="hidden" name="counts" value="{$counts}">
+            <table id="example1" class="table table-bordered table-striped">              
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" name="checkall" value="all" >select</th>
+                  <th>Country</th>
+                  <th>Avg.CPI</th>
+                  <th>bid%</th>
+                  <th>bid</th>
+                </tr>
+              </thead>
+              <tbody>
+              <volist name="cbids" id="vo">
+                <tr>
+                  <th><input type="checkbox" id="check_{$vo.id}" name="checkname[]" value="{$vo.id}" ></th>
+                  <th>{$vo.bid_country}</th>
+                  <th>{$vo.cpi}</th>
+                  <th>
+                      <input type="hidden" name="id[]" value="{$vo.id}">
+                      <input type="hidden" name="applistid[]" value="{$vo.applistid}">
+                      <input type="hidden" name="countryid[]" value="{$vo.countryid}">
+                      <input type="text" id="bid_{$vo.id}" class="input" name="bid[]" value="{$vo.bid}">  
+                      <button onclick="setbid({$vo.id},{$vo.applistid},{$vo.countryid})" type="submit" class="btn btn-default">set</button>
+                  </th>
+                  <th>{$vo.finalbid|number_format=###,2}</th>
+                </tr>
+              </volist>
+              </tbody>
+            </table>
+            </form>
+          </div>
+        </section>
+    </div>
+
+<include file="Public:footer" />
+<script type="text/javascript">
+
+$("#checkall").click( 
+function(){ 
+  if(this.checked){ 
+    $("input[name='checkname[]']").each(function(){this.checked=true;}); 
+  }else{ 
+    $("input[name='checkname[]']").each(function(){this.checked=false;});
+  } 
+});
+$("input[name='checkname[]']").each(function(){
+  $(this).click(function(){
+     if(!this.checked)
+     {
+      $("#checkall")[0].checked=false;
+     }
+  })
+  })
+
+  function setbid(id,applistid,countryid){
+    var bid = $('#bid_'+id).val();
+    $.ajax({
+        url: '__URL__/setbid',
+        data: {
+            id: id,
+            applistid:applistid,
+            countryid:countryid,
+            bid: bid
+        },
+        type: 'post'
+    })
+    .fail(function(msg) {
+        alert(msg);
+    });
+  }
+</script>

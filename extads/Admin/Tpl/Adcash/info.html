@@ -1,0 +1,284 @@
+<include file="./Public/widget/head.html" title="统计信息" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+.form-item{margin: 0;margin-top: -5px;}
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <div class="form">
+                <select id="dateRange">
+                    <option value="today">Today</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="last_7_days">Last 7 Days</option>
+                    <option value="last_30_days">Last 30 Days</option>
+                    <option value="this_month">This Month</option>
+                    <option value="last_month">Last Month</option>
+                    <option value="custom">Custom</option>
+                </select>
+                <span id="timewrap" class="ml20" style="display:none;">
+                <input type="date" id="timebegin" min="2015-04-01" max="{$today}"/>
+                <input type="date" id="timeend" min="2015-04-01" max="{$today}"/>
+                </span>
+                <input type="button" id="btnGetStatistics" value="同步统计数据" />
+                <span id="statisticsTip" class="tip"></span>
+                <if condition="($userinfo.discount neq 0)">
+                <input type="hidden" value="{$userinfo.discount}" id="discount"/>
+                <input type="button" id="btnStatisticsLocal" value="转换为内部数据" />
+                <span id="syncTip" class="tip"></span>
+                </if>
+            </div>
+            <div class="list">
+                <div class="filter f-cb">
+                    <form id="filterform" method="post">
+                        <ul>
+                            <li>
+                                主渠道:
+                                <select id="uid" name="uid">
+                                    <volist name="uids" id="uitem">
+                                    <if condition="($uitem.uid eq $uid)">
+                                    <option selected="true" value="{$uitem.uid}">{$uitem.uid}</option>
+                                    <else/>
+                                    <option value="{$uitem.uid}">{$uitem.uid}</option>
+                                    </if>
+                                    </volist>
+                                </select>
+                            </li>
+                            <li>
+                                子渠道：
+                                <select id="cid" name="cid">
+                                    <volist name="cids" id="citem">
+                                    <if condition="($citem.cid eq $cid)">
+                                    <option selected="true" value="{$citem.cid}">{$citem.cid}</option>
+                                    <else />
+                                    <option value="{$citem.cid}">{$citem.cid}</option>
+                                    </if>
+                                    </volist>
+                                </select>
+                            </li>
+                            <li>
+                                <div class="form-item">
+                                    Date Range:
+                                    <select id="ndateRange" name="dateRange">
+                                        <option value="today">Today</option>
+                                        <option value="last_7_days">Last 7 Days</option>
+                                        <option value="last_30_days">Last 30 Days</option>
+                                        <option value="this_month">This Month</option>
+                                        <option value="last_month">Last Month</option>
+                                        <option value="custom">Custom</option>
+                                    </select>
+                                    <span id="ntimewrap" class="timerange" style="display:none;">
+                                        <input type="text" id="datepicker"/>
+                                        <input id="ntimebegin" type="hidden" name="timebegin"/>
+                                        <input id="ntimeend" type="hidden" name="timeend"/>
+                                    </span>
+                                    &nbsp;
+                                    <input type="submit" value="Apply" />
+                                </div>
+                            </li>
+                            <li style="float:right">用户：{$userinfo.username}(折扣：{$userinfo.discount})</li>
+                        </ul>
+                    </form>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Impressions</th>
+                        <th>Clicks</th>
+                        <th>CPM</th>
+                        <th>CTR</th>
+                        <th>Profit</th>
+                        <th>ImportDate</th>
+                        <th>是否转换</th>
+                        <th>折扣</th>
+                    </tr>
+                    <tr class="f-fb">
+                        <td>total</td>
+                        <td class="f-tr">{$total.pop|number_format}</td>
+                        <td class="f-tr">{$total.click|number_format}</td>
+                        <td class="f-tr">{$total.cpm|number_format=###,4}</td>
+                        <td class="f-tr">{$total['ctr'] * 100|number_format=###,2}%</td>
+                        <td class="f-tr">${$total.profit|number_format=###,2}</td>
+                        <td class="fulltime">/</td>
+                        <td>/</td>
+                        <td>/</td>
+                    </tr>
+                    <volist name="ret" id="item">
+                    <tr>
+                        <td>{$item.date}</td>
+                        <td class="f-tr">{$item.pop|number_format}</td>
+                        <td class="f-tr">{$item.click|number_format}</td>
+                        <td class="f-tr">{$item.cpm|number_format=###,4}</td>
+                        <td class="f-tr">{$item['ctr'] * 100|number_format=###,2}%</td>
+                        <td class="f-tr">${$item.profit|number_format=###,2}</td>
+                        <td class="fulltime">{$item.importdate|strtotime|date='Y-m-d H:i',###}</td>
+                    <if condition="($item.istolocal eq 1)">
+                        <td>是</td>
+                    <else />
+                        <td>否</td>
+                    </if>
+                    <if condition="($item.discount eq 0)">
+                        <td>/</td>
+                    <else />
+                        <td>{$item.discount|number_format=###,2}</td>
+                    </if>
+                    </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript" src="__JS__/moment.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.daterangepicker.js"></script>
+<script type="text/javascript">
+$(function(){
+    setCurrNav('info');
+    setSecNav("{$t}");
+    $('#btnGetStatistics').click(function(e) {
+        $('#statisticsTip').text('正在同步，请稍候...');
+        var date_range = $('#dateRange').val();
+        var date_start = 0;
+        var date_end = 0;
+        var cid = '{$cid}'||'';
+        var uid = '{$uid}'||'';
+        var t = '{$t}' || '';
+        if (date_range == 'custom') {
+            date_start = $('#timebegin').val();
+            date_end = $('#timeend').val();
+        }
+        $.ajax({
+            url: '__URL__/setStatistics',
+            data: {
+                'dateRange': date_range,
+                'date_start': date_start,
+                'date_end': date_end,
+                'cid': cid,
+                'uid': uid,
+                't': t
+            },
+            type: 'post'
+        }).done(function(data) {
+            if (data == 1) {
+                window.location.reload();
+            } else if (data == 0) {
+                $('#statisticsTip').text('请先登录!');
+            } else if (data == 3) {
+                $('#statisticsTip').text('暂无数据!');
+            } else {
+                $('#statisticsTip').text('同步失败，请稍后再试!');
+            }
+        }).fail(function(msg) {
+            $('#statisticsTip').text('同步失败，失败信息：' + msg);
+        });
+    });
+
+    $('#dateRange').change(function(e) {
+        var value = this.value;
+        if (value == 'custom') {
+            $('#timewrap').show();
+        } else {
+            $('#timewrap').hide();
+        }
+    });
+
+    $('#cid').change(function(e) {
+        $('#filterform').submit();
+    });
+
+    $('#btnStatisticsLocal').click(function(e) {
+        var discount = parseFloat($('#discount').val());
+        if (discount <= 0 || discount > 1) {
+            alert('折扣参数有误！');
+            return;
+        }
+        $('#syncTip').text('正在转换，请稍候...');
+        $.ajax({
+            url: '__URL__/statisticstolocal',
+            data: {
+                uid: '{$uid}' || 0,
+                cid: '{$cid}' || 0,
+                discount: $('#discount').val()
+            },
+            type: 'post'
+        }).done(function(data) {
+             if (data == 1) {
+                window.location.reload();
+            } else if (data == 0) {
+                $('#syncTip').text('请先登录!');
+            } else {
+                $('#syncTip').text('转换失败，请稍后再试!');
+            }
+        }).fail(function(msg) {
+            $('#syncTip').text('转换失败，失败信息：' + msg);
+        });
+    });
+
+    dateinit();
+
+    uidinit();
+});
+
+function uidinit() {
+    $('#uid').change(function(e) {
+        var uid = $(this).val();
+        $.ajax({
+            url: '__URL__/getCidsByUid',
+            data: {
+                uid: uid
+            },
+            type: 'post',
+            dataType: 'json'
+        }).done(function(data) {
+            var opHtml = [];
+            for (var i = 0, j = data.length; i < j; i++) {
+                opHtml.push('<option value="'+data[i]['cid']+'">'+data[i]['cid']+'</option>')
+            }
+            $('#cid').empty().html(opHtml.join(''));
+        }).fail(function(msg) {
+            alert(msg);
+        });
+    });
+}
+
+function dateinit() {
+    var currrange = '{$currrange}';
+    $('#ndateRange').val(currrange);
+
+    var dateconf = {
+        language:'en',
+        showShortcuts: false
+    };
+    $('#datepicker').dateRangePicker(dateconf).bind('datepicker-change', function(event,obj) {
+        var val = obj.value;
+        if (val.indexOf('to') != -1) {
+            var datearr = val.split('to');
+            var datebegin = $.trim(datearr[0]);
+            var dateend = $.trim(datearr[1]);
+            $('#ntimebegin').val(datebegin);
+            $('#ntimeend').val(dateend);
+        }
+    });
+    var now = new Date();
+    now.setMonth(now.getMonth() - 2);
+    var towMonthBefore = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+    $('#datepicker').data('dateRangePicker')
+        .setDateRange(towMonthBefore,'{$today}');
+
+    $('#ntimebegin').val(towMonthBefore);
+    $('#ntimeend').val('{$today}');
+
+    $('#ndateRange').change(function(e) {
+        if (this.value == 'custom') {
+            $('#ntimewrap').show();
+        } else {
+            $('#ntimewrap').hide();
+        }
+    });
+}
+</script>
+<include file="./Public/widget/foot.html"/>

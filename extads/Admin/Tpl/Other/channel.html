@@ -1,0 +1,90 @@
+<include file="./Public/widget/head.html" title="外部渠道管理" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <div class="form">
+                <input type="button" id="btnAddChannel" value="手动添加外部渠道" />
+                <form id="addform" method="post" action="__URL__/addchannel" style="display:none;">
+                    <div class="form-item">
+                        <input type="text" placeholder="token" name="token" value="" />
+                    </div>
+                    <div class="form-item">
+                        <input type="text" placeholder="主渠道" name="uid" value="" />
+                    </div>
+                    <div class="form-item">
+                        <input type="text" placeholder="子渠道" name="cid" />
+                    </div>
+                    <div class="form-item">
+                        <input type="text" placeholder="平台" name="platform" value="other" />
+                    </div>
+                    <div class="form-item">
+                        <input type="submit" value="添加" />
+                    </div>
+                </form>
+                <span class="tip"></span>
+                <input type="button" id="btnChannelLocation" value="转换为内部渠道" />
+                <span id="synctip" class="tip"></span>
+            </div>
+            <div class="list">
+                <table class="table">
+                    <tr>
+                        <th>主渠道</th>
+                        <th>子渠道</th>
+                        <th>平台</th>
+                        <th>同步时间</th>
+                        <th>是否转换为内部渠道</th>
+                        <th>统计信息</th>
+                    </tr>
+                    <volist name="channels" id="item">
+                    <tr>
+                        <td>{$item.uid}</td>
+                        <td>{$item.cid}</td>
+                        <td>{$item.platform}</td>
+                        <td>{$item.addtime}</td>
+                    <if condition="($item.istolocal eq 1)">
+                        <td>是</td>
+                    <else />
+                        <td>否</td>
+                    </if>
+                        <td><a href="__URL__/info/cid/{$item.cid}/uid/{$item.uid}">查看统计</a></td>
+                    </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function(){
+    setCurrNav('channel');
+    setSecNav("other");
+
+    $('#btnAddChannel').click(function(e) {
+        $('#addform').show();
+    });
+
+    $('#btnChannelLocation').click(function(e) {
+        $('#synctip').text('正在同步，请稍候...');
+        $.ajax({
+            url: '__URL__/locationChannel'
+        }).done(function(data) {
+            if (data == 1) {
+                window.location.reload();
+            } else if (data == 0) {
+                $('#synctip').text('请先登录!');
+            } else {
+                $('#synctip').text('同步失败，请稍后再试!');
+            }
+        }).fail(function(msg) {
+            $('#synctip').text('同步失败，失败信息：' + msg);
+        });
+    });
+});
+</script>
+<include file="./Public/widget/foot.html"/>

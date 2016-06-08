@@ -1,0 +1,25 @@
+<div class="header">
+<h1>AdonAds({$Think.now|strtotime|date='Y-m-d',###})</h1>
+<a class="logout" href="/auth/logout">Log Out</a>
+<a class="myaccount" href="/payment/payments">MY INCOME ${$null|getIncome|number_format=###,2}</a>
+<if condition="$multiads eq 1">
+    <select class="multiads">
+        <option <if condition="$adt eq 'total'">selected</if> value="total">Total</option>
+        <eq name="multiads_pop" value="1">
+        <option <if condition="$adt eq 'impressions'">selected</if> value="sn">Site-under</option>
+        </eq>
+        <eq name="multiads_superfish" value="1">
+        <option <if condition="$adt eq 'superfish'">selected</if> value="sd">Shopping-Deals</option>
+        </eq>
+        <eq name="multiads_banners" value="1">
+        <option <if condition="$adt eq 'banners'">selected</if> value="banners">Banners</option>
+        </eq>
+        <eq name="multiads_intext" value="1">
+        <option <if condition="$adt eq 'intext'">selected</if> value="intext">inText</option>
+        </eq>
+        <eq name="multiads_inimage" value="1">
+        <option <if condition="$adt eq 'inimage'">selected</if> value="inimage">In-Image</option>
+        </eq>
+    </select>
+</if>
+</div>

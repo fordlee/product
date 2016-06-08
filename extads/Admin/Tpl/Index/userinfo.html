@@ -1,0 +1,98 @@
+<include file="./Public/widget/head.html" title="用户管理" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+.form .item-title{
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+.form-item input[type=text]{
+    width: 500px;
+}
+.content{
+    top: 0;
+    left: 0;
+    border: none;
+    padding: 0;
+}
+.form{
+    margin: 0;
+    border: none;
+}
+</style>
+<include file="./Public/widget/header.html"/>
+        <div class="content">
+            <div class="form">
+                <div class="form-item">
+                    <label class="item-title">UID：</label>
+                    <input readonly type="text" value="{$userinfo.uid}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">TOKEN：</label>
+                    <input readonly type="text" value="{$userinfo.token}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">登录用户名：</label>
+                    <input readonly type="text" value="{$userinfo.username}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">First Name：</label>
+                    <input readonly type="text" value="{$userinfo.firstname}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">Last Name：</label>
+                    <input readonly type="text" value="{$userinfo.lastname}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">系数：</label>
+                    <input readonly type="text" value="{$userinfo.discount}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">密码：</label>
+                    <input readonly type="text" value="{$userinfo.password}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">扩展地址：</label>
+                    <input readonly type="text" value="{$userinfo.ext}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">广告类型：</label>
+                    <input readonly type="text" value="{$userinfo.adtypes}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">国家：</label>
+                    <input readonly type="text" value="{$userinfo.country}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">Skype/Phone/QQ：</label>
+                    <input readonly type="text" value="{$userinfo.skype}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">公司：</label>
+                    <input readonly type="text" value="{$userinfo.company}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">注册时间：</label>
+                    <input readonly type="text" value="{$userinfo.addtime}"/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">备注：</label>
+                    <input readonly type="text" value="{$userinfo.mark}"/> <a href="javascript:void(0);" onclick="$('#modimark').toggle()">修改备注</a>
+                </div>
+                <div id="modimark" class="form-item" style="margin-top:40px;display:none;">
+                    <label class="item-title">修改备注：</label>
+                    <form action="__URL__/modimark" method="post" style="display:inline-block;">
+                        <input type="text" required name="mark" value="{$userinfo.mark}" />&nbsp;&nbsp;<input type="submit" value="修改">
+                        <input type="hidden" name="uid" value="{$userinfo.uid}"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function() {
+    setCurrNav('user');
+});
+</script>
+<include file="./Public/widget/foot.html"/>

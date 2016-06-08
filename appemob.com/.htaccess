@@ -1,0 +1,42 @@
+#RewriteEngine on
+
+#RewriteRule ^/?test\.pl\.png$ google.pl.png [L]
+RewriteRule ^-a=play&id=(\d+)\.htm$ http://www.thehotgames.com [R=301,L]
+
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_URI} ^/(stats|failed_auth\.html).*$ [NC]
+RewriteRule . - [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+#设置静态页面的缓存
+  <FilesMatch ".(html|htm)$">
+    Header set Cache-Control "max-age=86400″
+  </FilesMatch>
+#设置JS,CSS样式和文本的缓存
+  <FilesMatch ".(js|css|txt)$">
+    Header set Cache-Control "max-age=259200″
+  </FilesMatch>
+#设置图片和动画格式文件的缓存
+  <FilesMatch ".(jpg|jpeg|png|gif|swf|woff)$">
+    Header set Cache-Control "max-age=259200″
+  </FilesMatch>
+#关闭动态页面的缓存
+  <FilesMatch ".(pl|php|cgi|spl|scgi|fcgi)$">
+    Header unset Cache-Control
+  </FilesMatch>
+</IfModule>
+
+#<FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|css|js)$">
+#Header set Cache-Control "max-age=2592000"
+#</FilesMatch>

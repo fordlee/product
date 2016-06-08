@@ -1,0 +1,100 @@
+<include file="./Public/widget/head.html" title="添加消息" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+.item-title{
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    vertical-align: top;
+}
+.form-item input[type=text] {
+    width: 600px;
+}
+.form-item #container{
+    line-height: 1.428571429;
+    width: 800px;
+    height: 400px;
+    position: relative;
+    left: 104px;
+    top: -25px;
+}
+.form-item-submit{margin-top: 20px;}
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html" curr="index"/>
+        </ul>
+        <div class="content">
+            <form class="form" action="" method="post">
+                <input type="hidden" name="id" value="{$item.id}"/>
+                <div class="form-item">
+                    <label class="item-title">消息标题：</label>
+                    <input type="text" name="title" required value="{$item.title}" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">消息类型：</label>
+                    <label><input type="radio" name="type" checked="" value="normal"/>文本</label>
+                    <label><input type="radio" name="type" value="link"/>链接</label>
+                </div>
+                <div id="msg_link" class="form-item" style="display:none;">
+                    <label class="item-title">消息链接：</label>
+                    <input type="text" name="href" value="{$item.href}" />
+                </div>
+                <div id="msg_normal" class="form-item">
+                    <label class="item-title">消息内容：</label>
+                    <script id="container" name="content" type="text/plain">{$item.content}</script>
+                </div>
+                <div class="form-item form-item-submit">
+                    <label class="item-title"></label>
+                    <input type="submit" value="{$btn}" />
+                </div>
+            </form>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript" src="__ROOT__/Public/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/ueditor/ueditor.all.js"></script>
+<script type="text/javascript">
+var ue = UE.getEditor('container', {
+    autoHeight: false
+});
+$(function() {
+    setCurrNav('msg');
+
+
+    $('input[type=radio]').click(function(e) {
+        $('#msg_link,#msg_normal').hide();
+        $('#msg_' + this.value).show();
+    });
+
+    var type = '{$item.type}';
+    if (type == "link") {
+        $('input[type=radio][value="link"]').click();
+    }
+});
+
+function del(id) {
+    if (confirm("确认删除？")) {
+        $.ajax({
+            url: '__URL__/msgdel',
+            data: {
+                id: id
+            },
+            type: 'post'
+        }).done(function(data) {
+            if (data == 1) {
+                window.location.reload();
+            } else if (data == 0) {
+                alert('请先登录!');
+            } else {
+                alert('操作失败，请稍后再试!');
+            }
+        })
+        .fail(function(msg) {
+            alert(msg);
+        });
+    }
+}
+</script>
+<include file="./Public/widget/foot.html"/>

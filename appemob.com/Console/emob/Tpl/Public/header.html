@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Appemob | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="/Public/console/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="/Public/console/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/Public/console/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/Public/console/dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <header class="main-header">
+
+        <!-- Logo -->
+        <a href="{:U('Index/index')}" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>A</b>LT</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>App</b>emob</span>
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Messages: style can be found in dropdown.less-->
+              <li class="dropdown messages-menu">
+                <a href="javascript:void(0)" onclick="getMsg()" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-success" id="msgNo"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header" id="msgheader"></li>
+                  <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu" id="msgul">
+                        <script type="text/tmpl" id="tmpl-header-msg">
+                          <li>
+                            <a href="{:U('Message/msgshow')}/id/{{id}}">
+                              <div class="pull-left">
+                                <img src="/Public/console/dist/img/user-default.jpg" class="img-circle" alt="User Image">
+                              </div>
+                              <h4>
+                                {{title}}
+                                <small><i class="fa fa-clock-o"></i> {{addtime}}</small>
+                              </h4>
+                              <p>{{message}}</p>
+                            </a>
+                          </li>
+                      </script>
+                    </ul>
+                  </li>
+                  <li class="footer"><a href="#">See All Messages</a></li>
+                </ul>
+              </li>
+              
+              
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="/Public/console/dist/img/user-default.jpg" class="user-image" alt="User Image">
+                  <span class="hidden-xs">{$_SESSION['name']}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="/Public/console/dist/img/user-default.jpg" class="img-circle" alt="User Image">
+                    <p>
+                      {$_SESSION['email']}
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="{:U('Account/accountInfo')}" class="btn btn-default btn-flat">Account</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="{:U('Auth/logout')}" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <li>
+                <a href="{:U('Account/accountInfo')}"><i class="fa fa-gears"></i></a>
+              </li>
+            </ul>
+          </div>
+
+        </nav>
+      </header>
+      <script type="text/javascript">
+
+      function tmplRender(tmpl,data,boxId){
+        var _tmpl=tmpl, returnStr='';
+
+        for(var i=0,len=data.length;i<len;i++){
+          var _data=data[i];
+          var _str=_tmpl;
+          for (var o in _data){
+            var reg=new RegExp('{{'+o+'}}','ig');
+            _str=_str.replace(reg,_data[o]);
+          }
+
+          returnStr+=_str;
+        }
+
+        if(boxId){
+          $(boxId).html(returnStr);
+        }else{
+          return returnStr;
+        }
+      }
+
+
+
+      window.onload = function(){ 
+    　　 $.ajax({
+            url: "{:U('Message/loadMessage')}"
+          }).done(function(data){
+            data = eval(data);
+            $('#msgNo').text(data);
+            $('#msgheader').text("You have messages");
+          }).fail(function(msg) {
+              alert(msg);
+          });
+      }
+
+      function getMsg(){
+        $.ajax({
+          url:"{:U('Message/getMessage')}"
+        }).done(function(data){
+          data = JSON.parse(data);
+          tmplRender($('#tmpl-header-msg').html(),data,'#msgul');
+          console.log(tmplRender($('#tmpl-header-msg').html(),data));
+        }).fail(function(msg){
+          alert(msg);
+        });
+      }
+      </script>
+      

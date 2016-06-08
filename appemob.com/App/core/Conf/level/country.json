@@ -1,0 +1,1346 @@
+[
+    {
+        "country": "Angola",
+        "name": "安哥拉",
+        "code": "AO",
+        "phone_code": "244",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Afghanistan",
+        "name": "阿富汗",
+        "code": "AF",
+        "phone_code": "93",
+        "time_diff": "0"
+    },
+    {
+        "country": "Albania",
+        "name": "阿尔巴尼亚",
+        "code": "AL",
+        "phone_code": "355",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Algeria",
+        "name": "阿尔及利亚",
+        "code": "DZ",
+        "phone_code": "213",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Andorra",
+        "name": "安道尔共和国",
+        "code": "AD",
+        "phone_code": "376",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Anguilla",
+        "name": "安圭拉岛",
+        "code": "AI",
+        "phone_code": "1264",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Antigua and Barbuda",
+        "name": "安提瓜和巴布达",
+        "code": "AG",
+        "phone_code": "1268",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Argentina",
+        "name": "阿根廷",
+        "code": "AR",
+        "phone_code": "54",
+        "time_diff": "-11"
+    },
+    {
+        "country": "Armenia",
+        "name": "亚美尼亚",
+        "code": "AM",
+        "phone_code": "374",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Ascension",
+        "name": "阿森松",
+        "code": " ",
+        "phone_code": "247",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Australia",
+        "name": "澳大利亚",
+        "code": "AU",
+        "phone_code": "61",
+        "time_diff": "+2"
+    },
+    {
+        "country": "Austria",
+        "name": "奥地利",
+        "code": "AT",
+        "phone_code": "43",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Azerbaijan",
+        "name": "阿塞拜疆",
+        "code": "AZ",
+        "phone_code": "994",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Bahamas",
+        "name": "巴哈马",
+        "code": "BS",
+        "phone_code": "1242",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Bahrain",
+        "name": "巴林",
+        "code": "BH",
+        "phone_code": "973",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Bangladesh",
+        "name": "孟加拉国",
+        "code": "BD",
+        "phone_code": "880",
+        "time_diff": "-2"
+    },
+    {
+        "country": "Barbados",
+        "name": "巴巴多斯",
+        "code": "BB",
+        "phone_code": "1246",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Belarus",
+        "name": "白俄罗斯",
+        "code": "BY",
+        "phone_code": "375",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Belgium",
+        "name": "比利时",
+        "code": "BE",
+        "phone_code": "32",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Belize",
+        "name": "伯利兹",
+        "code": "BZ",
+        "phone_code": "501",
+        "time_diff": "-14"
+    },
+    {
+        "country": "Benin",
+        "name": "贝宁",
+        "code": "BJ",
+        "phone_code": "229",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Bermuda \nIs.",
+        "name": "百慕大群岛",
+        "code": "BM",
+        "phone_code": "1441",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Bolivia",
+        "name": "玻利维亚",
+        "code": "BO",
+        "phone_code": "591",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Botswana",
+        "name": "博茨瓦纳",
+        "code": "BW",
+        "phone_code": "267",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Brazil",
+        "name": "巴西",
+        "code": "BR",
+        "phone_code": "55",
+        "time_diff": "-11"
+    },
+    {
+        "country": "Brunei",
+        "name": "文莱",
+        "code": "BN",
+        "phone_code": "673",
+        "time_diff": "0"
+    },
+    {
+        "country": "Bulgaria",
+        "name": "保加利亚",
+        "code": "BG",
+        "phone_code": "359",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Burkina-faso",
+        "name": "布基纳法索",
+        "code": "BF",
+        "phone_code": "226",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Burma",
+        "name": "缅甸",
+        "code": "MM",
+        "phone_code": "95",
+        "time_diff": "-1.3"
+    },
+    {
+        "country": "Burundi",
+        "name": "布隆迪",
+        "code": "BI",
+        "phone_code": "257",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Cameroon",
+        "name": "喀麦隆",
+        "code": "CM",
+        "phone_code": "237",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Canada",
+        "name": "加拿大",
+        "code": "CA",
+        "phone_code": "1",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Cayman Is.",
+        "name": "开曼群岛",
+        "code": " ",
+        "phone_code": "1345",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Central African Republic",
+        "name": "中非共和国",
+        "code": "CF",
+        "phone_code": "236",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Chad",
+        "name": "乍得",
+        "code": "TD",
+        "phone_code": "235",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Chile",
+        "name": "智利",
+        "code": "CL",
+        "phone_code": "56",
+        "time_diff": "-13"
+    },
+    {
+        "country": "China",
+        "name": "中国",
+        "code": "CN",
+        "phone_code": "86",
+        "time_diff": "0"
+    },
+    {
+        "country": "Colombia",
+        "name": "哥伦比亚",
+        "code": "CO",
+        "phone_code": "57",
+        "time_diff": "0"
+    },
+    {
+        "country": "Congo",
+        "name": "刚果",
+        "code": "CG",
+        "phone_code": "242",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Cook Is.",
+        "name": "库克群岛",
+        "code": "CK",
+        "phone_code": "682",
+        "time_diff": "-18.3"
+    },
+    {
+        "country": "Costa Rica",
+        "name": "哥斯达黎加",
+        "code": "CR",
+        "phone_code": "506",
+        "time_diff": "-14"
+    },
+    {
+        "country": "Cuba",
+        "name": "古巴",
+        "code": "CU",
+        "phone_code": "53",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Cyprus",
+        "name": "塞浦路斯",
+        "code": "CY",
+        "phone_code": "357",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Czech Republic ",
+        "name": "捷克",
+        "code": "CZ",
+        "phone_code": "420",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Denmark",
+        "name": "丹麦",
+        "code": "DK",
+        "phone_code": "45",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Djibouti",
+        "name": "吉布提",
+        "code": "DJ",
+        "phone_code": "253",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Dominica \n                      Rep.",
+        "name": "多米尼加共和国",
+        "code": "DO",
+        "phone_code": "1890",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Ecuador",
+        "name": "厄瓜多尔",
+        "code": "EC",
+        "phone_code": "593",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Egypt",
+        "name": "埃及",
+        "code": "EG",
+        "phone_code": "20",
+        "time_diff": "-6"
+    },
+    {
+        "country": "EI \nSalvador",
+        "name": "萨尔瓦多",
+        "code": "SV",
+        "phone_code": "503",
+        "time_diff": "-14"
+    },
+    {
+        "country": "Estonia",
+        "name": "爱沙尼亚",
+        "code": "EE",
+        "phone_code": "372",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Ethiopia",
+        "name": "埃塞俄比亚",
+        "code": "ET",
+        "phone_code": "251",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Fiji",
+        "name": "斐济",
+        "code": "FJ",
+        "phone_code": "679",
+        "time_diff": "+4"
+    },
+    {
+        "country": "Finland",
+        "name": "芬兰",
+        "code": "FI",
+        "phone_code": "358",
+        "time_diff": "-6"
+    },
+    {
+        "country": "France",
+        "name": "法国",
+        "code": "FR",
+        "phone_code": "33",
+        "time_diff": "-8"
+    },
+    {
+        "country": "French \n                      Guiana",
+        "name": "法属圭亚那",
+        "code": "GF",
+        "phone_code": "594",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Gabon",
+        "name": "加蓬",
+        "code": "GA",
+        "phone_code": "241",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Gambia",
+        "name": "冈比亚",
+        "code": "GM",
+        "phone_code": "220",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Georgia ",
+        "name": "格鲁吉亚",
+        "code": "GE",
+        "phone_code": "995",
+        "time_diff": "0"
+    },
+    {
+        "country": "Germany ",
+        "name": "德国",
+        "code": "DE",
+        "phone_code": "49",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Ghana",
+        "name": "加纳",
+        "code": "GH",
+        "phone_code": "233",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Gibraltar",
+        "name": "直布罗陀",
+        "code": "GI",
+        "phone_code": "350",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Greece",
+        "name": "希腊",
+        "code": "GR",
+        "phone_code": "30",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Grenada",
+        "name": "格林纳达",
+        "code": "GD",
+        "phone_code": "1809",
+        "time_diff": "-14"
+    },
+    {
+        "country": "Guam",
+        "name": "关岛",
+        "code": "GU",
+        "phone_code": "1671",
+        "time_diff": "+2"
+    },
+    {
+        "country": "Guatemala",
+        "name": "危地马拉",
+        "code": "GT",
+        "phone_code": "502",
+        "time_diff": "-14"
+    },
+    {
+        "country": "Guinea",
+        "name": "几内亚",
+        "code": "GN",
+        "phone_code": "224",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Guyana",
+        "name": "圭亚那",
+        "code": "GY",
+        "phone_code": "592",
+        "time_diff": "-11"
+    },
+    {
+        "country": "Haiti",
+        "name": "海地",
+        "code": "HT",
+        "phone_code": "509",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Honduras",
+        "name": "洪都拉斯",
+        "code": "HN",
+        "phone_code": "504",
+        "time_diff": "-14"
+    },
+    {
+        "country": "Hongkong",
+        "name": "香港",
+        "code": "HK",
+        "phone_code": "852",
+        "time_diff": "0"
+    },
+    {
+        "country": "Hungary",
+        "name": "匈牙利",
+        "code": "HU",
+        "phone_code": "36",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Iceland",
+        "name": "冰岛",
+        "code": "IS",
+        "phone_code": "354",
+        "time_diff": "-9"
+    },
+    {
+        "country": "India",
+        "name": "印度",
+        "code": "IN",
+        "phone_code": "91",
+        "time_diff": "-2.3"
+    },
+    {
+        "country": "Indonesia",
+        "name": "印度尼西亚",
+        "code": "ID",
+        "phone_code": "62",
+        "time_diff": "-0.3"
+    },
+    {
+        "country": "Iran",
+        "name": "伊朗",
+        "code": "IR",
+        "phone_code": "98",
+        "time_diff": "-4.3"
+    },
+    {
+        "country": "Iraq",
+        "name": "伊拉克",
+        "code": "IQ",
+        "phone_code": "964",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Ireland",
+        "name": "爱尔兰",
+        "code": "IE",
+        "phone_code": "353",
+        "time_diff": "-4.3"
+    },
+    {
+        "country": "Israel",
+        "name": "以色列",
+        "code": "IL",
+        "phone_code": "972",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Italy",
+        "name": "意大利",
+        "code": "IT",
+        "phone_code": "39",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Ivory \nCoast",
+        "name": "科特迪瓦",
+        "code": " ",
+        "phone_code": "225",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Jamaica",
+        "name": "牙买加",
+        "code": "JM",
+        "phone_code": "1876",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Japan",
+        "name": "日本",
+        "code": "JP",
+        "phone_code": "81",
+        "time_diff": "+1"
+    },
+    {
+        "country": "Jordan",
+        "name": "约旦",
+        "code": "JO",
+        "phone_code": "962",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Kampuchea (Cambodia )",
+        "name": "柬埔寨",
+        "code": "KH",
+        "phone_code": "855",
+        "time_diff": "-1"
+    },
+    {
+        "country": "Kazakstan",
+        "name": "哈萨克斯坦",
+        "code": "KZ",
+        "phone_code": "327",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Kenya",
+        "name": "肯尼亚",
+        "code": "KE",
+        "phone_code": "254",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Korea",
+        "name": "韩国",
+        "code": "KR",
+        "phone_code": "82",
+        "time_diff": "+1"
+    },
+    {
+        "country": "Kuwait",
+        "name": "科威特",
+        "code": "KW",
+        "phone_code": "965",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Kyrgyzstan ",
+        "name": "吉尔吉斯坦",
+        "code": "KG",
+        "phone_code": "331",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Laos",
+        "name": "老挝",
+        "code": "LA",
+        "phone_code": "856",
+        "time_diff": "-1"
+    },
+    {
+        "country": "Latvia ",
+        "name": "拉脱维亚",
+        "code": "LV",
+        "phone_code": "371",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Lebanon",
+        "name": "黎巴嫩",
+        "code": "LB",
+        "phone_code": "961",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Lesotho",
+        "name": "莱索托",
+        "code": "LS",
+        "phone_code": "266",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Liberia",
+        "name": "利比里亚",
+        "code": "LR",
+        "phone_code": "231",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Libya",
+        "name": "利比亚",
+        "code": "LY",
+        "phone_code": "218",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Liechtenstein",
+        "name": "列支敦士登",
+        "code": "LI",
+        "phone_code": "423",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Lithuania",
+        "name": "立陶宛",
+        "code": "LT",
+        "phone_code": "370",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Luxembourg",
+        "name": "卢森堡",
+        "code": "LU",
+        "phone_code": "352",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Macao",
+        "name": "澳门",
+        "code": "MO",
+        "phone_code": "853",
+        "time_diff": "0"
+    },
+    {
+        "country": "Madagascar",
+        "name": "马达加斯加",
+        "code": "MG",
+        "phone_code": "261",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Malawi",
+        "name": "马拉维",
+        "code": "MW",
+        "phone_code": "265",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Malaysia",
+        "name": "马来西亚",
+        "code": "MY",
+        "phone_code": "60",
+        "time_diff": "-0.5"
+    },
+    {
+        "country": "Maldives",
+        "name": "马尔代夫",
+        "code": "MV",
+        "phone_code": "960",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Mali",
+        "name": "马里",
+        "code": "ML",
+        "phone_code": "223",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Malta",
+        "name": "马耳他",
+        "code": "MT",
+        "phone_code": "356",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Mariana Is",
+        "name": "马里亚那群岛",
+        "code": " ",
+        "phone_code": "1670",
+        "time_diff": "+1"
+    },
+    {
+        "country": "Martinique",
+        "name": "马提尼克",
+        "code": " ",
+        "phone_code": "596",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Mauritius",
+        "name": "毛里求斯",
+        "code": "MU",
+        "phone_code": "230",
+        "time_diff": "-4"
+    },
+    {
+        "country": "Mexico",
+        "name": "墨西哥",
+        "code": "MX",
+        "phone_code": "52",
+        "time_diff": "-15"
+    },
+    {
+        "country": "Moldova, Republic of ",
+        "name": "摩尔多瓦",
+        "code": "MD",
+        "phone_code": "373",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Monaco",
+        "name": "摩纳哥",
+        "code": "MC",
+        "phone_code": "377",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Mongolia ",
+        "name": "蒙古",
+        "code": "MN",
+        "phone_code": "976",
+        "time_diff": "0"
+    },
+    {
+        "country": "Montserrat \n                      Is",
+        "name": "蒙特塞拉特岛",
+        "code": "MS",
+        "phone_code": "1664",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Morocco",
+        "name": "摩洛哥",
+        "code": "MA",
+        "phone_code": "212",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Mozambique",
+        "name": "莫桑比克",
+        "code": "MZ",
+        "phone_code": "258",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Namibia ",
+        "name": "纳米比亚",
+        "code": "NA",
+        "phone_code": "264",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Nauru",
+        "name": "瑙鲁",
+        "code": "NR",
+        "phone_code": "674",
+        "time_diff": "+4"
+    },
+    {
+        "country": "Nepal",
+        "name": "尼泊尔",
+        "code": "NP",
+        "phone_code": "977",
+        "time_diff": "-2.3"
+    },
+    {
+        "country": "Netheriands Antilles",
+        "name": "荷属安的列斯",
+        "code": " ",
+        "phone_code": "599",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Netherlands",
+        "name": "荷兰",
+        "code": "NL",
+        "phone_code": "31",
+        "time_diff": "-7"
+    },
+    {
+        "country": "New \nZealand",
+        "name": "新西兰",
+        "code": "NZ",
+        "phone_code": "64",
+        "time_diff": "+4"
+    },
+    {
+        "country": "Nicaragua",
+        "name": "尼加拉瓜",
+        "code": "NI",
+        "phone_code": "505",
+        "time_diff": "-14"
+    },
+    {
+        "country": "Niger",
+        "name": "尼日尔",
+        "code": "NE",
+        "phone_code": "227",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Nigeria",
+        "name": "尼日利亚",
+        "code": "NG",
+        "phone_code": "234",
+        "time_diff": "-7"
+    },
+    {
+        "country": "North Korea",
+        "name": "朝鲜",
+        "code": "KP",
+        "phone_code": "850",
+        "time_diff": "+1"
+    },
+    {
+        "country": "Norway",
+        "name": "挪威",
+        "code": "NO",
+        "phone_code": "47",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Oman",
+        "name": "阿曼",
+        "code": "OM",
+        "phone_code": "968",
+        "time_diff": "-4"
+    },
+    {
+        "country": "Pakistan",
+        "name": "巴基斯坦",
+        "code": "PK",
+        "phone_code": "92",
+        "time_diff": "-2.3"
+    },
+    {
+        "country": "Panama",
+        "name": "巴拿马",
+        "code": "PA",
+        "phone_code": "507",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Papua New Cuinea",
+        "name": "巴布亚新几内亚",
+        "code": "PG",
+        "phone_code": "675",
+        "time_diff": "+2"
+    },
+    {
+        "country": "Paraguay",
+        "name": "巴拉圭",
+        "code": "PY",
+        "phone_code": "595",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Peru",
+        "name": "秘鲁",
+        "code": "PE",
+        "phone_code": "51",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Philippines",
+        "name": "菲律宾",
+        "code": "PH",
+        "phone_code": "63",
+        "time_diff": "0"
+    },
+    {
+        "country": "Poland",
+        "name": "波兰",
+        "code": "PL",
+        "phone_code": "48",
+        "time_diff": "-7"
+    },
+    {
+        "country": "French Polynesia",
+        "name": "法属玻利尼西亚",
+        "code": "PF",
+        "phone_code": "689",
+        "time_diff": "+3"
+    },
+    {
+        "country": "Portugal",
+        "name": "葡萄牙",
+        "code": "PT",
+        "phone_code": "351",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Puerto \nRico",
+        "name": "波多黎各",
+        "code": "PR",
+        "phone_code": "1787",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Qatar",
+        "name": "卡塔尔",
+        "code": "QA",
+        "phone_code": "974",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Reunion",
+        "name": "留尼旺",
+        "code": " ",
+        "phone_code": "262",
+        "time_diff": "-4"
+    },
+    {
+        "country": "Romania",
+        "name": "罗马尼亚",
+        "code": "RO",
+        "phone_code": "40",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Russia",
+        "name": "俄罗斯",
+        "code": "RU",
+        "phone_code": "7",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Saint Lueia",
+        "name": "圣卢西亚",
+        "code": "LC",
+        "phone_code": "1758",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Saint Vincent",
+        "name": "圣文森特岛",
+        "code": "VC",
+        "phone_code": "1784",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Samoa \n                      Eastern",
+        "name": "东萨摩亚(美)",
+        "code": " ",
+        "phone_code": "684",
+        "time_diff": "-19"
+    },
+    {
+        "country": "Samoa \n                      Western",
+        "name": "西萨摩亚",
+        "code": " ",
+        "phone_code": "685",
+        "time_diff": "-19"
+    },
+    {
+        "country": "San Marino",
+        "name": "圣马力诺",
+        "code": "SM",
+        "phone_code": "378",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Sao Tome and Principe",
+        "name": "圣多美和普林西比",
+        "code": "ST",
+        "phone_code": "239",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Saudi \n                      Arabia",
+        "name": "沙特阿拉伯",
+        "code": "SA",
+        "phone_code": "966",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Senegal",
+        "name": "塞内加尔",
+        "code": "SN",
+        "phone_code": "221",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Seychelles",
+        "name": "塞舌尔",
+        "code": "SC",
+        "phone_code": "248",
+        "time_diff": "-4"
+    },
+    {
+        "country": "Sierra \n                      Leone",
+        "name": "塞拉利昂",
+        "code": "SL",
+        "phone_code": "232",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Singapore",
+        "name": "新加坡",
+        "code": "SG",
+        "phone_code": "65",
+        "time_diff": "+0.3"
+    },
+    {
+        "country": "Slovakia",
+        "name": "斯洛伐克",
+        "code": "SK",
+        "phone_code": "421",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Slovenia",
+        "name": "斯洛文尼亚",
+        "code": "SI",
+        "phone_code": "386",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Solomon Is",
+        "name": "所罗门群岛",
+        "code": "SB",
+        "phone_code": "677",
+        "time_diff": "+3"
+    },
+    {
+        "country": "Somali",
+        "name": "索马里",
+        "code": "SO",
+        "phone_code": "252",
+        "time_diff": "-5"
+    },
+    {
+        "country": "South Africa",
+        "name": "南非",
+        "code": "ZA",
+        "phone_code": "27",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Spain",
+        "name": "西班牙",
+        "code": "ES",
+        "phone_code": "34",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Sri Lanka",
+        "name": "斯里兰卡",
+        "code": "LK",
+        "phone_code": "94",
+        "time_diff": "0"
+    },
+    {
+        "country": "St.Lucia",
+        "name": "圣卢西亚",
+        "code": "LC",
+        "phone_code": "1758",
+        "time_diff": "-12"
+    },
+    {
+        "country": "St.Vincent",
+        "name": "圣文森特",
+        "code": "VC",
+        "phone_code": "1784",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Sudan",
+        "name": "苏丹",
+        "code": "SD",
+        "phone_code": "249",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Suriname",
+        "name": "苏里南",
+        "code": "SR",
+        "phone_code": "597",
+        "time_diff": "-11.3"
+    },
+    {
+        "country": "Swaziland",
+        "name": "斯威士兰",
+        "code": "SZ",
+        "phone_code": "268",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Sweden",
+        "name": "瑞典",
+        "code": "SE",
+        "phone_code": "46",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Switzerland",
+        "name": "瑞士",
+        "code": "CH",
+        "phone_code": "41",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Syria",
+        "name": "叙利亚",
+        "code": "SY",
+        "phone_code": "963",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Taiwan",
+        "name": "台湾省",
+        "code": "TW",
+        "phone_code": "886",
+        "time_diff": "0"
+    },
+    {
+        "country": "Tajikstan",
+        "name": "塔吉克斯坦",
+        "code": "TJ",
+        "phone_code": "992",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Tanzania",
+        "name": "坦桑尼亚",
+        "code": "TZ",
+        "phone_code": "255",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Thailand",
+        "name": "泰国",
+        "code": "TH",
+        "phone_code": "66",
+        "time_diff": "-1"
+    },
+    {
+        "country": "Togo",
+        "name": "多哥",
+        "code": "TG",
+        "phone_code": "228",
+        "time_diff": "-8"
+    },
+    {
+        "country": "Tonga",
+        "name": "汤加",
+        "code": "TO",
+        "phone_code": "676",
+        "time_diff": "+4"
+    },
+    {
+        "country": "Trinidad and Tobago",
+        "name": "特立尼达和多巴哥",
+        "code": "TT",
+        "phone_code": "1809",
+        "time_diff": "-12"
+    },
+    {
+        "country": "Tunisia",
+        "name": "突尼斯",
+        "code": "TN",
+        "phone_code": "216",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Turkey",
+        "name": "土耳其",
+        "code": "TR",
+        "phone_code": "90",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Turkmenistan ",
+        "name": "土库曼斯坦",
+        "code": "TM",
+        "phone_code": "993",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Uganda",
+        "name": "乌干达",
+        "code": "UG",
+        "phone_code": "256",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Ukraine",
+        "name": "乌克兰",
+        "code": "UA",
+        "phone_code": "380",
+        "time_diff": "-5"
+    },
+    {
+        "country": "United Arab Emirates",
+        "name": "阿拉伯联合酋长国",
+        "code": "AE",
+        "phone_code": "971",
+        "time_diff": "-4"
+    },
+    {
+        "country": "United Kiongdom",
+        "name": "英国",
+        "code": "GB",
+        "phone_code": "44",
+        "time_diff": "-8"
+    },
+    {
+        "country": "United States of America",
+        "name": "美国",
+        "code": "US",
+        "phone_code": "1",
+        "time_diff": "-13"
+    },
+    {
+        "country": "Uruguay",
+        "name": "乌拉圭",
+        "code": "UY",
+        "phone_code": "598",
+        "time_diff": "-10.3"
+    },
+    {
+        "country": "Uzbekistan",
+        "name": "乌兹别克斯坦",
+        "code": "UZ",
+        "phone_code": "233",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Venezuela",
+        "name": "委内瑞拉",
+        "code": "VE",
+        "phone_code": "58",
+        "time_diff": "-12.3"
+    },
+    {
+        "country": "Vietnam",
+        "name": "越南",
+        "code": "VN",
+        "phone_code": "84",
+        "time_diff": "-1"
+    },
+    {
+        "country": "Yemen",
+        "name": "也门",
+        "code": "YE",
+        "phone_code": "967",
+        "time_diff": "-5"
+    },
+    {
+        "country": "Yugoslavia",
+        "name": "南斯拉夫",
+        "code": "YU",
+        "phone_code": "381",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Zimbabwe",
+        "name": "津巴布韦",
+        "code": "ZW",
+        "phone_code": "263",
+        "time_diff": "-6"
+    },
+    {
+        "country": "Zaire",
+        "name": "扎伊尔",
+        "code": "ZR",
+        "phone_code": "243",
+        "time_diff": "-7"
+    },
+    {
+        "country": "Zambia",
+        "name": "赞比亚",
+        "code": "ZM",
+        "phone_code": "260",
+        "time_diff": "-6"
+    }
+]

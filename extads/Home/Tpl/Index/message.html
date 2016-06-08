@@ -1,0 +1,31 @@
+<include file="./Public/widget/head.html" title="Message - Adonads" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<style type="text/css">
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html" curr="index"/>
+        </ul>
+        <div class="content message">
+            <table class="table table-noborder">
+            <empty name="ret">
+                <tr>
+                    <td>No Message</td>
+                </tr>
+            <else />
+                <volist name="ret" id="item">
+                <tr <eq name="item.isread" value="0" >class="noread"</eq>>
+                    <td><a class="msg-title" href="__URL__/msgshow/id/{$item.mid}">{$item.title}</a><span class="msg-time f-fr">{$item.addtime|strtotime|date='Y-m-d',###}</span></td>
+                </tr>
+                </volist>
+            </empty>
+            </table>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function() {
+    setCurrNav('message');
+});
+</script>
+<include file="./Public/widget/foot.html"/>

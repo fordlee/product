@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appemob</title>
+    <!--STYLES-->
+    <link rel="stylesheet" href="/Public/app/css/main.css"/>
+
+    <!--VENDOR-->
+    <script src="/Public/app/js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="/Public/app/js/vendor/jquery_cookie.min.js" type="text/javascript"></script>
+
+    <!--SCRIPTS-->
+    <script src="/Public/app/js/core.js"></script>
+    <link rel="shortcut icon" href="favicon.ico"></head>
+<body>
+    <script>
+    jQuery(document).ready(function ($) {
+        var signInFrame = $('.dropdown_menu').find('iframe');
+        signInFrame.attr('src', '');
+
+        var thor = window;
+        var frame = $('.pop-wrapper iframe'),
+                duration = 200;
+
+        $('.do-pop').on('click', function (e) {
+            $('.pop-up').show(100, function () {
+                $(frame).attr('src', $(e.target).data('target')).load(function () {
+                    $(frame).fadeIn(duration)
+                });
+            });
+            return false;
+        });
+
+        $('.pop-up').on('click', function (e) {
+            $('.pop-close').trigger('click');
+        });
+
+        $('.pop-close').on('click', function (e) {
+            $('.pop-up').fadeOut(duration);
+            $('.pop-up iframe').attr('src', '');
+
+            $(frame).contents().find('.do-frame').off('click');
+
+        });
+
+
+        $('.pop-wrapper iframe').load(function () {
+
+            $(frame).contents().find('.do-frame').on('click', function (e) {
+
+                $(this).attr('src', $(e.target).data('target'));
+
+            });
+
+
+            $(frame).contents().find('a.do-link').on('click', function (e) {
+
+                document.location = $(this).attr('href');
+                return false;
+            });
+
+
+        });
+
+        $('nav  iframe').load(function () {
+            $(this).contents().find('.do-frame').on('click', function (e) {
+                $('.pop-up').show();
+                //$(frame).fadeOut(100, function () {
+                $(this).attr('src', $(e.target).data('target')).fadeIn(duration);
+                //});
+
+                return false;
+            });
+        })
+
+        // Create IE + others compatible event handler
+        var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+        var eventer = window[eventMethod];
+        var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+        // Listen to message from child window
+        eventer(messageEvent, function (e) {
+            var msg = e.data;
+            // prevent URL load for development on localhost
+            if (window.location.href.indexOf('//localhost/') == -1) {
+              if (msg.action!="FB_LOG")
+            {
+            location.hash = msg;
+            location.reload();
+            }
+            }
+        }, false);
+
+        location.hash = "";
+
+        $.addUrlRefToCookie();
+    });
+
+</script>
+    <div class="pop-up">
+        <!--JOIN UP-->
+        <div class="pop-wrapper">
+            <div class="pop-close clearfix"></div>
+            <iframe src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div class="go-up"></div>
+    <header class="block clearfix headroom headroom--pinned">
+        <div class="inner">
+                <a class="logo logo_header" href="index.html"></a>
+
+                <nav class="nav_left pull-left">
+                    <ul>
+                        <li>
+                            <a class="monetize-h" href="publisher.html">Publisher</a>
+                        </li>
+                    </ul>
+                </nav>
+
+            <nav class="nav_right pull-right">
+                <ul>
+                    <li>
+                        <a class="advertise-h dropdown" href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a id="top_menu_login_btn" class="sign-h do-pop" href="#"
+                           data-target="login.html" href="#"
+                           onclick="ga('send', 'event', { eventCategory: 'Website CTA', eventAction: 'Menu', eventLabel: 'Sign In'});">Sign In</a>
+                    </li>
+                </ul>
+                <a id="regId" class="join_ap pull-right do-pop"
+                   data-target="register.html" href="#"
+                   onclick="ga('send', 'event', { eventCategory: 'Website CTA', eventAction: 'Menu', eventLabel: 'Join Now'});">Join Now</a>
+            </nav>
+        </div>
+    </header>
+
+<main class="block terms">
+    <div class="terms-nav clearfix">
+        <div class="inner">
+            <a href="javascript:;">
+                Terms & Conditions -
+                <br/>
+                Publishers
+            </a>
+        </div>
+    </div>
+
+    <div class="inner">
+
+        <!--Policy-->
+        <div class="content policy">
+            <p>
+                This Publisher Terms &amp; Conditions (“ <b>Publisher T&amp;C</b>
+                ”) shall govern the relationship between Appemob Ltd., a BVI company with its registered place of business at Intershore Chambers, Road Town, Tortola, Alberta, British Virgin Islands (“ <b>Appemob</b>
+                ”) and each publisher who enrolled into Appemob’s publisher’s program (respectively, “
+                <b>Publisher</b>
+                ” and “
+                <b>Publisher Program</b>
+                ”). Once enrolled into the Publisher Program, Publisher obtains access to Appemob Advertising Platform. Appemob Advertising Platform is a unique platform which includes a range of technical solutions and services in which Advertisers may select specific publishers for distributing and promoting their Applications by means of Mobile Campaigns. If Publisher is selected by an Advertiser to distribute and promote the Advertiser’s Mobile Campaign, Publisher, through the use of the Appemob Advertising Platform, shall have the opportunity to earn remuneration in connection with an Action in accordance with the Mobile Campaign Conditions. These Publisher T&amp;C may be modified by Appemob from time to time in its sole discretion and posted on the Appemob Website at https://www.Appemob.com/terms.html. The continued use of the Appemob Advertising Network and Services by Publisher after the effective date of the updated Publisher T&amp;C shall constitute Publisher’s binding acceptance to such modification(s).
+            </p>
+
+            <h3>1. CERTAIN DEFINITIONS</h3>
+
+            <p>
+                Terms not defined elsewhere in these Publisher T&amp;C shall have the following meanings:
+            </p>
+
+            <p>
+                <b>1.1</b>
+                “
+                <b>Action</b>
+                ” means, in connection with any Mobile Campaign promoted by Publisher in accordance with these Publisher T&amp;C after being selected by Advertiser, the installation and activation of the Advertiser’s Application.
+            </p>
+
+            <p>
+                <b>1.2</b>
+                “
+                <b>Advertiser</b>
+                ” an Appemob client promoting Applications (on its behalf or on behalf of any third parties) to a mobile audience through the Appemob Advertising Platform and its network of Publishers.
+            </p>
+
+            <p>
+                <b>1.3</b>
+                “
+                <b>Applications</b>
+                ” means third party mobile applications which are offered for download to end users on the Google Play Store and/or the Apple Store.
+            </p>
+
+            <p>
+                <b>1.4</b>
+                “
+                <b>Appemob Advertising Platform</b>
+                ” means Appemob’s proprietary Application Programming Interface (API) tools and managed services made available by Appemob to its Publishers, for the launch, management and distribution of specific Mobile Campaigns, which Advertiser selected the Publisher to promote.
+            </p>
+
+            <p>
+                <b>1.5</b>
+                “
+                <b>Appemob Website</b>
+                ” means
+                <a href="index.htm" tppabs="http://www.Appemob.com/" target="_blank">www.Appemob.com</a>
+                .
+            </p>
+
+            <p>
+                <b>1.6</b>
+                “
+                <b>Mobile Campaign(s)</b>
+                ” means, with respect to each Publisher selected by Advertiser, the promotion and distribution of the Advertiser’s Application(s) via Publisher’s Medium for the purpose of generating a Qualified Transaction.
+            </p>
+
+            <p>
+                <b>1.7</b>
+                “
+                <b>Mobile Campaign Conditions</b>
+                ” means conditions and/or restrictions imposed by the Advertiser for the promotion and distribution of the Advertiser’s Application (e.g. geography, platform).
+            </p>
+
+            <p>
+                <b>1.8</b>
+                “
+                <b>Publisher Link</b>
+                ” means an internet link provided by Appemob to Publisher for the purpose of promoting and distributing the Mobile Campaign, which link redirect’s to the relevant Store.
+            </p>
+
+            <p>
+                <b>1.9</b>
+                “
+                <b>Publisher Medium</b>
+                ” means Website or application directly published by Publisher.
+            </p>
+
+            <p>
+                <b>1.10</b>
+                “
+                <b>Qualified Transaction</b>
+                ” means a valid Action voluntarily performed by an end user via a Publisher Link and which is otherwise in compliance with these Publisher T&amp;C.
+            </p>
+
+            <h3>2. CREATION OF ACCOUNT; DESCRIPTION OF SERVICES</h3>
+
+            <p>
+                <b>2.1</b>
+                Publisher shall submit a properly completed application via the Appemob Website for the purpose of enrolling into the Publisher Program, whereupon Appemob shall create a dedicated account for Publisher (“
+                <b>Account</b>
+                ”). Appemob reserves the right to reject an application at its sole discretion. Publisher must open the Account on its own name and may not use any aliases or other means to mask its true identity or contact information.
+            </p>
+
+            <p>
+                <b>2.2</b>
+                Publisher will be responsible for safeguarding and maintaining the confidentiality of its Account and associated password. Publisher shall remain fully and solely responsible for any and all actions taken under the Account. Publisher undertakes to provide Appemob with prompt written notification of any known or suspected unauthorized use of its Account or any breach of the security of its Account.
+            </p>
+
+            <p>
+                <b>2.3</b>
+                Publisher can have access to and manage its Account in a dedicated and secured space on the Appemob Website. In this space Publisher may distribute and promote Mobile Campaigns, which Publisher was selected to distribute by the relevant Advertiser, have access to reporting tools and issue its payment requests to Appemob.
+            </p>
+
+            <p>
+                <b>2.4</b>
+                Publisher shall provide Appemob, upon request, with information concerning the Publisher Medium through which the Mobile Campaign is promoted, including regarding the manner in which the Mobile Campaign is presented. If Publisher is a media partner, it shall ensure that all of its communication with its direct publishers shall be done programmatically.
+            </p>
+
+            <p>
+                <b>2.5</b>
+                Publisher’s distribution efforts of Mobile Campaigns under these Publisher T&amp;C shall only be direct. Publisher may not broker Mobile Campaigns through its own network of affiliates without the express written approval of Appemob.
+            </p>
+
+            <p>
+                <b>2.6</b>
+                Publisher shall ensure that any Mobile Campaigns promoted via the Publisher Medium shall comply with the Mobile Campaign Conditions. In addition, Publisher acknowledges that Mobile Campaigns and the Mobile Campaigns Conditions may be terminated, modified, or updated by the Advertiser or Appemob without notice. Publisher shall ensure that Mobile Campaigns promoted by it shall be and remain as current as Mobile Campaigns made available by Appemob through the Appemob Advertising Platform. For such purpose, Publisher undertakes to use Appemob’s programmatic campaign pulling tools and remain updated with Appemob’s API at least on an hourly basis to verify the availability and conditions of Mobile Campaigns. Appemob reserves the right to retain payments in case of failure of Publisher to observe the terms of this Section 2.6.
+            </p>
+
+            <h3>3. SERVICES</h3>
+
+            <p>
+                <b>3.1</b>
+                As part of the Services, Appemob enables Publisher to distribute, through the Appemob Advertising Platform, Mobile Campaigns, with respect to which the Publisher was selected by the relevant Advertiser, for the opportunity to earn remuneration on the basis of Actions by promoting Applications on Publisher Medium in accordance with the Mobile Campaign Conditions.
+            </p>
+            <p>
+                As used in these Publisher T&amp;C, “
+                <b>Services</b>
+                ” means the range of services provided by Appemob to Publisher through the Appemob Advertising Platform.
+            </p>
+
+            <p>
+                <b>3.2</b>
+                Publisher will implement the Services in a manner that complies with the technical and implementation requirements provided on the Appemob Website or in writing by Appemob to Publisher from time to time, including those instructions contained in the documentation regarding the Services interface.
+            </p>
+
+            <p>
+                <b>3.3</b>
+                Publisher hereby acknowledges and agrees that Appemob is providing the Services as an intermediary between Advertisers and Publisher and as such Appemob shall not be held responsible or liable for any actions or omissions performed or omitted by Advertiser.
+            </p>
+
+            <h3>4. MOBILE CAMPAIGN</h3>
+
+            <p>
+                <b>4.1</b>
+                Publisher acknowledges that Advertiser shall develop all aspects of the Mobile Campaign and shall provide to Appemob all creative and substantive materials (“
+                <b>Creative</b>
+                ”) required for the marketing of the Mobile Campaign, including but not limited to: icons, links, fields, video, rich media, and any other creative content as required. Accordingly, Publisher acknowledges and agrees that Advertiser alone shall be responsible for the content of its Mobile Campaigns. Publisher hereby releases Appemob from and waives any and all claims and/or demands against Appemob in connection with all aspects of the Mobile Campaign, including without limitation any claims or demands asserting that the Creative violates any relevant rights of any third party, such as intellectual property rights.
+            </p>
+
+            <p>
+                <b>4.2</b>
+                Publisher acknowledges that Appemob will track the performance of the Mobile Campaign via its own or a third party’s tracking solution as elected by Appemob and the relevant Advertiser, in their respective sole discretion. Such chosen tracking solution shall form the sole basis for determining the number of Qualified Transactions. In case of any error in the transmission of any tracking data to Appemob (thus preventing Appemob from determining the number of Qualified Transactions), Appemob may determine the number of Qualified Transactions in accordance with other generally accepted industry methods, such as the use of historic analysis of the promotion of Advertiser by Publisher.
+            </p>
+
+            <p>
+                <b>4.3</b>
+                Publisher hereby acknowledges and agrees that Appemob reserves the right, in its sole discretion and without liability to reject, omit, exclude or terminate any Mobile Campaign for any reason at any time, whether or not such Mobile Campaign was previously acknowledged, accepted or published by Appemob. Without derogating from the generality of the above, Appemob shall be entitled to so act where it determines that the Mobile Campaign, any content or the Application promoted thereby violates any applicable law, rule, regulation or other judicial or administrative order or the rules or policies of any Store (Apple store or Google Play Store) or where the foregoing may otherwise harm Appemob, its business or reputation.
+            </p>
+             
+            <h3>5. REMUNERATION</h3>
+
+            <p>
+                <b>5.1</b>
+                Unless otherwise stated in these Publisher T&amp;C, Appemob shall pay Publisher for Qualified Transactions a compensation which is based on a revenue share model. This means that Publisher shall be entitled to an agreed upon share of the actual revenue generated by Appemob as a result of the installation and activation of Applications distributed by Publisher as part of the Mobile Campaign, where Appemob shall have the right to retain the remainder share of such income in consideration for its Services. The percentage allocation of the revenue share between Publisher and Appemob shall be separately agreed upon between the parties.
+            </p>
+
+            <p>
+                <b>5.2</b>
+                Publisher shall invoice Appemob for its remuneration on a monthly basis based on the reports made available by Appemob to Publisher via the Services. Payment by Appemob is typically being processed within net 10 or net 30 days from Publisher’s invoice; provided that Publisher’s account balance is greater than US$ 200 (in case Publisher elected to receive payment by wire transfer) or US$ 50 (in case Publisher elected to receive payment by Paypal or similar service) (in either case, “
+                <b>Minimum Balance</b>
+                ”). A balance below the Minimum Balance, will roll over to the next month, and will continue to roll over monthly until the Minimum Balance is reached. All payments shall be made in U.S. Dollars. Payment shall be made by wire transfer or Paypal to the account specified by Publisher in its application. All the fees and/or commissions related to the payment shall be at the exclusive charge of Publisher.
+            </p>
+
+            <p>
+                <b>5.3</b>
+                The number of Qualified Transactions, the amount of Publisher’s remuneration as well as any debits for disputed transactions, as calculated by Appemob in good faith, shall be final and binding on Publisher.
+            </p>
+
+            <p>
+                <b>5.4</b>
+                Publisher shall not be entitled to its remuneration in connection with:
+            </p>
+
+            <p style="margin-left:4em">
+                <b>5.4.1</b>
+                Transactions for which Appemob did not receive payment from the applicable Advertiser;
+            </p>
+
+            <p style="margin-left:4em">
+                <b>5.4.2</b>
+                Transactions in which the end user is the Publisher or its agents;
+            </p>
+
+            <p style="margin-left:4em">
+                <b>5.4.3</b>
+                Multiple transactions from the same person, device or IP address;
+            </p>
+
+            <p style="margin-left:4em">
+                <b>5.4.4</b>
+                Transactions which constitute fraud or suspected to be fraudulent as well as transactions which are not in compliance with the Mobile Campaign Conditions;
+            </p>
+
+            <p style="margin-left:4em">
+                <b>5.4.5</b>
+                Transactions which are otherwise not in compliance with these Publisher T&amp;C.
+            </p>
+
+            <p>
+                <b>5.5</b>
+                Appemob reserves the right to charge back to Publisher’s account any previously paid Qualified Transactions that are later determined to have not met the requirements set forth herein to be a Qualified Transaction due to the reasons set forth in Sections 5.4.2 to 5.4.5 (inclusive). In case Publisher’s account balance is lower than the due charge back amount, Publisher will be obliged to transfer the due amount back to Appemob upon request within no more than 7 business days.
+            </p>
+
+            <p>
+                <b>5.6</b>
+                In case Appemob is obliged to pay back monies already collected, either to Advertisers, banks, or payment processors (e.g. credit card companies, PayPal, etc.), such monies are deductible in the month they are paid back.
+            </p>
+
+            <p>
+                <b>5.7</b>
+                Publisher shall be responsible for paying all applicable taxes, duties and other governmental charges imposed on it with respect to its remuneration.
+            </p>
+
+            <p>
+                <b>5.8</b>
+                If Publisher has any payment obligation towards Appemob (whether or not under these Publisher T&amp;C), Appemob may set-off any such payment due to Appemob from amounts payable to Publisher under these Publisher T&amp;C.
+            </p>
+
+            <h3>6. Appemob ADVERTISING PLATFORM</h3>
+
+            <p>
+                <b>6.1</b>
+                Appemob may modify the Appemob Advertising Platform or any of the features provided in connection with the Appemob Advertising Platform at any time with or without notice to Publisher. Accordingly, Publisher shall have the right to use only the current version of the Appemob Advertising Platform as existing at the relevant time.
+            </p>
+
+            <p>
+                <b>6.2</b>
+                Appemob makes no guarantees with respect to the availability or uptime of the Appemob Advertising Platform, the Appemob Website or Services, however Appemob shall use its reasonable commercial efforts to ensure that the availability or uptime of the Appemob Advertising Platform shall meet industry standards. Appemob may change the method of access to the Appemob Advertising Platform at any time. It is in the best interests of both parties that Appemob maintain a secure and stable environment. Accordingly, in the event of degradation or instability of Appemob system or an emergency, Appemob may, in its sole discretion, temporarily suspend Publisher’s access to the Appemob Advertising Platform, the Appemob Website or Services.
+            </p>
+
+            <h3>7. COMPLIANCE WITH LAWS AND REGULATIONS; PROHIBITED ACTIVITY</h3>
+
+            <p>
+                <b>7.1</b>
+                Publisher represents and warrants that at all times it will be compliant with all relevant laws, regulations and generally accepted standards in any relevant jurisdiction, including without limitations with respect to privacy, collection and processing of personal data and information, protection of minors, the rights of third parties and fair competition.
+            </p>
+
+            <p>
+                <b>7.2</b>
+                In addition, Publisher shall not and will not allow any third party to: (i) directly or indirectly access, launch and/or activate the Services through or from, or otherwise incorporate such Services in, any software application, website or other means other than the Appemob Advertising Platform, and then only to the extent expressly permitted herein; (ii) directly or indirectly generate installations of Applications through any automated, deceptive, fraudulent or other invalid means (including, but not limited to, prefetching of clicks, click spam, robots, macro services, and Internet agents); (iii) encourage or require users or any other persons, either with or without their knowledge, to click on Mobile Campaigns, through offering incentives or any other methods that are manipulative, deceptive, malicious or fraudulent; (iv) modify, adapt, translate, prepare derivative works from, decompile, reverse engineer, disassemble or otherwise attempt to derive the source code of the Appemob Advertising Platform or any other Appemob’s technology, content, data, routines, algorithms, methods, ideas design, user interface techniques, software, materials, and documentation or prepare any derivative works thereof; (v) remove, obscure, or alter any of Appemob’s copyright notices or trade names, trademarks, service marks, logos, and domain names (“
+                <b>Marks</b>
+                ”) affixed to or contained within the Appemob Advertising Platform; and (vi) without Appemob’s prior written consent, use the Services in any manner that is not permitted hereunder.
+            </p>
+
+            <p>
+                <b>7.3</b>
+                Publisher may not use robots, spyders, scraping or other technology to access or use the Appemob Advertising Platform or Services to obtain any information beyond what Appemob provides to Publisher under these Publisher T&amp;C.
+            </p>
+
+            <p>
+                <b>7.4</b>
+                Without derogating from Publisher’s obligation to comply with the relevant Store rules, Publisher shall not promote any Mobile Campaign through any medium that contains or links to any material which is harmful, threatening, defamatory, obscene, sexually explicit, harassing, promotes violence, promotes discrimination of any kind, promotes illegal activities (such as gambling where applicable), contains profanity or otherwise contains materials that Appemob informs Publisher that it considers objectionable.
+            </p>
+
+            <p>
+                <b>7.5</b>
+                Publisher acknowledges and agrees that at any time during the term of these Publisher T&amp;C, if Appemob believes, in its reasonable judgment, that Publisher or anyone on its behalf is engaged in any conduct or activity which is prohibited under this Section 7 above, Appemob shall have the right (without prior notice to Publisher) to (i) remove and take any measures needed to prevent or correct such conduct or activity from being used in connection with the Services; and (ii) withdraw Publisher from any ongoing Mobile Campaign or remove Publisher from the Publisher Program. For the removal of doubt, Appemob shall not have any liability to Publisher whatsoever as a result of any of the foregoing actions taken by Appemob.
+            </p>
+
+            <h3>8. LICENSES; INTELLECTUAL PROPERTY</h3>
+
+            <p>
+                <b>8.1</b>
+                Subject to these Publisher T&amp;C, Appemob hereby grants to Publisher, a revocable, non- transferable, non-exclusive and non-sublicensable right and license during the term of these Publisher T&amp;C, to use and access the Appemob Advertising Platform solely in connection with the distribution of the Applications via the Publisher Medium.
+            </p>
+
+            <p>
+                <b>8.2</b>
+                As between Appemob and Publisher: (i) Appemob retains all rights, title and interest in and to all Intellectual Property Rights embodied in or associated with the Appemob Advertising Platform, the Appemob Website, all of its Services as well as any derivative therefrom; and (ii) Publisher retains all rights, title and interest in and to all Intellectual Property Rights embodied in or associated with the Publisher Medium. There are no implied licenses under these Publisher T&amp;C, and any rights not expressly granted to Publisher hereunder are reserved by Appemob or its suppliers. Publisher will not take any action inconsistent with Appemob’s ownership of the Appemob Advertising Platform, the Appemob Website, all of its Services as well as any derivative therefrom. Neither party will exceed the scope of the licenses granted hereunder.
+            </p>
+
+            <p>
+                <b>8.3</b>
+                Publisher agrees that Appemob, in its sole discretion, may use Publisher’s Marks for the purpose of advertising or publicizing Publisher’s use of the Services.
+            </p>
+
+            <p>
+                <b>8.4</b>
+                For the purpose of this Section 8, “
+                <b>Intellectual Property Rights</b>
+                ” means the right and title in and to all intangible legal rights, whether or not registered, including, without limitation, patents, Marks, copyrights, moral rights, goodwill, know how, databases, trade secrets, confidential business and technical information.
+            </p>
+
+            <h3>9. CONFIDENTIALITY</h3>
+
+            <p>
+                <b>9.1</b>
+                Each of the Publisher and Appemob (as applicable, “
+                <b>Receiving Party</b>
+                ”) shall keep confidential and shall not disclose to any third-party any and all proprietary information or confidential information disclosed to it by the other party (“
+                <b>Disclosing Party</b>
+                ”) during the term of these Publisher T&amp;C and/or relating to the business, processes, practices, products, technology, personally identifiable end-user information, customers, accounts, finance or contractual arrangements or trade secrets of the other party and any information concerning the Services or the substance of any report, recommendations, advice, test disclosed in relation to the Services (“
+                <b>Confidential Information</b>
+                ”), and shall use such Confidential Information solely for the performance of its obligations under these Publisher T&amp;C.
+            </p>
+
+            <p>
+                <b>9.2</b>
+                The obligations in this Section 9.1 shall not apply to Confidential Information which the Receiving Party is able to show, through clear and convincing evidence, (i) was already known to the Receiving Party prior to disclosure of Confidential Information to it not through a breach of confidentiality obligation or a wrongful act, (ii) was in the public domain through no fault of the Receiving Party, or (iii) is required to be disclosed by applicable legislation. Either party may disclose Confidential Information that has been approved in advance in writing by the other Party for disclosure.
+            </p>
+
+            <p>
+                <b>9.3</b>
+                Publisher will not make any public statement regarding these Publisher T&amp;C, the terms of these Publisher T&amp;C, any aspect thereof or the Appemob Advertising Platform without Appemob’s prior written approval which may be withheld in Appemob’s sole discretion. Advertiser permits Appemob to make public statements about Advertiser’s use of the Services.
+            </p>
+
+            <p>
+                <b>9.4</b>
+                The obligation of confidentiality of the Receiving Party pursuant to this Section 9 shall survive the termination of these Publisher T&amp;C for a period of 3 years.
+            </p>
+
+            <h3>10. REPRESENTATIONS AND WARRANTIES</h3>
+            <p>Publisher represents and warrants that:</p>
+
+            <p>
+                <b>10.1</b>
+                it has the full right, power, legal capacity and authority to enter into and perform its obligations under these Publisher T&amp;C;
+            </p>
+
+            <p>
+                <b>10.2</b>
+                the entering by it into these Publisher T&C and the performance hereof, will not conflict with, or breach the terms, conditions or provisions of, or default under any other agreement to which it is a party;
+            </p>
+
+            <p>
+                <b>10.3</b>
+                it shall comply with relevant data protection legislation and with Appemob’s current privacy policy as posted on its website and updated from time to time;
+            </p>
+
+            <p>
+                <b>10.4</b>
+                it shall not engage in any illegal business practices in any jurisdiction in respect of the Appemob Website, the Appemob Advertising Platform or the Services and it shall further comply in all matters with all applicable laws, regulations and generally accepted standards with respect to the same; and
+            </p>
+
+            <p>
+                <b>10.5</b>
+                it shall otherwise comply with all of its obligations under these Publisher T&amp;C.
+            </p>
+
+            <h3>11. DISCLAIMER OF WARRANTIES &amp; LIMITATION OF LIABILITY</h3>
+
+            <p>
+                EXCEPT AS EXPRESSLY STATED HEREIN, Appemob DISCLAIMS ALL WARRANTIES AND CONDITIONS, EXPRESS, IMPLIED OR STATUTORY, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. Appemob DOES NOT REPRESENT OR WARRANT THAT THE Appemob WEBSITE, SERVICES, OR THE Appemob ADVERTISING PLATFORM WILL OPERATE SECURELY OR WITHOUT INTERRUPTION. ALL PRODUCTS AND SERVICES PROVIDED BY Appemob HEREUNDER ARE PROVIDED “AS IS” AND “AS AVAILABLE.” ADVERTISER ACKNOWLEDGES THAT IT DID NOT ENTER INTO THESE PUBLISHER T&amp;C IN RELIANCE UPON ANY WARRANTY OR REPRESENTATION EXCEPT THOSE SPECIFICALLY SET FORTH HEREIN.
+            </p>
+
+            <p>
+                Appemob WILL HAVE NO INDIRECT, CONSEQUENTIAL, SPECIAL, INDIRECT, EXEMPLARY, PUNITIVE, OR OTHER LIABILITY WHETHER IN CONTRACT, TORT OR ANY OTHER LEGAL THEORY, UNDER THESE PUBLISHER T&amp;C, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH LIABILITY AND NOTWITHSTANDING ANY FAILURE OF ESSENTIAL PURPOSE OF ANY LIMITED REMEDY. Appemob AGGREGATE LIABILITY UNDER THESE PUBLISHER T&C (UNDER ANY THEORY OF LIABILITY) IS LIMITED TO AMOUNTS RETAINED BY Appemob FROM QUALIFIED TRANSACTIONS GENERATED BY PUBLISHER IN THE MONTH PRECEDING THE CLAIM. IN THE EVENT THAT THE FORMER LIMITATION OF LIABILITY IS HELD UNENFORCEABLE BY A COMPETENT COURT, Appemob’S AGGREGATE LIABILITY IS IN ANY CASE LIMITED TO US$ 5,000 PER EVENT, A SERIES OF EVENTS BEING CONSIDERED AS ONE SINGLE EVENT.
+            </p>
+
+            <h3>12. INDEMNIFICATION</h3>
+
+            <p>
+                <b>12.1</b>
+                Except as expressly provided in these Publisher T&amp;C, Publisher (the “ <strong>Indemnifying Party</strong>
+                ”) shall defend, hold harmless, and indemnify Appemob and/or its subsidiaries, affiliates, directors, officers, employees, agents, successors and permitted assignees (collectively, the “ <strong>Indemnified Party</strong>
+                ”) from and against any and all claims, damages, losses, suits, actions, demands, proceedings, expenses and/or liabilities (including but not limited to reasonable attorneys’ fees incurred and/or those necessary to successfully establish the right to indemnification) filed by any third party against the Indemnified Party (collectively, “
+                <strong>Third Party Claims</strong>
+                ”) arising out of a breach of any warranty, representation or obligation made by the Indemnifying Party under these Publisher T&amp;C.
+            </p>
+
+            <p>
+                <b>12.2</b>
+                The Indemnified Party shall: (i) promptly notify the Indemnifying Party of any Third Party Claim provided that a failure to give prompt notice shall not excuse or diminish the Indemnifying Party’s obligations under this Section 12 unless such failure shall materially and adversely affect the Indemnifying Party’s ability to defend such Third Party Claim, (ii) provide the Indemnifying Party with reasonable information, assistance and cooperation in defending the Third Party Claim at Indemnifying Party’s cost, and (iii) give the Indemnifying Party full control and sole authority over the defense and settlement of such Third Party Claim; provided, however, that any settlement will be subject to the Indemnified Party’s prior written approval (which approval shall not be unreasonably withheld or delayed) and provided further that Appemob shall not be required to allow Publisher to assume the control of the defense of a Third Party Claim to the extent that Appemob reasonably determines that (i) such claim relates to the Appemob Advertising Platform, (ii) any relief other than monetary damages is sought against the Indemnified Party, (iii) in the reasonable judgment of the Indemnified Party’s counsel, there may be a conflict of interest between the Indemnifying Party and the Indemnified Party in the conduct of the defense, or (iv) settlement of, or an adverse judgment with respect to, such Third Party Claim could reasonably be expected to establish a precedential custom or practice materially adverse to the continuing business interests of the Indemnified Party. The Indemnified Party may join in the defense of such Third Party Claim with counsel of its choice at its own expense.
+            </p>
+
+            <p>
+                <b>12.3</b>
+                The failure of the Indemnifying Party to comply with Section 12.2 will entitle the Indemnified Party to act on behalf of the Indemnifying Party, at the expense of the Indemnifying Party.
+            </p>
+
+            <h3>13. TERMS AND TERMINATION</h3>
+
+            <p>
+                <b>13.1</b>
+                The Agreement shall continue upon acceptance of these Publisher T&amp;C by Publisher (i.e. to be deemed to occur upon enrolment into the Publisher Program) and shall continue until terminated by either Party for convenience upon prior written notice to the other party.
+            </p>
+
+            <p>
+                <b>13.2</b>
+                Upon termination or expiration of these Publisher T&amp;C for any reason:
+            </p>
+
+            <p style="margin-left:4em">
+                <b>13.2.1</b>
+                Appemob will pay Publisher for any outstanding amounts on account of Qualified Transactions within a net 10 or net 30 days period after such termination or expiration (net 30 for larger accounts as determined by Appemob).
+            </p>
+
+            <p style="margin-left:4em">
+                <b>13.2.2</b>
+                Any outstanding debit balance shall be paid by Publisher within 7 business days of termination of these Publisher T&amp;C;
+            </p>
+
+            <p style="margin-left:4em">
+                <b>13.2.3</b>
+                any and all licenses and rights granted to either party in connection with these Publisher T&amp;C shall immediately cease and terminate; and
+            </p>
+
+            <p style="margin-left:4em">
+                <b>13.2.4</b>
+                any and all Confidential Information or proprietary information of either party that is in the other party’s possession or control must be immediately returned or kept confidential as stated out in Section 9.1.
+            </p>
+
+            <h3>14. GOVERNING LAW</h3>
+
+            <p>
+                The Agreement shall be governed and construed in accordance with the law of Cyprus and shall be subject to the jurisdiction of the courts located in Limassol, whose jurisdiction shall be exclusive other than in respect of the enforcement of any judgment, where their authority shall be non-exclusive.
+            </p>
+
+            <h3>15. MISCELLANEOUS</h3>
+
+            <p>
+                <b>15.1</b>
+                Subject always to the provisions of Section 15.2 below, neither party may assign the Agreement without the other’s prior written consent, which shall neither be unreasonably withheld nor delayed.
+            </p>
+
+            <p>
+                <b>15.2</b>
+                Notwithstanding the foregoing, (i) Appemob shall be entitled to assign these Publisher T&amp;C to any third-party, without need of consent from Publisher, if such assignment is required as part of a merger, sale of assets, change of control or other similar transaction in which the assigning party or any entity within its group of companies is involved; and (ii) Appemob shall be entitled to assign these Publisher T&amp;C to any of its affiliates (i.e. any person that controls, is controlled by or is under common control with Appemob, where control shall mean the ability to direct the activity of a relevant person).
+            </p>
+
+            <p>
+                <b>15.3</b>
+                These Publisher T&amp;C is the complete and entire agreement between Appemob and Publisher regarding the subject matter hereof and supersedes all prior agreements or understanding between the parties, and each party acknowledges that it has not relied upon any representation from the other which is not contained in these Publisher T&amp;C in entering into these Publisher T&amp;C.
+            </p>
+
+            <p>
+                <b>15.4</b>
+                Nothing in these Publisher T&amp;C shall create or be deemed to create a partnership, joint venture or principal-agent relationship between the parties and no party shall have authority to bind the other party in any way or manner.
+            </p>
+
+            <p>
+                <b>15.5</b>
+                The failure of either party at any time in enforcing any right or remedy under these Publisher T&amp;C shall not be construed as a waiver of any future or other exercise of such right or remedy.
+            </p>
+
+            <p>
+                <b>15.6</b>
+                Notwithstanding that the whole or any part of any provision of these Publisher T&amp;C may prove to be illegal or unenforceable, the other provisions of these Publisher T&amp;C and the remainder of the provision in question shall remain in full force and effect, and the parties shall replace such illegal or unenforceable provision with legal and enforceable provisions which will reflect to the greatest extent possible the intention of the parties hereunder.
+            </p>
+        </div>
+    </div>
+</main>
+
+<!--FOOTER-->
+<footer class="block">
+
+    <div class="clearfix inner">
+        <div class="menu clearfix">
+            <a class="logo" href="#"></a>
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="publisher.html">publisher</a></li>
+                    <li><a href="about.html">about</a></li>
+                </ul>
+            </nav>
+
+            <div class="social">
+                <a class="fb" href="https://www.facebook.com/Appemob"></a>
+                <a class="gp" href="https://plus.google.com/100238247706466745666/posts"></a>
+                <a class="in" href="http://www.linkedin.com/company/appemob"></a>
+                <a class="tw" href="https://twitter.com/appemob_updates"></a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="copy-nav">
+        <a href="http://appemob.com/">APPEMOB&copy;2016</a>
+        <a href="policy.html">Privacy policy</a>
+        <a href="terms.html">TERMS OF USE</a>
+        <a href="#" class="do-pop" data-target="pop-contact.html">CONTACT</a>
+    </nav>
+</footer>
+</body>
+</html>

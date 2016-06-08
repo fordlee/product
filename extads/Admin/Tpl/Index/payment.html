@@ -1,0 +1,326 @@
+<include file="./Public/widget/head.html" title="提现管理" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+    .row{margin-bottom: 30px;}
+    .row h4{margin-bottom: 5px;}
+    .row .table th{color: #333;font-weight: normal;}
+    .j_note{display: block;width: 100%;}
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html" curr="index"/>
+        </ul>
+        <div class="content payment">
+
+            <div class="form">
+                <input type="button" id="btnAddPayment" value="手动添加付款" />
+                <div id="addManualPayment" style="display:none;">
+                    <form method="post" action="__URL__/addManualPayment">
+                        用户邮箱：<input type="text" name="username">
+                        本次付款额：<input type="text" name="paycount">
+                        <input type="submit" value="提交">
+                    </form>
+                </div>
+            </div>
+
+            <ul class="u-inline u-inline-bg">
+                <li <eq name="status" value="0">class="curr"</eq>><a href="__URL__/payment/s/0">等待审核</a></li>
+                <li <eq name="status" value="1">class="curr"</eq>><a href="__URL__/payment/s/1">付款中</a></li>
+                <li <eq name="status" value="2">class="curr"</eq>><a href="__URL__/payment/s/2">付款成功</a></li>
+                <li <eq name="status" value="3">class="curr"</eq>><a href="__URL__/payment/s/3">审核失败</a></li>
+                <li <eq name="status" value="all">class="curr"</eq>><a href="__URL__/payment/s/all">全部</a></li>
+            </ul>
+            <div class="row">
+                <table class="table">
+                    <tr>
+                        <th>用户</th>
+                        <th>用户状态</th>
+                        <th>提现金额</th>
+                        <th>提现方式</th>
+                        <th>申请时间</th>
+                        <th>审批时间</th>
+                        <th>付款时间</th>
+                        <th style="width:105px;">备注</th>
+                        <th>操作</th>
+                    </tr>
+                    <volist name="payRet" id="item">
+                    <tr>
+                        <td>{$item.username}</td>
+                        <td>
+                        <if condition="($item.isactive eq 0)">
+                        禁用
+                        <else/>
+                        正常
+                        </if>
+                        </td>
+                        <if condition="($item.paycount neq 0)">
+                        <td>${$item.paycount|number_format=###,2}</td>
+                        <elseif condition="($item.paycount eq 0)"/>
+                        <td>
+                            <span style="color:red;">Weeks</span>
+                        </td>
+                        </if>
+                        <td>
+                            <if condition="($item.paytype eq 1)">
+                                <a href="javascript:void(0);" onclick="$('#payinfo_{$item.id}').toggle()">paypal</a>
+                            <elseif condition="($item.paytype eq 2)"/>
+                                <a href="javascript:void(0);" onclick="$('#payinfo_{$item.id}').toggle()">wire transfer</a>
+                            <elseif condition="($item.paytype eq 3)"/>
+                                <a href="javascript:void(0);" onclick="$('#payinfo_{$item.id}').toggle()">wester nunion</a>
+                            <elseif condition="($item.paytype eq 4)"/>
+                                <a href="javascript:void(0);" onclick="$('#payinfo_{$item.id}').toggle()">alipay</a>
+                            </if>
+                            <notempty name="item.paytype">
+                                <div id="payinfo_{$item.id}" style="display:none;">
+                                    <div class="payinfo-mask" onclick="$('#payinfo_{$item.id}').toggle()"></div>
+                                    <div class="payinfo payinfo-{$item.paytype}">
+                                        <p><span class="pay-title">用户:</span>{$item.username}</p>
+                                        <notempty name="item.name"><p><span class="pay-title">Name:</span>{$item.name}</p></notempty>
+                                        <notempty name="item.account"><p><span class="pay-title">Account:</span>{$item.account}</p></notempty>
+                                        <notempty name="item.swift"><p><span class="pay-title">SWIFT:</span>{$item.swift}</p></notempty>
+                                        <notempty name="item.owner"><p><span class="pay-title">Owner:</span>{$item.owner}</p></notempty>
+                                        <notempty name="item.cp_address"><p><span class="pay-title">Company/Personal Address：</span>{$item.cp_address}</p></notempty>
+                                        <notempty name="item.number"><p><span class="pay-title">Number:</span>{$item.number}</p></notempty>
+                                        <notempty name="item.bank"><p><span class="pay-title">Bank:</span>{$item.bank}</p></notempty>
+                                        <notempty name="item.address"><p><span class="pay-title">Address:</span>{$item.address}</p></notempty>
+                                        <notempty name="item.tel"><p><span class="pay-title">Tel:</span>{$item.tel}</p></notempty>
+                                    </div>
+                                </div>
+                            </notempty>
+                        </td>
+                        <td>{$item.addtime|strtotime|date='Y-m-d', ###}</td>
+                        <td>
+                        <empty name="item.checktime">
+                        /
+                        <else/>
+                        {$item.checktime|strtotime|date='Y-m-d', ###}
+                        </empty>
+                        </td>
+                        <td>
+                        <empty name="item.paytime">
+                        /
+                        <else/>
+                        {$item.paytime|strtotime|date='Y-m-d', ###}
+                        </empty>
+                        </td>
+                        <td>
+                            <span class="j_note" id="note_txt_{$item.id}" data-id="{$item.id}">{$item.note}&nbsp;</span>
+                            <input class="j_note_ipt" type="text" data-id="{$item.id}" data-val="{$item.note}" id="note_{$item.id}" value="{$item.note}" style="display:none;"></td>
+                        <td>
+                    <if condition="($item.status eq 0)">
+                        <button onclick="pass({$item.id}, 1)">审核通过</button><br/><br/>
+                        <button onclick="del({$item.id}, '{$item.username}')">删除申请</button>
+                    <elseif condition="($item.status eq 1)"/>
+                        <notempty name="item.invoice">
+                            <notempty name="item.upinvoice">
+                            <a target="_blank" href="http://www.adonads.com/console/{$item.upinvoice|getSignInvoicePath}">签名invoice</a><br/><br/>
+                            <!-- <a target="_blank" href="__ROOT__/{$item.upinvoice|getSignInvoicePath}">签名invoice</a><br/><br/> -->
+                            <else/>
+                            <a target="_blank" href="__ROOT__/{$item.invoice|getInvoicePath}">查看invoice</a><br/><br/>
+                            </notempty>
+                        <else/>
+                            <button  onclick="$('#invoice_{$item.id}').toggle()">生成invoice</button>
+                            <div id="invoice_{$item.id}" style="display:none;">
+                                <div class="payinfo-mask" onclick="$('#invoice_{$item.id}').toggle()"></div>
+                                <div class="payinfo payinfo-2 payinfo-2-1">
+                                    <p>支付日期范围：</p>
+                                    <p>开始日期：<input type="date" id="pay_time_begin_{$item.id}" value="{$item.addtime|getMonthBeforeFirstDay}"></p>
+                                    <p>结束日期：<input type="date" id="pay_time_end_{$item.id}" value="{$item.addtime|getMonthBeforeLastDay}"></p>
+                                    <p class="f-cb" style="margin-top:12px;"><button class="f-fl" onclick="invoice({$item.id}, 0)">确认</button><button class="f-fr" onclick="invoice({$item.id}, 1)">预览</button></p>
+                                </div>
+                            </div><br/><br/>
+                        </notempty>
+                        <notempty name="item.upinvoice">
+                            <button onclick="payed({$item.id})" style="color:green">付款成功</button><br/><br/>
+                            <else/>
+                            <button onclick="payed({$item.id})">付款成功</button><br/><br/>
+                        </notempty>
+                        <button onclick="del({$item.id}, '{$item.username}')">删除申请</button>
+                    <elseif condition="($item.status eq 2)"/>
+                        <notempty name="item.upinvoice">
+                        <a target="_blank" href="http://www.adonads.com/console/{$item.upinvoice|getSignInvoicePath}">签名invoice</a>
+                        <!-- <a target="_blank" href="__ROOT__/{$item.upinvoice|getSignInvoicePath}">签名invoice</a> -->
+                        <else/>
+                        /
+                        </notempty>
+                    <elseif condition="($item.status eq 3)"/>
+                        <button onclick="pass({$item.id}, 1)">审核通过</button><br/><br/>
+                        <button onclick="del({$item.id}, '{$item.username}')">删除申请</button>
+                    </if>
+                        </td>
+                    </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function() {
+    setCurrNav('payment');
+    bindNote();
+    addPayment();
+});
+
+function addPayment(){
+    $('#btnAddPayment').click(function(e) {
+        $('#addManualPayment').toggle();
+    });
+}
+
+function del(id, username) {
+    if (prompt("请输入你要删除的提现单的用户名(邮箱)：","") == username) {
+        $.ajax({
+            url: '__URL__/del',
+            data: {
+                id: id
+            },
+            type: 'get'
+        }).done(function(data) {
+            if (data == 1) {
+                window.location.reload();
+            } else if (data == 0) {
+                alert('请先登录!');
+            } else {
+                alert('操作失败，请稍后再试!');
+            }
+        })
+        .fail(function(msg) {
+            alert(msg);
+        });
+    } else {
+        alert('请仔细核对哦！');
+    }
+}
+
+function bindNote() {
+    $('.j_note').dblclick(function(e){
+        var $this = $(this);
+        var id = $this.attr('data-id');
+        $this.hide();
+        $('#note_' + id).show().focus();
+    });
+
+    $('.j_note_ipt').blur(function(e) {
+        var $this = $(this);
+        var id = $this.attr('data-id');
+        var oldv = $this.attr('data-val');
+        var newv = $this.val();
+        if (oldv != newv) {
+            changenote(id, newv);
+        }
+        if (newv == "") {
+            newv = "&nbsp;";
+        }
+        $this.hide();
+        $('#note_txt_' + id).html(newv).show();
+    });
+}
+
+function changenote(id, val) {
+    $.ajax({
+        url: '__URL__/addpaymentnote',
+        data: {
+            id: id,
+            note: val
+        },
+        type: 'get'
+    }).done(function(data) {
+        if (data == 1) {
+
+        } else if (data == 0) {
+            alert('请先登录!');
+        } else {
+            alert('操作失败，请稍后再试!');
+        }
+    })
+    .fail(function(msg) {
+        alert(msg);
+    });
+}
+
+function payed(id) {
+    if(confirm("请确认该用户上传Invoice是否正确！")){
+        $.ajax({
+            url: '__URL__/payedpayment',
+            data: {
+                id: id
+            },
+            type: 'post'
+        }).done(function(data) {
+            if (data == 1) {
+                window.location.reload();
+            } else if (data == 0) {
+                alert('请先登录!');
+            } else {
+                alert('操作失败，请稍后再试!');
+            }
+        })
+        .fail(function(msg) {
+            alert(msg);
+        });
+    }else{
+        return false;
+    }
+}
+
+function pass(id, status) {
+    $.ajax({
+        url: '__URL__/passpayment',
+        data: {
+            id: id,
+            status: status
+        },
+        type: 'post'
+    }).done(function(data) {
+        if (data == 1) {
+            window.location.reload();
+        } else if (data == 0) {
+            alert('请先登录!');
+        } else {
+            alert('操作失败，请稍后再试!');
+        }
+    })
+    .fail(function(msg) {
+        alert(msg);
+    });
+}
+
+function invoice(id, isPre) {
+    var pay_time_begin = $('#pay_time_begin_' + id).val();
+    var pay_time_end = $('#pay_time_end_' + id).val();
+    if (isPre) {
+        window.open('__APP__/invoice/index/pid/' + id + '/ispre/' + isPre + '/pay_time_begin/' + pay_time_begin + '/pay_time_end/' + pay_time_end);
+        return;
+    }
+    $.ajax({
+        url: '__APP__/invoice/index',
+        data: {
+            pid: id,
+            ispre: isPre,
+            pay_time_begin: pay_time_begin,
+            pay_time_end: pay_time_end
+        },
+        type: 'get'
+    }).done(function(data) {
+        if (data == 1) {
+            window.location.reload();
+        } else if (data == 0) {
+            alert('请先登录!');
+        } else if (data == -3) {
+            alert('提现单不存在，无法生成invoice！');
+        } else if (data == -4) {
+            alert('付款时间有误，无法生成invoice！');
+        } else if (data == -5) {
+            alert('提现信息缺失，无法生成invoice！');
+        } else {
+            alert('操作失败，请稍后再试!');
+        }
+    })
+    .fail(function(msg) {
+        alert(msg);
+    });
+}
+</script>
+<include file="./Public/widget/foot.html"/>

@@ -1,0 +1,41 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+
+<style type="text/css">
+.country-list-mod{display: inline-block;width: 150px;}
+.country-list-mod label{display: inline-block;width: 100px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;vertical-align: middle;margin-left: 5px;}
+</style>
+
+<!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <section class="content-header">
+	    	<h1>
+	          <small style="color:red">等级{$_SESSION['level']}</small>管理员操作
+	          <small>Version 2.0</small>
+	        </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">CPI设定</li>
+          </ol>
+
+      </section>
+        
+    <section class="content">
+    	<div class="form-group">
+    	 <form action="{:U('CPI/addCPIGroup')}" method="post">
+        CPI：<input type="text" name="cpi" value=''>
+    	 	<button type="submit" class="btn btn-default">确认</button>
+    	 	<button type="reset" class="btn btn-default">重置</button><br>
+        <h2 class="">国家代码：</h2>
+			<volist name="countries" id="vo">
+         	<span class="country-list-mod">{$vo.id}
+         		<input type="checkbox" name="country[]" value='{$vo.id}'>
+         		<label class="" title='{$vo.name}'>{$vo.name}</label>
+         	</span>
+         	</volist>
+         </form>
+       </div>
+	</section>
+  </div>
+
+<include file="Public:footer" />

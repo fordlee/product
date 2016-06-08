@@ -1,0 +1,50 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+<div class="content-wrapper">
+	  <section class="content-header">
+	    	<h1>
+	          <small style="color:red">User: {$_SESSION['name']}</small>
+	          <small>Version 2.0</small>
+	        </h1>
+	      <ol class="breadcrumb">
+	        <li><a href="{:U('Index/index')}"><i class="fa fa-dashboard"></i> Home</a></li>
+	        <li class="active">SDK Ad</li>
+	      </ol>
+
+	  </section>
+        
+    <section class="content">
+    <div class="dataTables_wrapper form-inline dt-bootstrap">
+    	<div class="row">
+    	<table id="example1" class="table table-bordered table-striped">                  	
+            <thead>
+              <tr>
+                <th>Img</th>
+                <th>AppId</th>
+                <th>Appname</th>
+                <th>SDKActive</th>
+                <th>Ad control</th>
+              </tr>
+            </thead>
+            <tbody>
+            	<volist name="item" id="vo">                       
+                  <tr>
+                    <td><img src="{:C('IMG_DOMAIN')}/{$vo.img}w30-rw"></td>
+          					<td>{$vo.appid}</td>
+          					<td>{$vo.name}</td>
+                    <eq name="vo.active_status" value="1">
+                    <td><span class="label label-success">Active</span></td>
+                    <else/>
+                    <td><span class="label label-danger">Inactive</span></td>
+                    </eq>
+          					<td><a href="{:U('SDK/setad')}?id={$vo.applistid}" class="btn btn-default">Set</a></td>
+                  </tr>
+              </volist>
+            </tbody>
+         </table>
+		</div>
+	</div>
+	</section>
+</div>
+
+<include file="Public:footer" />

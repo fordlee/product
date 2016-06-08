@@ -1,0 +1,512 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			<small style="color:red">User: {$_SESSION['name']}</small>
+          	<small>Version 2.0</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="{:U('Index/index')}"><i class="fa fa-dashboard"></i>Home</a></li>
+          	<li class="active">Application Detail</li>
+		</ol>
+	</section>
+
+	<section class="content">
+		<h2 class="page-header">
+			<font><font class="">AdminLTE Custom Tabs</font></font>
+		</h2>
+		<div class="row">
+			<div>
+				<!-- Custom Tabs -->
+				<div class="nav-tabs-custom">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#tab_1" id="tab1" data-toggle="tab"
+							aria-expanded="true"><font><font>Overview</font></font></a></li>
+						<li class=""><a href="#tab_2" id="tab2" data-toggle="tab"
+							aria-expanded="false"><font><font>Titles</font></font></a></li>
+						<li class=""><a href="#tab_3" id="tab3" data-toggle="tab"
+              				aria-expanded="false"><font><font>Reporting</font></font></a></li>
+			            <li class=""><a href="#tab_4" id="tab4" data-toggle="tab"
+			              	aria-expanded="false"><font><font>Install Details</font></font></a></li>
+					</ul>
+          			<input type="hidden" id="applistid" value="{$appinfo.id}">
+                	<input type="hidden" id="appid" value="{$appinfo.appid}">
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab_1">
+							
+								<div class="form-horizontal">
+									<div class="form-group GFJQI2EDMW">
+										<div class="col-md-3">
+											<div class="form-row-left wide-md">
+												<label class="form-row-left-label text-align-right-md"><font><font>App</font></font></label>
+												<div class="form-row-left-help"></div>
+											</div>
+										</div>
+										<div class="form-row-right form-row-right-withpadding col-md-5">
+										<div>
+											<table cellspacing="0" cellpadding="0">
+											<tbody>
+											<tr>
+											<td align="left" style="vertical-align: middle;">
+                							<img class="gwt-Image GFJQI2EDDW" src="{:C('IMG_DOMAIN')}/{$appinfo.img}w50-rw">
+							        		</td>
+											<td align="left" style="vertical-align: middle;">
+                								<div class="gwt-Label GFJQI2EDIW">
+                									<font><font>{$appinfo.promoter_title.title}</font></font>
+												</div>
+              								</td>
+											</tr>
+											</tbody>
+											</table>
+										</div>
+										</div>
+									</div>
+									<div class="GFJQI2EDKW"></div>
+									<div class="form-group">
+										<div class="col-md-3">
+											<div class="form-row-left wide-md">
+												<label class="form-row-left-label text-align-right-md"><font><font>Promoted app state</font></font></label>
+												<div class="form-row-left-help"></div>
+											</div>
+										</div>
+							<div class="form-row-right form-row-right-withpadding col-md-5">
+							<div id='wrap'>
+								<span class="gwt-RadioButton">
+                            <input type="radio" name="state" value="1" id="gwt-uid-309" tabindex="0" <php>if($appinfo['status']==1)echo checked</php>>
+                            <label for="gwt-uid-309">
+                              <span class="promotion-status-running" style="color: green" >
+                              	<i class="fa fa-play"></i><font>Active</font>
+                              </span>
+                              </label>
+                            </span>
+                            <span class="gwt-RadioButton hmargin-s">
+							<input type="radio" name="state" value="0" id="gwt-uid-310" tabindex="0" <php>if($appinfo['status']==0)echo checked</php>>
+								<label for="gwt-uid-310">
+                              <span class="promotion-status-stopped" style="color: red">
+									 <i class="fa fa-stop"></i><font class="">Stopped</font>
+                              </span>
+                            </label>
+                          </span>																		
+								</div>
+							</div>
+							</div>
+							<!-- <div class="form-group">
+								<div class="col-md-3">
+									<div class="form-row-left wide-md">
+										<label class="form-row-left-label text-align-right-md"><font><font>Current balance</font></font></label>
+										<div class="form-row-left-help"></div>
+									</div>
+								</div>
+								<div class="form-row-right form-row-right-withpadding col-md-5">
+									
+									<div>
+										<div>
+											<span class="gwt-InlineLabel"><font><font>$34.40</font></font></span>
+											&nbsp;&nbsp; <a class="gwt-Anchor GFJQI2EDEW"><i
+												class="fa fa-shopping-cart"></i><font><font>
+														Add funds</font></font></a>
+										</div>
+									</div>
+								</div>
+							</div> -->
+						<div class="form-group">
+							<div class="col-md-3">
+								<div class="form-row-left wide-md">
+									<label class="form-row-left-label text-align-right-md"><font><font>Country targeting</font></font></label>
+									<div class="form-row-left-help"></div>
+								</div>
+							</div>
+							<div
+								class="form-row-right form-row-right-withpadding col-md-5">
+								<div>												
+									<a href="{:U('addCountry')}?id={$appinfo.id}" class="gwt-Anchor"><font>Edit country selection</font></a>
+								</div>											
+							</div>										
+						</div>
+						
+						<div>
+							<div class="form-group has-error">
+								<div class="col-md-3">
+									<div class="form-row-left wide-md">
+										<label class="form-row-left-label text-align-right-md"><font>App budget</font></label>
+										<div class="form-row-left-help"></div>
+									</div>
+								</div>
+								<div
+									class="form-row-right form-row-right-withpadding col-md-5">
+									<div>
+										<span class="gwt-RadioButton" style="float:left;margin-right: 10px;">
+										<input type="radio" name="budget" value="0" id="gwt-uid-183" tabindex="0">
+											<label for="gwt-uid-183"><font>No limit</font></label>
+										</span>
+										<span class="gwt-RadioButton"><input type="radio"
+											name="budget" value="1" id="gwt-uid-184" tabindex="0"
+											checked=""><font>$&nbsp;</font><label for="gwt-uid-184"></label></span>
+										<div class="GFJQI2EDL0">
+											<span>
+											<input type="text" class="form-control" name="budget" id="budgetid" value="{$appinfo.budget}">
+											</span>
+										</div>
+									</div>
+									<div class="GFJQI2EDHF">
+										<font><font>Add more to avoid pausing the campaign</font></font>
+									</div>
+									<div class="sub-text">
+										<font><font>The promotion will pause once the specified amount is spent.</font></font>
+									</div>
+								</div>
+								<div class="col-md-4"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-3">
+								<div class="form-row-left wide-md">
+									<label class="form-row-left-label text-align-right-md"><font><font>Title</font></font></label>
+									<div class="form-row-left-help"></div>
+								</div>
+							</div>
+							<div class="form-row-right col-md-5">
+								<div>
+									<p>{$appinfo.promoter_title.title}</p>	
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-3">
+								<div class="form-row-left wide-md">
+									<label class="form-row-left-label text-align-right-md"><font><font>Subtitle</font></font></label>
+									<div class="form-row-left-help"></div>
+								</div>
+							</div>
+							<div class="form-row-right col-md-5">
+								<div>
+									<p>{$appinfo.promoter_title.subtitle}</p>
+								</div>
+							</div>										
+						</div>
+						<div class="form-group" style="">
+							<div class="col-md-3">
+								<div class="form-row-left wide-md">
+									<label class="form-row-left-label text-align-right-md"></label>
+									<div class="form-row-left-help"></div>
+								</div>
+							</div>
+							<div
+								class="form-row-right form-row-right-withpadding col-md-5">
+								<div>
+									<a href="javascript:void(0)" onclick="toTab();"><font><font>Add/edit alternative (sub)titles</font></font></a>
+								</div>										
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-3">
+								<div class="form-row-left wide-md">
+									<label class="form-row-left-label text-align-right-md"></label>
+									<div class="form-row-left-help"></div>
+								</div>
+							</div>
+							
+						</div>						
+						<div class="GFJQI2EDGF row">
+							<div class="col-md-offset-3 col-md-9">
+								<button type="button" id="saveBtn1" onclick="updateInfo();" class="btn btn-default">
+									<font><font>Save</font></font>
+								</button>
+							</div>
+						</div>
+					</div>
+				
+			</div>
+			<!-- /.tab-pane -->
+
+
+						
+			<div class="tab-pane" id="tab_2">
+                
+                <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Data Table With Full Features</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div clas="dataTables_wrapper form-inline dt-bootstrap">
+                  <div class="row">
+                  <table id="example1" class="table table-bordered table-striped">                    
+                    <thead>
+                      <tr>
+                        <th>Set title</th>
+                        <th>Title</th>
+                        <th>Subtitle</th>
+                        <th>Language</th>
+                        <!-- <th>Impr</th>
+                        <th>Clicks</th>
+                        <th>CTR</th>
+                        <th>Installs</th>
+                        <th>IR</th> -->
+                        <th>Operate</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="item" id="vo">
+                      <tr>
+                          <td>
+                          	<span class="gwt-CheckBox">
+                          		<input type="checkbox" name="checktitle" id="check_{$vo.language}" value="1" <php>if($vo['active']==1) echo checked</php>>
+                          	</span>
+                      	  </td>
+                          <td><input type="text" name="title" id="title_{$vo.language}" value="{$vo.title}"></td>
+                          <td><input type="text" name="subtitle" id="sub_{$vo.language}" value="{$vo.subtitle}"></td>
+                          <td>
+                            <select class="" id="sel_{$vo.language}">
+                            	<volist name="languages" id="language">
+                              		<option value="{$key}" <php>if($vo['language']==$key)echo 'selected="selected"'</php>>{$language}</option>
+                             	</volist>
+                            </select>
+                          </td>
+                          <!-- <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>{$appinfo.install}</td>
+                          <td>IR</td> -->
+                          <td>
+                          	<button type="button" id="editbtn_{$vo.language}" onclick="edittitle('{$vo.language}');" class="btn btn-default">
+                    			<font>Modify</font>
+                  			</button>
+                  			<button type="button" id="delbtn" onclick="deltitle('{$vo.language}');" class="btn btn-default">
+                    			<font>Delete</font>
+                  			</button>
+                  		  </td>
+                        </tr>
+                    </volist>
+                        <tr id="hidtitle" style="display:none">
+                          <td>
+                          	<span class="gwt-CheckBox">
+                          		<input type="checkbox" name="checktitle" id="newTitleCheck" value="1" >
+                          	</span>
+                          </td>
+                          <td><input type="text" name="title" id="newtitle" value=""></td>
+                          <td><input type="text" name="subtitle" id="newsubtitle" value=""></td>
+                          <td>
+                            <select class="" id="newselect">
+                            	<volist name="languages" id="language">
+                              		<option value="{$key}">{$language}</option>
+                             	</volist>
+                            </select>
+                          </td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>-</td>
+                          <td>0</td>
+                          <td>-</td>
+                          <td>
+                          	<button type="button" id="saveBtn2" onclick="savetitle();" class="btn btn-default">
+                    			<font>Add</font>
+                  			</button>
+                  		  </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                  <a href="javascript:void(0);" onclick="addNewTitle();"><font>add new title</font></a>
+                 </div>         
+                </div>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+           	</div>
+
+            <div class="tab-pane" id="tab_3">
+            	
+            </div>
+
+            <div class="tab-pane" id="tab_4">
+
+            </div>
+
+		</div><!-- /.tab-content -->
+	</div><!-- nav-tabs-custom -->
+</div><!-- /.col -->
+</div><!-- /.row -->
+</section>
+</div><!-- /.Content Wrapper. Contains page content -->
+
+
+
+<include file="Public:footer" />
+
+<script type="text/javascript">
+ $('#tab3').click(function(){
+    var id = $('#appid').val();
+    window.location.href="{:U('Report/reportDetail')}?id="+id;
+  });
+
+ $('#tab4').click(function(){
+ 	var id = $('#appid').val();
+ 	window.location.href="{:U('Report/installCountry')}?id="+id;
+ })
+
+  function addNewTitle(){
+  	$("#hidtitle").toggle();
+  }
+
+  function toTab(){
+    $('ul li:nth-child(1)').removeClass('active');
+    $('.nav nav-tabs #tab1').attr("aria-expanded","false");
+    $('ul li:nth-child(2)').addClass("active");
+    $('.nav nav-tabs #tab2').attr("aria-expanded","true");
+    $('div #tab_1').removeClass("active");
+    $('div #tab_2').addClass("tab-pane active");
+  }
+
+  function updateInfo(){
+    var id =$('#applistid').val();
+    var active = $('#wrap input[name="state"]:checked').val();
+    var bid = $('#bid').val();      
+    var url = "{:U('App/appInfoUpdate')}";
+    var ondailybid = $('input[name="daily"]:checked').val();
+    var onbudgetid = $('input[name="budget"]:checked').val();
+    if(ondailybid==1){
+    	var dailybid = $('#dailybid').val();
+    }else{
+    	var dailybid = Number.POSITIVE_INFINITY;
+    }
+    if(onbudgetid==1){
+    	var budget = $('#budgetid').val()
+    }else{
+    	var budget = Number.POSITIVE_INFINITY;
+    }
+
+    $.ajax({
+        url: url,
+        data: {
+            'id':id,
+            'active':active,
+            'bid':bid,
+            'dailybid' : dailybid,
+            'budget' : budget
+        },
+        dataType:"json",
+        type: 'post'
+    }).done(function(data){
+        if(data == 1){
+            alert('success!');
+            window.location.reload();
+        }else{
+            alert('false!');
+        }
+    }).fail(function(msg) {
+        alert(msg);
+    });
+  }
+
+  function savetitle(){
+  	var id =$('#applistid').val();
+
+    var ischecked=$('#newTitleCheck').is(':checked');
+    if(ischecked){
+      var active = $('#newTitleCheck').val();
+    }else{
+      var active=0;
+    }
+
+  	var title = $('#newtitle').val();
+    var subtitle = $('#newsubtitle').val();
+    var languages =$("#newselect option:selected").val();     
+    var url = "{:U('App/savetitle')}";
+    
+    $.ajax({
+        url: url,
+        data: {
+            'id':id,
+            'promoter_title':{
+            	'active':active,
+            	'language':languages,
+            	'title':title,
+            	'subtitle':subtitle
+            }
+        },
+        dataType:"json",
+        type: 'post'
+    }).done(function(data){
+        if(data == 1){
+            alert('success!');
+            window.location.reload();
+        }else{
+            alert('false!');
+        }
+    }).fail(function(msg) {
+        alert(msg);
+    });
+  }
+
+  function edittitle(language){
+    var ischecked=$('#check_'+language).is(':checked');
+    if(ischecked){
+      var active=$('#check_'+language).val();
+    }else{
+      var active=0;
+    }
+  
+  	var id = $('#applistid').val();
+    var title = $('#title_'+language).val();
+    var subtitle = $('#sub_'+language).val();
+    var languages = $('#sel_'+language+' option:selected').val();
+  	
+  	$.ajax({
+  		url:"{:U('App/edittitle')}",
+  		data:{
+  			'id':id,
+        'oldlanguage':language,
+        'promoter_title':{
+          	'active':active,
+          	'language':languages,
+          	'title':title,
+          	'subtitle':subtitle
+        }
+  		},
+  		type:'post'
+  	}).done(function(data){
+  		if(data == 1){
+  			alert("success!");
+  			window.location.reload();
+  		}else{
+  			alert("false!");
+  		}
+  	}).fail(function(msg){
+  		alert(msg);
+  	});
+  }
+
+  function deltitle(language){
+  	var id =$('#applistid').val();
+    var ischecked=$('#check_'+language).is(':checked');
+    if(ischecked){
+      var active=$('#check_'+language).val();
+    }else{
+      var active=0;
+    }
+
+  	$.ajax({
+  		url:"{:U('App/deltitle')}",
+  		data:{
+  			'id':id,
+        'active':active,
+  			'language':language
+  		},
+  		type:'post'
+  	}).done(function(data){
+	  	if(data == 1){
+  			alert("success!");
+  			window.location.reload();
+	  	}else if(data == 0){
+    		alert("The default title can not be deleted!");
+	    }else{
+  			alert("false!");
+	  	}
+  	}).fail(function(msg){
+  		alert(msg);
+  	});
+  }
+
+</script>

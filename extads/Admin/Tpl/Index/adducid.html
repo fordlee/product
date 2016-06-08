@@ -1,0 +1,122 @@
+<include file="./Public/widget/head.html" title="用户管理" keywords="Adonads"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/cn/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/cn/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <div class="form">
+                <h1>添加渠道号</h1>
+                <form id="adduserform" method="post" action="__URL__/adducid">
+                    <input type="hidden" name="uid" value="{$item.uid}" />
+                    <div class="form-item">
+                        用户邮箱：<input readonly value="{$item.username}" />
+                    </div>
+                    <div class="form-item">
+                        扩展名称：<input required name="ext" value="" />
+                    </div>
+                    <div class="form-item">
+                        分配渠道：
+                    <if condition="$propellercids">
+                        <select title="propeller" name="pcid">
+                            <option value="">暂不分配</option>
+                            <volist name="propellercids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(propeller)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$adcashcids">
+                        <select title="adcash" name="acid">
+                            <option value="">暂不分配</option>
+                            <volist name="adcashcids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(adcash)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$advertisecids">
+                        <select title="advertise" name="dcid">
+                            <option value="">暂不分配</option>
+                        </select>(advertise)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$superfishcids">
+                        <select title="Shopping Deals" name="scid">
+                            <option value="">暂不分配</option>
+                            <volist name="superfishcids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(Shopping Deals)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$bannerscids">
+                        <select title="banners" name="bcid">
+                            <option value="">暂不分配</option>
+                            <volist name="bannerscids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(banners)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$intextcids">
+                        <select title="intext" name="itcid">
+                            <option value="">暂不分配</option>
+                            <volist name="intextcids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(intext)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$inimagecids">
+                        <select title="inimage" name="iicid">
+                            <option value="">暂不分配</option>
+                            <volist name="inimagecids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(inimage)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$videocids">
+                        <select title="video" name="vicid">
+                            <option value="">暂不分配</option>
+                            <volist name="videocids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(video)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$searchcids">
+                        <select title="search" name="secid">
+                            <option value="">暂不分配</option>
+                            <volist name="searchcids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(search)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$smartlinkscids">
+                        <select title="smartlinks" name="slcid">
+                            <option value="">暂不分配</option>
+                            <volist name="smartlinkscids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(smartlinks)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    <if condition="$othercids">
+                        <select title="other" name="ocid">
+                            <option value="">暂不分配</option>
+                            <volist name="othercids" id="item">
+                            <option value="{$item.cid}">{$item.cid}</option>
+                            </volist>
+                        </select>(other)&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                    </div>
+                    <div class="form-item">
+                        <input type="submit" value="提交"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+$(function() {
+    setCurrNav('user');
+});
+</script>
+<include file="./Public/widget/foot.html"/>

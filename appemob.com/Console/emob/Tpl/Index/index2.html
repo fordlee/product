@@ -1,0 +1,284 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+            <small>Version 2.0</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <!-- Info boxes -->
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Earnings Last 30 Days:</span>
+                  <span class="info-box-number"><small>{$item['points']} Points</small><br>Lead {$item['earning']} Installs</span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa ion-stats-bars"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Costings Last 30 Days:</span>
+                  <span class="info-box-number"><small>{$ret['points']} Points</small><br>Earnings {$ret['earning']} Installs</span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Rest Points</span>
+                  <span class="info-box-number"><small>{$ret1['restPoints']} Points</small></span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Abnormal alarm</span>
+                  <span class="info-box-number">None</span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+
+          <!-- Main row -->
+          <div class="row">
+            <!-- Left col -->
+            <div class="col-md-8">
+              <!-- Map box -->
+              <div class="box box-solid bg-light-blue-gradient">
+                <div class="box-header">
+                  <!-- tools box -->
+                  <div class="pull-right box-tools">
+                    <button class="btn btn-primary btn-sm pull-right" data-widget="collapse" data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
+                  </div><!-- /. tools -->
+
+                  <i class="fa fa-map-marker"></i>
+                  <h3 class="box-title">
+                    Installs
+                  </h3>
+                </div>
+                <div class="box-body">
+                  <div id="world-map" style="height: 285px; width: 100%;"></div>
+                </div><!-- /.box-body-->
+              </div><!-- /.box -->
+
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Top 5 Installs App</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table class="table no-margin">
+                      <thead>
+                        <tr>
+                          <th>Rank</th>
+                          <th>App ID</th>
+                          <th>Image</th>
+                          <th>Installs</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <volist name="aitops" id="vo" key="k">
+                        <tr>
+                          <td>Top{$k}</td>
+                          <td><a href="{:U('App/showAppInfo')}?id={$vo.appid}">{$vo.appid}</a></td>
+                          <td><img src="{:C('IMG_DOMAIN')}/{$vo.img}w30-rw"></td>
+                          <td>{$vo.installs}</td>
+                          <eq name="vo.status" value="1">
+                          <td><span class="label label-success">Active</span></td>
+                          <else/>
+                          <td><span class="label label-danger">Stopped</span></td>
+                          </eq>
+                        </tr>
+                        </volist>
+                      </tbody>
+                    </table>
+                  </div><!-- /.table-responsive -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+              <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Top 5 Costs App</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table class="table no-margin">
+                      <thead>
+                        <tr>
+                          <th>Rank</th>
+                          <th>App ID</th>
+                          <th>Image</th>
+                          <th>Costs</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <volist name="actops" id="vo" key="k">
+                        <tr>
+                          <td>Top{$k}</td>
+                          <td><a href="{:U('App/showAppInfo')}?id={$vo.appid}">{$vo.appid}</a></td>
+                          <td><img src="{:C('IMG_DOMAIN')}/{$vo.img}w30-rw"></td>
+                          <td>{$vo.cost}</td>
+                          <eq name="vo.status" value="1">
+                          <td><span class="label label-success">Active</span></td>
+                          <else/>
+                          <td><span class="label label-danger">Stopped</span></td>
+                          </eq>
+                        </tr>
+                        </volist>
+                      </tbody>
+                    </table>
+                  </div><!-- /.table-responsive -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+            </div><!-- /.col -->
+
+            <div class="col-md-4">
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Top3 Installs Country</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <volist name="ctops" id="vo" key="k">
+                <div class="info-box bg-green">
+                  <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Top {$k} Installs Country {$vo.country}</span>
+                    <span class="info-box-number">{$vo.c_cost}</span>
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">
+                      70% Increase in 30 Days
+                    </span>
+                  </div>
+                </div>
+                </volist>
+              </div>
+
+              <!-- PRODUCT LIST -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Recently Added Apps</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <ul class="products-list product-list-in-box">
+                    <volist name="recentAddApp" id="vo">
+                    <li class="item">
+                      <div class="product-img">
+                        <img src="{:C('IMG_DOMAIN')}/{$vo.img}w50-rw" alt="{$vo.name}">
+                      </div>
+                      <div class="product-info">
+                        <a href="{:U('App/showAppInfo')}?id={$vo.appid}" class="product-title">{$vo.appid}</a>
+                        <span class="product-description">
+                          <div title="{$vo.description}" style="width:300px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:pointer">{$vo.description}</div>
+                        </span>
+                      </div>
+                    </li><!-- /.item -->
+                    </volist>               
+                  </ul>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+              <!-- <div class="width:200px;margin:50px auto;">
+                <div id="html5-clock" ></div>
+              </div> -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+
+<include file="Public:footer" />
+<script type="text/javascript" src="/Public/static/js/clock2.js"></script>
+<script type="text/javascript" src="/Public/static/js/jQueryRotate.2.2.js"></script>
+<script type="text/javascript">
+  //jvectormap data
+  var installsData = {$installCountry};
+  //World map by jvectormap
+  $('#world-map').vectorMap({
+    map: 'world_mill_en',
+    backgroundColor: "transparent",
+    regionStyle: {
+      initial: {
+        fill: '#e4e4e4',
+        "fill-opacity": 1,
+        stroke: 'none',
+        "stroke-width": 0,
+        "stroke-opacity": 1
+      }
+    },
+    series: {
+      regions: [{
+          values: installsData,
+          scale: ["#92c1dc", "#ebf4f9"],
+          normalizeFunction: 'polynomial'
+        }]
+    },
+    onRegionLabelShow: function (e, el, code) {
+      if (typeof installsData[code] != "undefined")
+        el.html(el.html() + ': ' + installsData[code] + ' new installs');
+    },
+    onRegionClick:function (e, code) {
+      if (typeof installsData[code] != "undefined"){
+        window.location.href = "{:U('')}?c="+code+"&d="+dateRange;
+      }
+    }
+  });
+
+  var config = {
+    divId: "html5-clock",  
+    useSecondHand: "true",
+    clockWidthAndHeight: "180",         
+    clockFaceImg: "/Public/static/image/clockImgs/bg/clockBg.png",
+    hourHandImg: "/Public/static/image/clockImgs/bg/hourHand.png",
+    minuteHandImg: "/Public/static/image/clockImgs/bg/minuteHand.png",
+    secondHandImg: "/Public/static/image/clockImgs/bg/secondHand.png", 
+    clockFaceHighResImg: "/Public/static/image/clockImgs/bg/clockBgHighRes.png",
+    hourHandHighResImg: "/Public/static/image/clockImgs/bg/hourHandHighRes.png",
+    minuteHandHighResImg: "/Public/static/image/clockImgs/bg/minuteHandHighRes.png",
+    secondHandHighResImg: "/Public/static/image/clockImgs/bg/secondHandHighRes.png",
+    smoothRotation: "false",
+    secondHandSpeed: "100"                        
+  };          
+  var myhtml5Clock = new html5Clock(config);
+  
+</script> 

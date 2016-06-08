@@ -1,0 +1,44 @@
+<include file="Public:header" />
+<include file="Public:sidenav" />
+
+<style type="text/css">
+.country-list-mod{display: inline-block;width: 150px;}
+.country-list-mod label{display: inline-block;width: 100px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;vertical-align: middle;margin-left: 5px;}
+</style>
+
+<!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <section class="content-header">
+	    	<h1>
+	          <small style="color:red">User: {$_SESSION['name']}</small>
+	          <small>Version 2.0</small>
+	        </h1>
+          <ol class="breadcrumb">
+            <li><a href="{:U('Index/index')}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Add APP trafficking countries</li>
+          </ol>
+
+      </section>
+        
+    <section class="content">
+    	<div class="form-group">
+    	 <form action="{:U('App/addCountry')}" method="post">
+        App name:{$appinfo[0].name}
+        <input type="hidden" name="applistid" value="{$applistid}">
+        <h2 class="">country code:</h2>
+        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="reset" class="btn btn-default">Reset</button><br>
+			 <volist name="countries" id="vo">
+         	<span class="country-list-mod">{$vo.id}
+         		<input type="checkbox" name="countryid[]" value='{$vo.id}' <php>foreach ($appinfo as $k => $v){if($vo['id'] == $v['countryid']) echo checked;}</php>>
+         		<label class="" title='{$vo.country}'>{$vo.country}</label>
+         	</span>
+        </volist><br>
+        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="reset" class="btn btn-default">Reset</button><br>
+      </form>
+      </div>
+	</section>
+  </div>
+
+<include file="Public:footer" />

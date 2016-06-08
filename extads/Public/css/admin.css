@@ -1,0 +1,212 @@
+.header h1{
+    color:#333;
+    display: inline-block;
+}
+.logout{
+    background: url(../imgs/icon_logout.png) no-repeat 64px center
+}
+.myaccount{
+    color: #333;
+}
+.nav-group{
+    margin-top: 10px;
+    border-top: 1px solid #EEE;
+}
+.content{
+    padding: 20px;
+}
+.form{
+    padding: 10px;
+    border:1px solid #eee;
+    line-height: 30px;
+}
+.tip{
+    color: #888;
+    font-size: 12px;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 20px;
+}
+.list{
+    margin: 10px 0;
+}
+.fulltime{
+    width: 150px;
+    color: #666;
+}
+.filter{
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ddd;
+    color: #222;
+}
+.filter li{
+    float: left;
+    margin-right: 20px;
+}
+.filter select{
+    padding: 2px 6px;
+    font-size: 14px;
+}
+.form-item{
+    margin: 10px 0;
+}
+.form-item input[type=text]{
+    width: 300px;
+    padding: 4px 10px;
+    font-size: 16px;
+}
+
+.used{
+    font-weight: 700;
+    color: #f00;
+}
+.noused{
+    font-weight: 700;
+    color: #00C957;
+}
+.form input,
+.form select{
+    padding: 5px 10px;
+}
+
+.side li .nav-sec{
+    display: none;
+}
+
+.side li .nav-sec a{
+    padding-left: 40px;
+    color: #666;
+}
+.side li .nav-sec a:hover {
+    color: #fff;
+}
+.side .curr .nav-sec{
+    display: block;
+}
+.side .curr .nav-sec a{
+    color: #fff;
+    background-color: #888;
+}
+.side .curr .nav-sec .scurr a{
+    background-color: #f60;
+}
+
+.warning{
+    font-weight: 700;
+    color: #c9302c;
+}
+.table .f-warning{
+    background-color: #449d44;
+    color: #fff;
+}
+.table .f-bhl{
+    background-color: #5bc0de;
+    color: #fff;
+}
+.con-wrap{width: 49%;background-color: #fafafa;padding: 10px;}
+.con-wrap h2{text-align: center;}
+.con-wrap-left{float: left;}
+.con-wrap-right{float: right;}
+.warn-0{
+    background-color: #d9534f;
+    color: #fff;
+}
+.warn-1,
+.warn-2{
+    background-color: #ec971f;
+    color: #fff;
+}
+.payinfo{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -300px;
+    margin-top: -50px;
+    height: 100px;
+    width: 600px;
+    z-index: 2;
+    background-color: #fff;
+    border:1px solid #ccc;
+    line-height: 30px;
+    padding: 10px;
+}
+.payinfo-2{
+    margin-top: -100px;
+    height: 200px;
+}
+.payinfo-2-1{
+    width: 230px;
+    margin-left: -115px;
+    line-height: 45px;
+}
+.payinfo-3{
+    margin-top: -70px;
+    height: 140px;
+}
+.pay-title{
+    display: inline-block;
+    /*width: 58px;*/
+    text-align: right;
+    margin-right: 5px;
+    color: #666;
+}
+.payinfo-mask{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    border: 0;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 1;
+}
+
+.accountstate{
+    background-color: #666;
+    padding: 5px 5px 0 5px;
+}
+.accountstate a{
+    display: inline-block;
+    line-height: 25px;
+    padding: 5px 20px;
+    color: #fff;
+}
+.accountstate a:hover{
+    background-color: #ccc;
+    color: #333;
+}
+.accountstate .curr,
+.accountstate .curr:hover{
+    background-color: #fff;
+    color: #333;
+    cursor: default;
+}
+
+.u-inline{
+    display: block;
+    margin-bottom: 15px;
+    padding-left: 10px;
+}
+.u-inline li{
+    display: inline-block;
+    margin-right: 20px;
+    padding: 5px 20px;
+}
+
+.u-inline-bg{
+    background-color: #eee;
+}
+
+.u-inline-bg li{
+}
+
+.u-inline-bg .curr{
+    margin-top: 5px;
+    background-color: #fff;
+}
+
+.table tr:nth-child(odd) {
+    background-color: #ddd;
+}
